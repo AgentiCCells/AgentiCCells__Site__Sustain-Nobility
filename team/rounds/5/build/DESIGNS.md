@@ -61,3 +61,11 @@ Notice exact and first after the skip link; `<!--designs-chip-->` inside every h
 ## For others
 - **Writer (page furniture not in copy.json, added this round):** "End of paper" (Board Paper), "Close dates share one bracket." (Calendar ruler caption), "Year" and "What the source says, and the source" (table headers on Grid and Board Paper). Move into copy.json if preferred.
 - **Picker (other developer):** /d/ thumbnails in `src/assets/designs/` show the round 4 designs; retake them after this build (brief item 10).
+
+## Follow-up to the round 5 live review (team/rounds/5/review/LIVE.md, items 1 to 5)
+- **1. Grid figure:** from 360 to 999 px the question mark sits at the hero's top padding, beside an eyebrow that is at least as tall as the mark, so the headline starts below it. Overlap measured at 360, 390, 480, 600 and 800 px, light and dark: 0 px. H1 at 390 is now 237 px (was 229 with the overlap).
+- **2. Board Paper:** the "Covered by one check" column shows the word "Yes" in each row. The ticked boxes and their CSS are gone; the page has no tick mark (C1).
+- **3. Notice link:** `white-space: nowrap` on the notice link on all five designs and /d/. At 360 to 1366 px the link is one line box, and the notice does not overflow or scroll sideways.
+- **4. Counsel strip:** `--pk-align: left` with `--pk-max: 42rem` and `--pk-pad: 16px`. The strip label's left edge equals the wordmark's (347 px at 1366, 64 px at 800). This replaces the "centred" note under item 6 above.
+- **5. Grid wordmark:** one line under 600 px (0.76rem, no letter spacing, `nowrap`), above the Proposal tag; the header row fits at 360 px.
+- **Checks:** 360, 390, 480, 600, 800 and 1366 px, light and dark, all five designs and /d/: `scrollWidth` equals the viewport. Build, validate and leak scan print OK. `d-grid-390.png` and `d-calendar-390.png` retaken.

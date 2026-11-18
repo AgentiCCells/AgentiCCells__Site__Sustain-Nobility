@@ -148,7 +148,7 @@ const BASE_CSS_ = `*,*::before,*::after{box-sizing:border-box}html{-webkit-text-
 .skip{position:absolute;left:8px;top:-60px;z-index:10;padding:.75rem 1rem;background:var(--ink);color:var(--bg)}.skip:focus{top:8px}
 a{color:var(--link)}a:hover{text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-.notice{font-size:.875rem;line-height:1.5}.notice a{color:inherit;font-weight:700}.notice-in{margin:0 auto}
+.notice{font-size:.875rem;line-height:1.5}.notice a{color:inherit;font-weight:700;white-space:nowrap}.notice-in{margin:0 auto}
 .sn{font-size:.6em;line-height:0;vertical-align:super;font-weight:400;font-style:normal;letter-spacing:0;margin-left:.08em}.sn a{color:var(--link);text-decoration:none;padding:0 .12em;border-bottom:1px solid currentColor}
 .lbl{font-weight:700}.replaced{font-weight:700}
 h1 .sn,h2 .sn,.pull .sn{font-size:.34em;margin-left:.15em}
@@ -377,7 +377,7 @@ figure{margin:1rem 0}figcaption{font-size:.85rem;color:var(--soft)}
 .lane{width:100%}.l-box{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}.l-rule{stroke:var(--rule);stroke-width:1.5}.l-n{font:500 15px ${MONO};fill:var(--accent)}.l-t{font:600 18px ${SERIF};fill:var(--ink)}.l-br{fill:none;stroke:var(--soft);stroke-width:1.5}.l-bt{font:14px ${MONO};fill:var(--soft)}.l-arc{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 4}
 table.t{border-collapse:collapse;width:100%;font-size:.95rem;margin:.5rem 0}
 .t th,.t td{border-top:1px solid var(--hair);padding:.6rem .6rem .6rem 0;text-align:left;vertical-align:top}.t thead th{border-top:2px solid var(--ink);font:500 .72rem ${MONO};letter-spacing:.08em;text-transform:uppercase}
-.t td p{margin:.3rem 0}.t td.tick{text-align:center;width:7rem}.box{display:inline-block;width:1.1rem;height:1.1rem;border:1.5px solid var(--ink);position:relative;vertical-align:middle}.box::after{content:"";position:absolute;left:.3rem;top:.05rem;width:.35rem;height:.65rem;border:solid var(--accent);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.t td p{margin:.3rem 0}.t td.tick{width:7rem;font-family:${MONO};font-size:.85rem}
 .t .none{color:var(--soft);font-style:italic}
 .tablewrap{overflow-x:auto}
 .pinc{margin:.25rem 0;padding-left:1.1rem}
@@ -433,7 +433,7 @@ ${steps.map(s => { s.source_fact_ids.forEach(id => used.add(id)); return `<div c
 </section>
 <section aria-labelledby="p4"><h2 id="p4"><span class="no">4</span>${esc(T.areas_table_title)}</h2>
 ${R_('4.1', `${esc(C.home.areas_intro.lead_in)} ${q(C.home.areas_intro)}`, C.home.areas_intro.fact_id)}
-<div class="tablewrap"><table class="t"><thead><tr><th scope="col">Area, as published</th><th scope="col">${esc(C.areas_page.summary_label)}</th><th scope="col">${esc(T.areas_tick_head)}</th></tr></thead><tbody>${areas.map(a => { used.add(a.fact_id); return `<tr><th scope="row">${esc(a.name)}</th><td>${esc(a.text)}</td><td class="tick"><span class="box" aria-hidden="true"></span><span class="vh">Yes</span></td></tr>`; }).join('')}</tbody></table></div>
+<div class="tablewrap"><table class="t"><thead><tr><th scope="col">Area, as published</th><th scope="col">${esc(C.areas_page.summary_label)}</th><th scope="col">${esc(T.areas_tick_head)}</th></tr></thead><tbody>${areas.map(a => { used.add(a.fact_id); return `<tr><th scope="row">${esc(a.name)}</th><td>${esc(a.text)}</td><td class="tick">Yes</td></tr>`; }).join('')}</tbody></table></div>
 <p class="small">${esc(C.areas_page.caption)}${cite('c6')}</p>
 </section>
 <section aria-labelledby="p5"><h2 id="p5"><span class="no">5</span>${esc(T.options_title)}</h2>
@@ -745,7 +745,8 @@ h1 .sn{font-size:.22em;letter-spacing:0;vertical-align:top;position:relative;top
 @media (min-width:1000px){.qm{order:2;align-self:stretch;justify-content:flex-start}.qm svg{width:auto;height:100%;max-height:34rem;max-width:100%}}
 .qm-sq{fill:var(--ink)}.qm-dot{fill:var(--red)}
 .hl{order:1}
-@media (max-width:999px){.hero{position:relative}.qm{position:absolute;right:0;top:2rem}.qm svg{width:2.9rem}.eyebrow{padding-right:4rem;margin-bottom:1.6rem}}
+@media (max-width:999px){.hero{position:relative}.qm{position:absolute;right:0;top:2rem}.qm svg{width:2.9rem}.eyebrow{padding-right:4rem;min-height:4.55rem;margin-bottom:.55rem}}
+@media (max-width:599px){.qm{top:1.1rem}header.top .brand{white-space:nowrap;font-size:.76rem;letter-spacing:0}}
 /* Round 5 (brief item 9): sections vary in scale: compact, standard, one full-bleed black band, one large numeral spread, one wide table. */
 .chead{display:flex;align-items:flex-end;gap:.5rem 1.25rem;flex-wrap:wrap}.compact.g,.wide.g{row-gap:12px}.chead h2{margin:0 0 .35rem}
 .compact{padding:1rem 0 2.25rem}.compact .num{font-size:clamp(3rem,6vw,5rem);margin:0;-webkit-text-stroke-width:1.5px}.compact h2{font-size:clamp(1.6rem,3vw,2.5rem)}
@@ -838,7 +839,7 @@ function counsel() {
   const d = D.counsel; const T = C.design_text.counsel; begin();
   const SERIF = '"EB Garamond",Garamond,"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif';
   const SANS = '"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
-  const css = `:root{--bg:#f3efe6;--ink:#2a2a26;--soft:#5a5850;--rule:#d6cfc0;--sage:#46634f;--clay:#8c4d2b;--link:#46634f;--focus:#8c4d2b;--th:-3rem;${pk('#f3efe6', '#2a2a26', '#5a5850', '#d6cfc0', '#46634f')};${lay('42rem', 'center')}}
+  const css = `:root{--bg:#f3efe6;--ink:#2a2a26;--soft:#5a5850;--rule:#d6cfc0;--sage:#46634f;--clay:#8c4d2b;--link:#46634f;--focus:#8c4d2b;--th:-3rem;${pk('#f3efe6', '#2a2a26', '#5a5850', '#d6cfc0', '#46634f')};${lay('42rem')}}
 @media (prefers-color-scheme:dark){:root{--bg:#191b18;--ink:#e8e4d9;--soft:#b9b4a8;--rule:#3a3d37;--sage:#a7c4b1;--clay:#e0a483;--link:#a7c4b1;--focus:#e0a483;${pk('#191b18', '#e8e4d9', '#b9b4a8', '#3a3d37', '#a7c4b1')}}}
 body{font:22px/1.6 ${SERIF}}
 .notice,.small,.top,.foot,.sources,figcaption{font-family:${SANS}}
