@@ -1,7 +1,7 @@
 {
   "schema": "hub.json (draft)",
   "name": "SUSTAIN-NOBILITY",
-  "what_it_does": "A redesign proposal for SUSTAIN-NOBILITY Advisory, AI governance readiness for SMEs and their advisers, made by AgentiCCells with their agreement.",
+  "what_it_does": "A redesign proposal, made by AgentiCCells with their agreement, for SUSTAIN-NOBILITY Advisory Ltd's AI Governance Readiness Check for SMEs and the advisers who support them.",
   "owner": "AgentiCCells",
   "team": "factory@AgentiCCells.dinis, instructed by Dinis Cruz",
   "licence": { "code": "Apache-2.0", "text": "CC BY 4.0" },

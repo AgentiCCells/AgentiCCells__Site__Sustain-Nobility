@@ -1,6 +1,10 @@
 # SUSTAIN-NOBILITY
 
-A redesign proposal for SUSTAIN-NOBILITY Advisory, AI governance readiness for SMEs and their advisers, made by AgentiCCells with their agreement.
+A redesign proposal for SUSTAIN-NOBILITY Advisory, AI governance readiness for SMEs and their advisers, made by AgentiCCells with their agreement. It is not their official site: every action links to https://www.sustain-nobility.com.
+
+Pages (static HTML and one stylesheet in `src/`, no third-party assets): home, how it works (inline SVG flow), what makes it different (inline SVG figure), plans, for partners, context with sources, and use with AI (`llms.txt`, `index.md`, agent instructions).
+
+Open placeholders: the founder's name, and confirmation of the context page's facts against their sources.
 
 - Live at https://sustain-nobility.agenticcells.site (version at /version.json).
 - Made by the AgentiCCells site factory from request `requests/2026-11-18__sustain-nobility/` in AgentiCCells__Site__Factory, seeded from AgentiCCells__Site__Template.
