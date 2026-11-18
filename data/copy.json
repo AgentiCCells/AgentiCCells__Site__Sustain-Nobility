@@ -14,8 +14,8 @@
     "not_legal_advice": "This is not legal advice."
   },
 
-  "notice": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. Made by AgentiCCells with their agreement: to start the Readiness Check or book a call, use their site.",
-  "notice_short": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. Made by AgentiCCells with their agreement: to start the Readiness Check or book a call, use their site.",
+  "notice": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. To start the Readiness Check or book a call, use their site.",
+  "notice_short": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. To start the Readiness Check or book a call, use their site.",
   "notice_link": { "text": "sustain-nobility.com ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their official site)" },
 
   "brand": {

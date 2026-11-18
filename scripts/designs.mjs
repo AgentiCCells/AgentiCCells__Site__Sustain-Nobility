@@ -298,7 +298,7 @@ ${steps.map((s, i) => `<rect class="l-box" x="${bx(i)}" y="60" width="160" heigh
 <path class="l-br" d="M${bx(3)} 150 v10 h160 v-10"/><text class="l-bt" x="${bx(3)}" y="184">${esc(C.flow.brackets[1].text)}</text>
 </svg>${vflow({ line: 'l-rule', box: 'l-box', n: 'l-n', t: 'l-t', arc: 'l-arc', lt: 'l-bt' })}<figcaption>${flowCaption()}</figcaption></figure>`;
   const opts = plans.map((p, i) => {
-    const cost = /discussed/i.test(p.price) ? T.cost_to_be_discussed : T.cost_not_published;
+    const cost = /discussed/i.test(p.price) ? T.cost_to_be_discussed : p.price;
     return `<tr><th scope="row">${esc(T.options_letters[i])}. ${esc(p.name)}</th><td>${esc(p.label || '')}</td><td>${p.for ? `<q>${esc(p.for)}</q>` : ''}${p.includes.length ? `<ul class="pinc">${p.includes.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${p.includes_note ? `<span class="small">${ours(p.includes_note)}</span>` : ''}${p.start_quote ? `<p><q>${esc(p.start_quote)}</q></p>` : ''}</td><td>${esc(cost)}${cost === T.cost_not_published ? ` (read ${esc(F.c9.read)})` : ''}</td></tr>`;
   }).join('');
   const annex = rows.length ? `<section aria-labelledby="annex"><h2 id="annex"><span class="no">A</span>${esc(T.annex_title)}</h2>
@@ -431,7 +431,7 @@ ${rail}
 <ol class="stepgrid">${steps.map(s => { s.source_fact_ids.forEach(id => used.add(id)); return `<li><span class="sn">STEP ${s.n}</span><h3>${esc(s.name)}</h3><p>Published: <q>${esc(s.published)}</q></p><p class="small"><span class="lbl">${esc(s.label)}:</span> ${esc(s.text)}</p></li>`; }).join('')}</ol>
 <p class="small">${flowCaption()} ${esc(C.flow.footnote)}</p></section>
 <section class="panel s7" aria-labelledby="ar"><span class="plab">Areas</span><h2 id="ar">${esc(C.home.areas_title)}</h2>${dialSvg}</section>
-<section class="panel s5" aria-labelledby="lg"><span class="plab">Legend</span><h2 id="lg">${esc(C.areas_page.h1)}</h2>${areasIntro()}<p class="small">Clockwise from the top. ${esc(C.areas_page.summary_label)} under each name.</p>
+<section class="panel s5" aria-labelledby="lg"><span class="plab">Legend</span><h2 id="lg">What each area covers</h2>${areasIntro()}<p class="small">Clockwise from the top. ${esc(C.areas_page.summary_label)} under each name.</p>
 <ol class="legend">${areas.map(a => { used.add(a.fact_id); return `<li><strong>${esc(a.name)}</strong><span>${esc(a.text)}</span></li>`; }).join('')}</ol><p class="small">${esc(C.areas_page.caption)} ${cite('c6')}</p></section>
 <section class="panel" aria-labelledby="pp"><span class="plab">Plans</span><h2 id="pp">${esc(C.plans_page.h1)}</h2><p class="small">${ours(C.plans_page.intro)}</p></section>
 ${plansPanels}

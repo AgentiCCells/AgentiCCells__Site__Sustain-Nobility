@@ -31,7 +31,14 @@ for (const f of [...files, 'hub.json', 'README.md']) {
     if (!/<html lang="/.test(s)) fail(`${f}: no lang on <html>`);
     // conductor.sustain-nobility@ (2026-11-18): the proposal takes no input and says what it is on every page.
     if (/<form[\s>]/i.test(s)) fail(`${f}: has a <form> (this proposal takes no sign-ups, assessments or personal data)`);
-    if (!isTemplate && !/class="notice"[^>]*>[\s\S]*?made by AgentiCCells with their agreement[\s\S]*?sustain-nobility\.com/i.test(s)) fail(`${f}: no proposal notice (made by AgentiCCells with their agreement, linking sustain-nobility.com)`);
+    // The notice must carry the agreed sentence (design review G1) and link their site. Replaced the earlier phrase
+    // check on 2026-11-18 (live review F2): the sentence is stricter and the two together read twice.
+    if (!isTemplate) {
+      const at = s.search(/class="notice"/);
+      const region = at < 0 ? '' : s.slice(at, at + 3000);
+      const text = region.replace(/<span class="vh">[\s\S]*?<\/span>/g, '').replace(/<[^>]+>/g, '').replace(/&#39;|&rsquo;|\u2019/g, "'").replace(/\s+/g, ' ');
+      if (at < 0 || !text.includes("A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com.") || !/href="https:\/\/www\.sustain-nobility\.com/.test(region)) fail(`${f}: no proposal notice with the agreed sentence and a link to sustain-nobility.com`);
+    }
     // conductor.sustain-nobility@ (2026-11-18, live review F4): an external link goes only to their site,
     // a source recorded in data/research.json, this site, or this team's own GitHub repositories.
     if (!isTemplate) for (const m of s.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+)"/g)) {

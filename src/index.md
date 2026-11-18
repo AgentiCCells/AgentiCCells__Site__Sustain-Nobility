@@ -1,6 +1,6 @@
 # AI governance readiness: SUSTAIN-NOBILITY (redesign proposal)
 
-**Proposal, not the official site.** A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. Made by AgentiCCells with their agreement: to start the Readiness Check or book a call, use their site. https://www.sustain-nobility.com
+**Proposal, not the official site.** A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. To start the Readiness Check or book a call, use their site. https://www.sustain-nobility.com
 
 Version __VERSION__. Quotes are SUSTAIN-NOBILITY's words from https://www.sustain-nobility.com, read 2026-11-18. Lines marked "AgentiCCells's summary" are ours.
 
