@@ -141,3 +141,4 @@ pre { background: var(--card); border: 1px solid var(--line); border-radius: 8px
 .site-foot .cols { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
 .site-foot p { margin: .3rem 0; }
 .site-foot strong { color: var(--ink); }
+.fact .src a, #failed a { overflow-wrap: anywhere; }

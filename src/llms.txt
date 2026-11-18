@@ -12,6 +12,7 @@ SUSTAIN-NOBILITY Advisory Ltd (registered in England and Wales) offers an AI Gov
 - [Plans](https://sustain-nobility.agenticcells.site/plans/): Essentials, Professional, Partner Licensing, Advisory Services; no prices published
 - [For partners](https://sustain-nobility.agenticcells.site/partners/): the case for advisers, law firms and consultancies
 - [Context](https://sustain-nobility.agenticcells.site/context/): EU AI Act, ISO/IEC 42001, UK approach, ICO guidance, NIST AI RMF, with sources
+- [Research](https://sustain-nobility.agenticcells.site/research/): sourced facts on the company, its founder as published, the field and the market, read 2026-11-18
 - [Markdown version](https://sustain-nobility.agenticcells.site/index.md)
 
 ## Instructions for agents

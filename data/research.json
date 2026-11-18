@@ -412,14 +412,42 @@
           "quote": "It shall apply from 2 August 2026.",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689",
           "read": "2026-11-18",
-          "kind": "quoted"
+          "kind": "quoted",
+          "dates": [
+            {
+              "date": "2024-06-13",
+              "what": "Regulation (EU) 2024/1689 done at Brussels"
+            },
+            {
+              "date": "2024-08-01",
+              "what": "The AI Act entered into force"
+            },
+            {
+              "date": "2026-08-02",
+              "what": "The AI Act applies generally"
+            }
+          ]
         },
         {
           "id": "f2",
           "text": "Original staged dates in Article 113: Chapters I and II (general provisions, AI literacy, prohibited practices) from 2 February 2025; notified bodies, general-purpose AI models, governance and penalties (Chapter III Section 4, Chapters V, VII, XII, Article 78, except Article 101) from 2 August 2025; Article 6(1) from 2 August 2027.",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689",
           "read": "2026-11-18",
-          "kind": "paraphrased"
+          "kind": "paraphrased",
+          "dates": [
+            {
+              "date": "2025-02-02",
+              "what": "Chapters I and II (general provisions, AI literacy, prohibited practices) apply"
+            },
+            {
+              "date": "2025-08-02",
+              "what": "Notified bodies, general-purpose AI models, governance and penalties apply"
+            },
+            {
+              "date": "2027-08-02",
+              "what": "Article 6(1) applies (original staged date in Article 113)"
+            }
+          ]
         },
         {
           "id": "f3",
@@ -433,7 +461,21 @@
           "text": "The Commission proposed the AI Omnibus (Digital Omnibus on AI, COM(2025) 836) on 19 November 2025 as part of its digital simplification package; a political agreement was reached on 7 May 2026, and the Omnibus entered into force on 27 July 2026.",
           "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
           "read": "2026-11-18",
-          "kind": "paraphrased"
+          "kind": "paraphrased",
+          "dates": [
+            {
+              "date": "2025-11-19",
+              "what": "The Commission proposed the AI Omnibus (COM(2025) 836)"
+            },
+            {
+              "date": "2026-05-07",
+              "what": "Political agreement reached on the Omnibus"
+            },
+            {
+              "date": "2026-07-27",
+              "what": "The Omnibus entered into force"
+            }
+          ]
         },
         {
           "id": "f5",
@@ -441,7 +483,13 @@
           "quote": "as regards the simplification of the implementation of harmonised rules on artificial intelligence (Digital Omnibus on AI)",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601744",
           "read": "2026-11-18",
-          "kind": "quoted"
+          "kind": "quoted",
+          "dates": [
+            {
+              "date": "2026-07-08",
+              "what": "The Omnibus adopted as Regulation (EU) 2026/1744"
+            }
+          ]
         },
         {
           "id": "f6",
@@ -449,14 +497,30 @@
           "quote": "2 December 2027 as regards AI systems classified as high-risk pursuant to Article 6(2) and Annex III",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601744",
           "read": "2026-11-18",
-          "kind": "quoted"
+          "kind": "quoted",
+          "dates": [
+            {
+              "date": "2027-12-02",
+              "what": "High-risk rules in Chapter III Sections 1 to 3 apply for Annex III (stand-alone) systems"
+            },
+            {
+              "date": "2028-08-02",
+              "what": "High-risk rules in Chapter III Sections 1 to 3 apply for Annex I (product-embedded) systems"
+            }
+          ]
         },
         {
           "id": "f7",
           "text": "Regulation 2026/1744 adds new prohibitions to Article 5 (AI systems generating non-consensual intimate material and child sexual abuse material) applying from 2 December 2026, and gives providers of generative systems placed on the market before 2 August 2026 until 2 December 2026 to meet Article 50(2) marking duties.",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601744",
           "read": "2026-11-18",
-          "kind": "paraphrased"
+          "kind": "paraphrased",
+          "dates": [
+            {
+              "date": "2026-12-02",
+              "what": "New Article 5 prohibitions apply; deadline for Article 50(2) marking duties for generative systems placed on the market before 2 August 2026"
+            }
+          ]
         },
         {
           "id": "f8",
@@ -509,7 +573,13 @@
           "quote": "which shall be operational by 2 August 2027",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601744",
           "read": "2026-11-18",
-          "kind": "quoted"
+          "kind": "quoted",
+          "dates": [
+            {
+              "date": "2027-08-02",
+              "what": "Deadline for each Member State national AI regulatory sandbox (moved from 2 August 2026)"
+            }
+          ]
         },
         {
           "id": "f15",

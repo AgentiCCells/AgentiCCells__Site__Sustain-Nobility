@@ -66,6 +66,6 @@ AgentiCCells research, not legal advice; not re-checked against the sources on 2
 
 ## Company
 
-SUSTAIN-NOBILITY Advisory Ltd, registered in England and Wales. Founder: [placeholder: founder's name as given in their site footer]. Registered office and contact: as given on https://www.sustain-nobility.com
+SUSTAIN-NOBILITY Advisory Ltd, registered in England and Wales. Founder: Monica Maghami, as their About Us page (https://www.sustain-nobility.com/home) says. Registered office and contact: as given on https://www.sustain-nobility.com
 
 Proposal by AgentiCCells, with SUSTAIN-NOBILITY's agreement. Text CC BY 4.0, code Apache-2.0.
