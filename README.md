@@ -10,3 +10,15 @@ A redesign proposal for SUSTAIN-NOBILITY Advisory Ltd, AI governance readiness f
 - Release: `scripts/release.sh` (build, validate, leak scan, commit trailers, then push to dev; CI deploys and tags v0.1.N).
 
 Licences: code Apache-2.0; text CC BY 4.0.
+
+## Third-party material
+
+Fonts, self-hosted from `src/assets/fonts/<family>/`, copied unmodified from the npm packages below by `scripts/fonts.mjs` (run by hand after `npm ci`; versions pinned in `package.json` and `package-lock.json`). Each package's licence is in `src/assets/fonts/LICENSES/<package>.txt`. No font, stylesheet or script is loaded from another host.
+
+| Package | Version | Files used (Latin subset, woff2) | Licence |
+|---|---|---|---|
+| `@fontsource/fraunces` | 5.3.0 | `fraunces-latin-600-normal.woff2`, `fraunces-latin-400-italic.woff2` | SIL Open Font License 1.1 |
+| `@fontsource/public-sans` | 5.3.0 | `public-sans-latin-400-normal.woff2`, `public-sans-latin-600-normal.woff2` | SIL Open Font License 1.1 |
+| `@fontsource/ibm-plex-mono` | 5.3.0 | `ibm-plex-mono-latin-500-normal.woff2` | SIL Open Font License 1.1 |
+
+The design thumbnails in `src/assets/designs/` are screenshots of this site's own pages, made by `scripts/shots.mjs`; no image from SUSTAIN-NOBILITY's site or any other site is used.

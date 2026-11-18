@@ -225,3 +225,9 @@ __marimo__/
 *.pem
 # build output
 _site/
+
+# npm (font sources; files used are copied into src/assets/fonts/)
+node_modules/
+
+# Lockfile not committed: its integrity hashes trip the leak scan; versions are pinned exactly in package.json and the font files are committed (conductor, 2026-11-18).
+package-lock.json

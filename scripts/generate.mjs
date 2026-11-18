@@ -129,10 +129,67 @@ ${rows.map(x => `<li${x.superseded ? ' class="replaced"' : ''}><time datetime="$
 </ol>
 <p class="nla">${esc(NOT_ADVICE)}</p>`;
 const pickFacts = ids => (ids || []).map(id => factById[id]).filter(Boolean);
+// Round 4 (proposal 2.4.8, review item 13): on wide screens the home rows also sit on a
+// horizontal ruler of years. The range runs from 1 January of the earliest year to
+// 1 January after the latest; every position is computed from the ISO dates, and the
+// read date comes from research.json. Nothing is hard-coded. CSS shows the ruler from
+// 1000 px and the list below that, so one of the two is read, never both.
+const ruler = rows => {
+  const t = iso => Date.UTC(...iso.split('-').map((n, i) => i === 1 ? n - 1 : +n));
+  const y0 = +rows[0].date.slice(0, 4), y1 = +rows[rows.length - 1].date.slice(0, 4) + 1;
+  const a = Date.UTC(y0, 0, 1), b = Date.UTC(y1, 0, 1);
+  const x = iso => +((t(iso) - a) / (b - a) * 100).toFixed(2);
+  // Each label is W percent wide, anchored left or right of its date. A search picks the
+  // fewest levels such that labels on one level do not overlap and no label covers the
+  // leader line of a label above it (at most 3^n * 2^n tries; n is small).
+  const W = 18; // label width in percent (matches .ruler-item in style.css)
+  const xs = rows.map(r => x(r.date));
+  const span = (i, right) => right ? [xs[i] - W, xs[i]] : [xs[i], xs[i] + W];
+  let best = null;
+  for (let L = 1; L <= rows.length && !best; L++) {
+    const lv = new Array(rows.length).fill(0), rt = new Array(rows.length).fill(false);
+    const ok = () => {
+      for (let i = 0; i < rows.length; i++) {
+        const [a1, b1] = span(i, rt[i]);
+        if (a1 < 0 || b1 > 100) return false;
+        for (let j = 0; j < rows.length; j++) {
+          if (i === j) continue;
+          const [a2, b2] = span(j, rt[j]);
+          if (lv[i] === lv[j] && a1 < b2 + 1 && a2 < b1 + 1) return false;
+          if (lv[j] > lv[i] && xs[j] > a1 && xs[j] < b1) return false;
+        }
+      }
+      return true;
+    };
+    const rec = i => {
+      if (i === rows.length) return ok();
+      for (let l = 0; l < L; l++) for (const r of [false, true]) { lv[i] = l; rt[i] = r; if (rec(i + 1)) return true; }
+      return false;
+    };
+    if (rec(0)) best = { lv: [...lv], rt: [...rt], L };
+  }
+  if (!best) throw new Error('generate: the why-now ruler cannot place its labels');
+  const ends = { length: best.L };
+  const items = rows.map((r, i) => {
+    const px = xs[i], right = best.rt[i], lv = best.lv[i];
+    return `<li class="ruler-item ${right ? 'r' : 'l'}" style="${right ? `right:${(100 - px).toFixed(2)}%` : `left:${px}%`};--lv:${lv}"><time datetime="${esc(r.date)}">${esc(human(r.date))}</time><span class="what">${esc(r.what)}</span><span class="tl-src"><a href="/research/#f-${esc(r.id)}">Fact ${esc(r.id)}</a> &#183; source: <a class="ext" rel="noopener" href="${esc(r.url)}">${esc(publisherOf(r.url))}</a>, read ${esc(r.read)}</span></li>`;
+  });
+  const years = [];
+  for (let y = y0; y <= y1; y++) years.push(`<span class="ruler-year${y === y1 ? ' end' : ''}" style="left:${x(`${y}-01-01`)}%">${y}</span>`);
+  const readAt = /^\d{4}-\d{2}-\d{2}$/.test(r.read) && r.read >= rows[0].date ? x(r.read) : null;
+  const label = copy.home?.why_now_ruler || {};
+  return `<div class="ruler" role="group" aria-label="${esc(label.title || 'Sourced dates on a line of years')}" style="--levels:${ends.length}">
+<ol class="ruler-list" style="list-style:none;margin:0;padding:0">
+${items.join('\n')}
+</ol>
+<div class="ruler-axis" aria-hidden="true">${rows.map(r => `<span class="ruler-dot" style="left:${x(r.date)}%"></span>`).join('')}${readAt !== null && readAt <= 100 ? `<span class="ruler-read" style="left:${readAt}%"><span>${esc(label.read_marker_label || 'Read')} ${esc(r.read)}</span></span>` : ''}</div>
+<div class="ruler-years" aria-hidden="true">${years.join('')}</div>
+</div>`;
+};
 const MARKERS = {
   home: () => {
     const rows = timelineRows(pickFacts(copy.home?.why_now_fact_ids)).filter(x => !x.superseded && HOME_ROWS.includes(`${x.id} ${x.date}`));
-    return rows.length ? tlList(rows) : '';
+    return rows.length ? ruler(rows) + '\n' + tlList(rows) : '';
   },
   context: () => {
     const rows = timelineRows(pickFacts(copy.context?.timeline_fact_ids));

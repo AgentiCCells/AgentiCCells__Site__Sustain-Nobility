@@ -1,0 +1,62 @@
+/* Designs picker: chip, "Same facts, six designs" strip and dialog (round 4, review C3).
+   Added to every page by scripts/picker.mjs. Neutral by default; a design may set
+   --pk-bg --pk-ink --pk-soft --pk-line --pk-accent --pk-focus, and for the strip
+   --pk-strip-bg --pk-strip-ink --pk-strip-soft --pk-strip-line --pk-strip-accent, and --pk-max to match its own tokens. AgentiCCells, code Apache-2.0. */
+
+/* Chip: a link to /d/ that picker.js turns into the dialog opener */
+.dz-chip { display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 .95rem; border: 1.5px solid currentColor; border-radius: 999px; font: inherit; font-size: .9rem; font-weight: 600; line-height: 1.2; color: inherit; text-decoration: none; white-space: nowrap; }
+.dz-chip::before { content: ""; flex: none; width: .8em; height: .8em; background:
+  linear-gradient(currentColor, currentColor) 0 0 / 42% 42% no-repeat,
+  linear-gradient(currentColor, currentColor) 100% 0 / 42% 42% no-repeat,
+  linear-gradient(currentColor, currentColor) 0 100% / 42% 42% no-repeat,
+  linear-gradient(currentColor, currentColor) 100% 100% / 42% 42% no-repeat; }
+.dz-chip:hover { background: rgba(127, 127, 127, .14); }
+.dz-strip a:focus-visible { outline: 3px solid var(--pk-strip-accent, var(--pk-focus, currentColor)); outline-offset: 2px; }
+.dz-chip:focus-visible, .dz-picker a:focus-visible, .dz-close:focus-visible { outline: 3px solid var(--pk-focus, var(--pk-accent, currentColor)); outline-offset: 2px; }
+
+/* Strip: right after the notice */
+.dz-strip { display: block; background: var(--pk-strip-bg, rgba(127, 127, 127, .1)); color: var(--pk-strip-ink, var(--pk-ink, inherit)); border-bottom: 1px solid var(--pk-strip-line, var(--pk-line, rgba(127, 127, 127, .4))); font-size: 13px; line-height: 1.3; }
+.dz-strip-in { display: flex; align-items: center; gap: 0 1.1rem; max-width: var(--pk-max, 72rem); margin: 0 auto; padding: 4px 16px; overflow-x: auto; white-space: nowrap; scrollbar-width: thin; }
+.dz-strip-label { flex: none; color: var(--pk-strip-soft, var(--pk-soft, inherit)); }
+.dz-strip a { flex: none; display: inline-flex; align-items: center; min-height: 28px; color: inherit; text-decoration: none; border-bottom: 2px solid transparent; }
+.dz-strip a:hover { border-bottom-color: currentColor; }
+.dz-strip a[aria-current="page"] { font-weight: 600; color: var(--pk-strip-accent, var(--pk-accent, inherit)); border-bottom-color: var(--pk-strip-accent, var(--pk-accent, currentColor)); }
+@media (max-width: 600px) { .dz-strip-in { padding: 0 16px; } .dz-strip a { min-height: 44px; } }
+
+/* Dialog */
+.dz-picker { box-sizing: border-box; width: min(94vw, 64rem); max-width: none; max-height: 90vh; margin: auto; padding: 0; border: 1px solid var(--pk-line, rgba(127, 127, 127, .5)); border-radius: 14px; background: var(--pk-bg, #fff); color: var(--pk-ink, #14201b); overflow: auto; overscroll-behavior: contain; font-size: 16px; line-height: 1.45; }
+.dz-picker::backdrop { background: rgba(6, 12, 10, .74); }
+.dz-in { padding: 20px; }
+.dz-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin: 0 0 16px; }
+.dz-head h2 { margin: 0; font-size: 1.35rem; line-height: 1.2; color: inherit; }
+.dz-close { flex: none; min-height: 44px; min-width: 44px; padding: 0 1rem; border: 1.5px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: inherit; font-weight: 600; cursor: pointer; }
+.dz-close:hover { background: rgba(127, 127, 127, .14); }
+.dz-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: 1fr; }
+.dz-grid li { margin: 0; min-width: 0; }
+.dz-grid a { box-sizing: border-box; height: 100%; display: grid; grid-template-columns: 42% 1fr; gap: 4px 12px; align-content: start; padding: 8px; border: 1px solid var(--pk-line, rgba(127, 127, 127, .5)); border-radius: 10px; color: inherit; text-decoration: none; }
+.dz-grid a:hover { border-color: var(--pk-accent, currentColor); }
+.dz-grid img { grid-row: 1 / span 3; display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border-radius: 6px; background: var(--pk-line, rgba(127, 127, 127, .3)); }
+.dz-grid b { font-size: 16px; line-height: 1.25; }
+.dz-idea { font-size: 13px; color: var(--pk-soft, inherit); }
+.dz-now { justify-self: start; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 1px 6px; border: 1px solid currentColor; border-radius: 4px; color: var(--pk-accent, inherit); }
+.dz-grid a[aria-current="page"] { border: 2px solid var(--pk-accent, currentColor); padding: 7px; }
+.dz-foot { margin: 16px 0 0; font-size: 14px; }
+.dz-foot a { display: inline-flex; align-items: center; min-height: 44px; color: var(--pk-accent, inherit); font-weight: 600; }
+@media (min-width: 600px) {
+  .dz-in { padding: 24px; }
+  .dz-grid { grid-template-columns: repeat(2, 1fr); }
+  .dz-grid a { grid-template-columns: 1fr; }
+  .dz-grid img { grid-row: auto; margin-bottom: 6px; }
+}
+@media (min-width: 1000px) { .dz-grid { grid-template-columns: repeat(3, 1fr); } }
+html:has(dialog.dz-picker[open]) { overflow: hidden; }
+@media (prefers-reduced-motion: no-preference) {
+  .dz-picker[open] { animation: dz-in .16s ease-out; }
+  @keyframes dz-in { from { opacity: 0; transform: translateY(8px); } }
+}
+@media (forced-colors: active) {
+  .dz-chip::before { forced-color-adjust: none; color: CanvasText; }
+  .dz-grid a[aria-current="page"], .dz-strip a[aria-current="page"] { outline: 2px solid Highlight; }
+  .dz-picker::backdrop { background: rgba(0, 0, 0, .6); }
+}
+@media print { .dz-strip, .dz-chip, .dz-picker { display: none; } }

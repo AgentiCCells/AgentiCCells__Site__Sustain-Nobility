@@ -1,0 +1,17 @@
+{
+  "name": "agenticcells-site-sustain-nobility",
+  "private": true,
+  "description": "Static redesign proposal site. Build: node scripts/build.mjs. Fonts are copied from these devDependencies into src/assets/fonts/.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "devDependencies": {
+    "@fontsource/archivo": "5.3.0",
+    "@fontsource/eb-garamond": "5.3.0",
+    "@fontsource/fraunces": "5.3.0",
+    "@fontsource/ibm-plex-mono": "5.3.0",
+    "@fontsource/ibm-plex-sans-condensed": "5.3.0",
+    "@fontsource/newsreader": "5.3.0",
+    "@fontsource/public-sans": "5.3.0",
+    "@fontsource/source-serif-4": "5.3.1"
+  }
+}
