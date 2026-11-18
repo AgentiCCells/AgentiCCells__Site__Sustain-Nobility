@@ -291,3 +291,5 @@ code { overflow-wrap: anywhere; }
 .card dl { margin: 0 0 var(--s-3); }
 .card dd { margin: 0 0 var(--s-3); }
 .card h3 code { font-size: .78em; font-weight: 600; }
+/* Round 3 (live review F8): their label in sentence case, saying whose label it is */
+.plabel { font-size: var(--fs-0); font-weight: 600; color: var(--gold-text); margin: 0 0 var(--s-2); }

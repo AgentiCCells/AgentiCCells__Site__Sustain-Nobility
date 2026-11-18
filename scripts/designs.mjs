@@ -44,7 +44,9 @@ function srcInfo(id) {
 // Each page collects the facts it cites, for its Sources list.
 let used;
 const cite = id => { used.add(id); const s = srcInfo(id); return `<span class="cite">(<a href="${esc(s.url)}">${esc(s.title)}</a>, read ${esc(s.read)})</span>`; };
-const q = item => `<q>${esc(item.text)}</q>`;
+// Live review F6: their text holds straight double quotes; inside <q> show them as single quotation marks.
+const inner = t => String(t).replace(/"([^"]*)"/g, '\u2018$1\u2019');
+const q = item => `<q>${esc(inner(item.text))}</q>`;
 const qc = item => `${item.lead_in ? esc(item.lead_in) + ' ' : ''}${q(item)} ${cite(item.fact_id)}`;
 const ours = item => { (item.fact_ids || []).forEach(id => used.add(id)); return `<span class="lbl">${esc(item.label)}:</span> ${esc(item.text)}`; };
 const sr = t => `<span class="vh"> ${esc(t)}</span>`;
@@ -129,7 +131,9 @@ ${css}
 `;
 }
 
-const noticeBar = () => `<div class="notice" role="region" aria-label="Proposal notice"><div class="notice-in">${esc(C.notice_short)} <a href="${esc(C.notice_link.href)}">${esc(C.notice_link.text)}${sr(C.notice_link.sr)}</a></div></div>`;
+// Live review F2: one notice, the same words as the main site; the link sits on sustain-nobility.com.
+const noticeText = (() => { const t = C.notice; const i = t.indexOf('sustain-nobility.com'); if (i < 0) throw new Error('designs: notice has no sustain-nobility.com'); return `${esc(t.slice(0, i))}<a href="${esc(C.notice_link.href)}">sustain-nobility.com${sr(C.notice_link.sr)}</a>${esc(t.slice(i + 'sustain-nobility.com'.length))}`; })();
+const noticeBar = () => `<div class="notice" role="region" aria-label="Proposal notice"><div class="notice-in">${noticeText}</div></div>`;
 
 const brand = () => `<span class="brand">${esc(C.brand.wordmark)}<span class="vh">, a proposal</span> <span class="tag">${esc(C.brand.tag)}</span></span>`;
 const theirBtn = (cls = 'their') => `<a class="${cls}" href="${esc(C.brand.their_site_button.href)}">${esc(C.brand.their_site_button.text)}${sr(C.brand.their_site_button.sr)}</a>`;
@@ -147,7 +151,7 @@ function footer(slug) {
 <p><strong>${esc(ft.company)}</strong>. ${esc(ft.jurisdiction)} ${esc(ft.office)}.</p>
 <p class="small">${esc(ft.source_line)}</p>
 <p>${esc(ft.proposal_line)} <a href="${THEIRS}">sustain-nobility.com ↗${sr('(opens their official site)')}</a></p>
-<p class="small">${esc(ft.made_by)} ${esc(ft.licences)} <a href="/version.json">${esc(ft.version_label)} __VERSION__</a></p>
+<p class="small">${esc(ft.licences)} <a href="/version.json">${esc(ft.version_label)} __VERSION__</a></p>
 ${switcher(slug)}
 </div>
 </footer>
@@ -167,7 +171,7 @@ function plansNote() { used.add('c9'); return `<p class="small">${esc(C.plans_pa
 
 function planBody(p, { showPrice = true } = {}) {
   const RL = C.plans_page.row_labels;
-  return `${p.label ? `<p class="plabel"><span class="vh">${esc(RL.label)}: </span>${esc(p.label)}</p>` : ''}
+  return `${p.label ? `<p class="plabel">Their label: ${esc(p.label)}</p>` : ''}
 ${p.for ? `<p class="pfor"><q>${esc(p.for)}</q></p>` : ''}
 ${p.includes.length ? `<p class="phead">${esc(RL.includes)}</p><ul class="pinc">${p.includes.map(i => `<li>${esc(i)}</li>`).join('')}</ul>` : ''}
 ${p.includes_note ? `<p class="small">${ours(p.includes_note)}</p>` : ''}
@@ -307,7 +311,7 @@ ${steps.map((s, i) => `<rect class="l-box" x="${bx(i)}" y="60" width="160" heigh
 <p class="kicker">${esc(T.header)}</p>
 <p class="small">${eyebrow()}</p>
 <h1><q>${esc(headline.text)}</q></h1>
-<p class="small">${esc(d.name)}: ${esc(d.line)} Their headline ${cite(hFact)}.</p>
+<p class="small">Their headline ${cite(hFact)}.</p>
 ${summarySvg}
 <section aria-labelledby="p1"><h2 id="p1"><span class="no">1</span>The question</h2>
 ${R_('1.1', q(C.home.lede[0]), noteCite(C.home.lede[0].fact_id))}
@@ -331,7 +335,7 @@ ${R_('4.1', qc(C.home.areas_intro))}
 <p class="small">${esc(C.areas_page.caption)} ${cite('c6')}</p>
 </section>
 <section aria-labelledby="p5"><h2 id="p5"><span class="no">5</span>${esc(T.options_title)}</h2>
-<div class="tablewrap"><table><thead><tr><th scope="col">Option</th><th scope="col">${esc(C.plans_page.row_labels.label)}</th><th scope="col">${esc(C.plans_page.row_labels.includes)}</th><th scope="col">${esc(T.cost_head)}</th></tr></thead><tbody>${opts}</tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th scope="col">Option</th><th scope="col">Their label</th><th scope="col">${esc(C.plans_page.row_labels.includes)}</th><th scope="col">${esc(T.cost_head)}</th></tr></thead><tbody>${opts}</tbody></table></div>
 ${plansNote()}
 <p>${actionShort('start')} ${actionShort('call')}</p>
 </section>
@@ -385,7 +389,7 @@ h2{font-size:1.15rem;margin:0 0 .6rem}h3{font-size:1.02rem;margin:.2rem 0 .4rem}
 figcaption{font-size:.85rem;color:var(--soft);text-align:center}
 .legend{padding-left:1.3rem;margin:.5rem 0}.legend li{margin:.4rem 0}.legend span{display:block;font-size:.88rem;color:var(--soft)}
 .chip{display:inline-block;border:1px solid var(--amber);color:var(--amber);border-radius:999px;padding:.1rem .55rem}
-.pinc{padding-left:1.1rem;margin:.25rem 0}.pinc li::marker{color:var(--teal)}.phead{font-weight:700;margin:.4rem 0 .1rem}.plabel{font:700 .75rem ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin:.1rem 0 .4rem}.pfor,.pprice{margin:.3rem 0}.pstart .btn{width:100%}
+.pinc{padding-left:1.1rem;margin:.25rem 0}.pinc li::marker{color:var(--teal)}.phead{font-weight:700;margin:.4rem 0 .1rem}.plabel{font:700 .85rem ui-monospace,Menlo,monospace;;color:var(--amber);margin:.1rem 0 .4rem}.pfor,.pprice{margin:.3rem 0}.pstart .btn{width:100%}
 .pfig svg{max-width:28rem;display:block}.f-line{stroke:var(--stroke);stroke-width:2}.f-node{fill:var(--panel);stroke:var(--teal);stroke-width:2}.f-txt{font:600 18px system-ui,sans-serif;fill:var(--ink)}.f-hub{fill:var(--panel);stroke:var(--amber);stroke-width:2.5}.f-hubtxt{font:700 20px system-ui,sans-serif;fill:var(--ink)}.f-small{font-weight:400;font-size:17px}
 .events{list-style:none;padding:0;margin:.5rem 0;display:grid;gap:10px;grid-template-columns:1fr}
 @media (min-width:700px){.events{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1100px){.events{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -419,7 +423,7 @@ ${steps.map((s, i) => `<rect class="r-pill" x="${px(i) - 84}" y="38" width="168"
   const body = `<header>${noticeBar()}<div class="top">${brand()}<span>${theirBtn()}</span></div></header>
 <main id="main" class="dash">
 <section class="panel s8"><span class="plab">${eyebrow()}</span><h1><q>${esc(headline.text)}</q></h1><p class="small">${cite(hFact)}</p>${ledeParas()}</section>
-<section class="panel s4 status" aria-labelledby="st"><span class="plab">Readiness</span><h2 id="st">${esc(T.status_title)}</h2><p>${esc(T.status_text)}</p><p>${actionShort('start')}</p><p class="small">${esc(C.actions.note)}</p></section>
+<section class="panel s4 status" aria-labelledby="st"><span class="plab">Their site</span><h2 id="st">Where the check runs</h2><p>${esc(T.status_text)}</p><p>${actionShort('start')}</p><p class="small">${esc(C.actions.note)}</p></section>
 <section class="panel" aria-labelledby="sh"><h2 id="sh">${esc(C.home.show_title)}</h2><p class="small">${ours(C.home.show_intro)}</p></section>
 ${C.home.show.map(s => { s.fact_ids.forEach(id => used.add(id)); return `<div class="panel s4"><p class="stag">${esc(s.tag)}</p><h3>${esc(s.title)}</h3><p><span class="lbl">${esc(s.label)}:</span> ${esc(s.text)}</p></div>`; }).join('\n')}
 <section class="panel" aria-labelledby="fl"><span class="plab">Flow</span><h2 id="fl">${esc(C.flow.title)}</h2><p class="small">${ours(C.flow.intro)}</p>
@@ -436,7 +440,7 @@ ${plansPanels}
 <div class="panel s6">${partnerFigure('pf')}</div>
 ${events}
 <section class="panel s6" aria-labelledby="fo">${founderBlock('h2').replace('<h2>', '<h2 id="fo">')}</section>
-<section class="panel s6 cta" aria-labelledby="ct"><h2 id="ct">${q(C.home.cta.title)}</h2><p class="small">${cite(C.home.cta.title.fact_id)}</p><p>${esc(C.home.cta.text)}</p><p>${action('start')} ${action('partner', 'btn2')}</p><p class="small">${esc(C.home.cta.small)}</p></section>
+<section class="panel s6 cta" aria-labelledby="ct"><h2 id="ct">${q(C.home.cta.title)}</h2><p class="small">${cite(C.home.cta.title.fact_id)}</p><p>${esc(C.home.cta.text)}</p><p>${action('start')} ${action('partner', 'btn2')}</p></section>
 <section class="panel" aria-labelledby="sr"><h2 id="sr">Sources</h2>${sourcesList()}</section>
 </main>`;
   writePage(`d/${d.slug}`, head({ ...pageMeta(d), css }) + body + footer(d.slug));
@@ -453,7 +457,7 @@ body{font:18px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .notice{border-bottom:3px double var(--rule);padding:.6rem 16px}.notice-in{max-width:76rem;margin:0 auto}
 .top{max-width:76rem;margin:0 auto;padding:.5rem 16px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;border-bottom:1px solid var(--ink)}
 .brand{font:700 1.05rem "Iowan Old Style",Palatino,Georgia,serif;letter-spacing:.08em}.tag{font:700 .7rem ui-monospace,Menlo,monospace;color:var(--green);border:1px solid var(--green);padding:.05rem .35rem;letter-spacing:.08em;text-transform:uppercase}
-.their{display:inline-flex;align-items:center;min-height:44px;color:var(--blue);font-weight:700}
+.their{display:inline-flex;align-items:center;min-height:44px;min-width:44px;padding:0 .9rem;border:2px solid var(--blue);border-radius:4px;color:var(--blue);font-weight:700;text-decoration:none}
 .mast{max-width:76rem;margin:0 auto;padding:2rem 16px 1.5rem;border-bottom:1px solid var(--rule)}
 .kicker{font:700 .8rem ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin:0}
 h1{font-size:clamp(2.1rem,5.4vw,4rem);line-height:1.05;margin:.4rem 0 1rem;max-width:20ch;font-weight:700}
@@ -485,7 +489,7 @@ h1{font-size:clamp(2.1rem,5.4vw,4rem);line-height:1.05;margin:.4rem 0 1rem;max-w
 .side h2{border-bottom:1px solid var(--ink);padding-bottom:.4rem}
 .pgrid{display:grid;gap:1rem}@media (min-width:800px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .pgrid article{border-top:1px solid var(--rule);padding-top:.5rem}.pgrid h3{margin:0 0 .2rem}
-.plabel{font:700 .8rem ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin:0 0 .3rem}.phead{font-weight:700;margin:.4rem 0 0}.pinc{padding-left:1.1rem;margin:.2rem 0}.pfor,.pprice{margin:.3rem 0;font-size:.95rem}
+.plabel{font:700 .85rem ui-monospace,Menlo,monospace;color:var(--blue);margin:0 0 .3rem}.phead{font-weight:700;margin:.4rem 0 0}.pinc{padding-left:1.1rem;margin:.2rem 0}.pfor,.pprice{margin:.3rem 0;font-size:.95rem}
 .btn{border:2px solid var(--blue);color:var(--blue)}.btnp{background:var(--blue);color:var(--bg)}
 .pfig svg{max-width:28rem}.f-line{stroke:var(--stroke);stroke-width:1.5}.f-node{fill:var(--card);stroke:var(--ink);stroke-width:1.5}.f-txt{font:18px system-ui,sans-serif;fill:var(--ink)}.f-hub{fill:var(--card);stroke:var(--blue);stroke-width:2.5}.f-hubtxt{font:700 20px "Iowan Old Style",Georgia,serif;fill:var(--ink)}.f-small{font-weight:400;font-size:17px}
 figcaption{font-size:.85rem;color:var(--soft)}
@@ -598,7 +602,7 @@ h3{font-size:1.1rem;text-transform:uppercase;letter-spacing:.04em;font-weight:80
 @media (min-width:1000px){.pcols{grid-template-columns:repeat(4,minmax(0,1fr))}.pcols article{border-left:6px solid var(--ink);padding:0 1.25rem}.pcols article:first-child{border-left:0;padding-left:0}}
 @media (max-width:999px){.pcols article{border-top:6px solid var(--ink);padding:.75rem 0 1.25rem}}
 .pcols h3{font-size:1.5rem;text-transform:none;letter-spacing:-.02em}
-.plabel{color:var(--red);font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:0}.phead{font-weight:800;margin:.5rem 0 0}.pinc{padding-left:1.1rem;margin:.25rem 0}.pfor,.pprice{margin:.4rem 0;font-size:.95rem}
+.plabel{color:var(--red);font-weight:800;margin:0}.phead{font-weight:800;margin:.5rem 0 0}.pinc{padding-left:1.1rem;margin:.25rem 0}.pfor,.pprice{margin:.4rem 0;font-size:.95rem}
 .btn{background:var(--ink);color:var(--bg)}
 table{border-collapse:collapse;width:100%}th,td{text-align:left;vertical-align:top;padding:.6rem .5rem .6rem 0;border-top:2px solid var(--ink)}thead th{text-transform:uppercase;font-size:.85rem;letter-spacing:.04em}
 td.d{font-weight:800;white-space:nowrap}td .src{display:block;font-size:.82rem;color:var(--soft)}td .src a{color:var(--soft)}
@@ -664,7 +668,7 @@ figcaption{font-size:.85rem;color:var(--soft);text-align:center}
 .two{columns:1}@media (min-width:900px){.two{columns:2;column-gap:3rem}}
 .two p{break-inside:avoid;margin:0 0 1.2rem}
 .letters article{border-top:1px solid var(--ink);padding:1rem 0 1.5rem}
-.letters h3{font-size:1.3rem}.plabel{font-variant:small-caps;letter-spacing:.06em;color:var(--clay);margin:0}.phead{font-variant:small-caps;letter-spacing:.06em;margin:.5rem 0 0}.pinc{padding-left:1.2rem;margin:.2rem 0}.pfor,.pprice{margin:.3rem 0}
+.letters h3{font-size:1.3rem}.plabel{color:var(--clay);margin:0}.phead{font-variant:small-caps;letter-spacing:.06em;margin:.5rem 0 0}.pinc{padding-left:1.2rem;margin:.2rem 0}.pfor,.pprice{margin:.3rem 0}
 .btn{color:var(--sage);text-decoration:underline;padding-left:0;font-weight:400}
 .pfig svg{max-width:26rem;display:block;margin:0 auto}.f-line{stroke:var(--sage);stroke-width:1.5}.f-node{fill:var(--bg);stroke:var(--sage);stroke-width:1.5}.f-txt{font:18px "Iowan Old Style",Georgia,serif;fill:var(--ink)}.f-hub{fill:var(--bg);stroke:var(--clay);stroke-width:1.5}.f-hubtxt{font:20px "Iowan Old Style",Georgia,serif;fill:var(--ink)}.f-small{font-size:17px}
 .dates{list-style:none;padding:0}.dates li{padding:.6rem 0;border-bottom:1px solid var(--rule)}.dates time{font-variant:small-caps;letter-spacing:.04em;color:var(--clay);display:block;font-variant-numeric:oldstyle-nums}.dates .src{display:block;font-size:.85rem;color:var(--soft)}.dates .src a{color:var(--link)}
@@ -686,7 +690,7 @@ ${pts.map(([x, y], i) => `<circle class="lc" cx="${x}" cy="${y}" r="26"/><text c
   const hexSvg = `<figure class="hex"><svg viewBox="0 0 400 340" role="img" aria-labelledby="hx-t hx-d"><title id="hx-t">${esc(C.areas_page.svg_title)}</title><desc id="hx-d">A hexagon outline; each of its six corners stands for one area: ${esc(areas.map(a => a.name).join('; '))}.</desc>
 <polygon class="hx" points="${hv.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ')}"/>${hv.map(([x, y], i) => `<circle class="hv" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5"/><text class="ht" x="${(hc[0] + (hexR + 22) * Math.cos((i * 60 - 90) * Math.PI / 180)).toFixed(1)}" y="${(hc[1] + (hexR + 22) * Math.sin((i * 60 - 90) * Math.PI / 180) + 5).toFixed(1)}" text-anchor="${i === 0 || i === 3 ? 'middle' : i < 3 ? 'start' : 'end'}">${i + 1}</text>`).join('')}
 <text class="ht" x="200" y="176" text-anchor="middle">${esc(C.areas_page.centre)}</text></svg><figcaption>${esc(C.areas_page.caption)}</figcaption></figure>`;
-  const pull = item => `<blockquote class="pull"><p><q>${esc(item.text)}</q></p><footer class="small">${cite(item.fact_id)}</footer></blockquote>`;
+  const pull = item => `<blockquote class="pull"><p><q>${esc(inner(item.text))}</q></p><footer class="small">${cite(item.fact_id)}</footer></blockquote>`;
   const body = `<header>${noticeBar()}<div class="top">${brand()}${theirBtn()}</div></header>
 <main id="main">
 <div class="col">

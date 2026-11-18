@@ -1,6 +1,6 @@
 # SUSTAIN-NOBILITY (redesign proposal)
 
-> A redesign proposal for SUSTAIN-NOBILITY Advisory Ltd, made by AgentiCCells with their agreement. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com (https://www.sustain-nobility.com). This site is not their official site. Version __VERSION__.
+> Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com (https://www.sustain-nobility.com). Made by AgentiCCells with their agreement: to start the Readiness Check or book a call, use their site. Version __VERSION__.
 
 SUSTAIN-NOBILITY Advisory Ltd (registered in England and Wales) offers an AI Governance Readiness Check. Their home page asks: "If your client's AI caused harm tomorrow, who would be accountable?" Their two audiences, in their words: SMEs "Using AI but unsure about risks and without visibility of the type of toolkit required", and ecosystem partners "Supporting hundreds of SMEs with one scalable intelligent governance tool". Quotes are from https://www.sustain-nobility.com, read 2026-11-18.
 

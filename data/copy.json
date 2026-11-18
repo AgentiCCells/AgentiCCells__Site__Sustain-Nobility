@@ -14,8 +14,8 @@
     "not_legal_advice": "This is not legal advice."
   },
 
-  "notice": "Proposal, not the official site. A redesign proposal for SUSTAIN-NOBILITY Advisory Ltd, made by AgentiCCells with their agreement. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. To start the Readiness Check, book a call or get in touch, use their own site.",
-  "notice_short": "Proposal, not the official site, made by AgentiCCells with their agreement. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com.",
+  "notice": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. Made by AgentiCCells with their agreement: to start the Readiness Check or book a call, use their site.",
+  "notice_short": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. Made by AgentiCCells with their agreement: to start the Readiness Check or book a call, use their site.",
   "notice_link": { "text": "sustain-nobility.com ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their official site)" },
 
   "brand": {
@@ -361,7 +361,6 @@
     "office_fact_ids": ["c28", "c30"],
     "source_line": "Company name, registration and office as given in their site footer (source c28, with its read date).",
     "proposal_line": "A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com.",
-    "made_by": "Made by AgentiCCells with their agreement. Not the official site.",
     "licences": "Code Apache-2.0, text CC BY 4.0.",
     "version_label": "Version"
   },

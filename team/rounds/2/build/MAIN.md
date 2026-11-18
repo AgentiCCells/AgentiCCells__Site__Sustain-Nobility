@@ -121,3 +121,22 @@ OK
 $ node scripts/leak-scan.mjs
 OK (71 files, 5 binary skipped)
 ```
+
+## Live review fixes (conductor's third brief, 2026-11-18)
+
+- **F1:** `src/404.html`, written in commit 1. It has a full head (title containing "proposal", noindex, og and twitter tags), the notice, header and footer, a short "page not found", and links to /, /d/, /research/ and sustain-nobility.com. All paths are absolute.
+- **F2:** `copy.json` `notice` and `notice_short` now hold exactly the conductor's text; `footer.made_by` is removed.
+  - The notice on every page (main, generated and /d/) uses that one text, with the link on "sustain-nobility.com" inside the sentence.
+  - The footer keeps the G1 line only, with the link in it.
+  - The home CTA's "Both buttons open..." line and the Dial CTA's repeat are gone, so each page says once that buttons open their site.
+  - The ledes in `llms.txt` and `index.md` follow.
+  - generate.mjs now checks the notice text with tags stripped, and matches "made by AgentiCCells with their agreement" case-insensitively.
+- **F5:** the /different/ H2 is now "What each area covers".
+- **F6:** inner straight double quotes inside a quote are shown as single quotation marks, on the main site, in the designs and in index.md. copy.json is unchanged.
+- **F7:** the Board Paper intro line no longer describes the design; it gives only the headline source under the paper's own header.
+- **F8:** plans show "Their label: Diagnostic" in sentence case with no text-transform, on the main site, the home strip and every design. The Board Paper table heading is now "Their label".
+- **F9:** the Dial panel is now "Their site / Where the check runs".
+- **F10:** the Calendar's "Their site" is a bordered button at least 44 by 44 px.
+- **F11:** at phone width the visible narrow flow and ring SVGs carry `role="img"` and an `aria-label`. The hidden wide SVG keeps its name, and `display:none` removes it from the accessibility tree. The /d/ designs are unchanged on this point.
+- **F3 and F4** need decisions on the rules, not code. F4 is covered by the validator's new allowlist, which permits github.com/AgentiCCells/.
+- **Screenshots** at 390 and 1366 px (home, plans, different, dial, calendar, board paper, 404): no horizontal scroll.

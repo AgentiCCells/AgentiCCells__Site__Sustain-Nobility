@@ -59,7 +59,8 @@ header = header.replace(/ aria-current="page"/g, '');
 if (!header.includes('<a href="/research/">Research</a>')) throw new Error('generate: no Research item in the src/index.html nav');
 header = header.replace('<a href="/research/">Research</a>', '<a href="/research/" aria-current="page">Research</a>');
 const NOTICE_SENTENCE = "A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com.";
-if (!notice.includes(NOTICE_SENTENCE) || !notice.includes('made by AgentiCCells with their agreement')) throw new Error('generate: the notice in src/index.html lacks a required sentence');
+const noticeText = notice.replace(/<span class="vh">[\s\S]*?<\/span>/g, '').replace(/<[^>]+>/g, '');
+if (!noticeText.includes(NOTICE_SENTENCE) || !/made by AgentiCCells with their agreement/i.test(notice)) throw new Error('generate: the notice in src/index.html lacks a required sentence');
 
 const linkText = u => { try { const x = new URL(u); return x.hostname.replace(/^www\./, '') + (x.pathname.length > 1 ? x.pathname : ''); } catch { return u; } };
 const source = (url, read, kind) => {

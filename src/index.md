@@ -1,6 +1,6 @@
 # AI governance readiness: SUSTAIN-NOBILITY (redesign proposal)
 
-**Proposal, not the official site.** A redesign proposal for SUSTAIN-NOBILITY Advisory Ltd, made by AgentiCCells with their agreement. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. To start the Readiness Check, book a call or get in touch, use their own site. https://www.sustain-nobility.com
+**Proposal, not the official site.** A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. Made by AgentiCCells with their agreement: to start the Readiness Check or book a call, use their site. https://www.sustain-nobility.com
 
 Version __VERSION__. Quotes are SUSTAIN-NOBILITY's words from https://www.sustain-nobility.com, read 2026-11-18. Lines marked "AgentiCCells's summary" are ours.
 
@@ -12,7 +12,7 @@ Version __VERSION__. Quotes are SUSTAIN-NOBILITY's words from https://www.sustai
 
 AgentiCCells's summary: Their Readiness Check helps an organisation assess its AI governance maturity, identify risks and get practical, defensible outputs, which their site says come "in days instead of months".
 
-> The question is no longer: "Are you using AI?" The question is: "Can you prove it is governed responsibly?"
+> The question is no longer: ‘Are you using AI?’ The question is: ‘Can you prove it is governed responsibly?’
 
 ### One check, three things you can show
 
