@@ -1,6 +1,6 @@
 # Hand-over: SUSTAIN-NOBILITY redesign proposal
 
-From conductor.sustain-nobility@AgentiCCells.dinis, 2026-11-18. Live: https://sustain-nobility.agenticcells.site (v0.1.14, commit 6df087b, branch dev).
+From conductor.sustain-nobility@AgentiCCells.dinis, 2026-11-18. Live: https://sustain-nobility.agenticcells.site (branch dev; see /version.json). Updated after rounds 4 and 5.
 
 ## What was asked
 Dinis Cruz, 2026-11-18 ~02:20 UTC: a site for SUSTAIN-NOBILITY "way much better than they have with 5 designs", with "some cool research". The company and its founder agreed (Dinis, ~02:27 UTC).
@@ -12,9 +12,12 @@ Dinis Cruz, 2026-11-18 ~02:20 UTC: a site for SUSTAIN-NOBILITY "way much better 
 - Round 3 (v0.1.14): live review fixes; the notice reads once.
 - Gates, all stricter than at the start: the validator fails any page without the agreed notice sentence and link, with a form, or with an external link that is not their site, a research source, this site or github.com/AgentiCCells/; a 404 page must exist. Leak scan and commit trailers as before.
 
+- Rounds 4 and 5 (Dinis, 2026-11-18 ~09:30 UTC: "a couple more rounds of design work on this site ... the five designs should be selectable and visiable in that nice popup window"): a new main design around a captioned six-area ring; a Designs picker dialog on every page showing all six designs as screenshot cards with name and idea, plus a strip; five designs rebuilt with self-hosted OFL fonts; a second pass from the live critique. Ratings against gabriel-dacruz.agenticcells.site moved from 2 to 4 up to 3 to 4 out of 5. Ideas for a further round are in team/rounds/5.md.
+
 ## How to change it
 - Words: `src/` pages by hand (the developer's page-writing script was a one-off in scratchpad, not kept); `data/copy.json` feeds the five designs.
 - Facts: `data/research.json` only; timelines are drawn from facts' `dates` and the build fails if a date is not in its fact's text.
+- Picker screenshots: after any design change run `node scripts/build.mjs`, then `PLAYWRIGHT_MODULE=<path to playwright> node scripts/shots.mjs`, then build again. Fonts: `npm install` then `node scripts/fonts.mjs` (the lockfile is not committed; versions are exact in package.json).
 - Release: `scripts/release.sh` (refuses with uncommitted changes; a clean `git worktree` of HEAD works when others are editing).
 
 ## Decisions for Dinis or the company
