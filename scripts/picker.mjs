@@ -11,6 +11,10 @@
 //  (d) links /assets/picker.css before </head>.
 // Names and ideas come from data/copy.json (picker, designs[]); nothing is hard-coded here.
 // Thumbnails are /assets/designs/<slug>.jpg, made by scripts/shots.mjs (run by hand).
+// Round 5 (review item 10): the thumbnails stay lazy in the HTML, so a page that never
+// opens the dialog does not fetch them, and /assets/picker.js switches all six to
+// loading="eager" when the chip is pointed at or focused and again before the dialog
+// opens, so all six load together and none waits for its card to scroll into view.
 import { readFileSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 

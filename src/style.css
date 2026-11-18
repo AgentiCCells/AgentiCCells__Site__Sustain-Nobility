@@ -66,7 +66,10 @@
   --pk-strip-soft: #b9c4bd;
   --pk-strip-line: rgba(224, 184, 96, .35);
   --pk-strip-accent: var(--brass);
-  --pk-max: 76rem;
+  /* round 5: the strip follows .wrap (76rem border-box with --gutter each side) */
+  --pk-max: calc(76rem - 2 * var(--gutter));
+  --pk-pad: var(--gutter);
+  --pk-align: left;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -122,6 +125,11 @@ q { quotes: "\201C" "\201D" "\2018" "\2019"; }
 .notice strong { font-weight: 600; }
 .notice a { color: var(--notice-ink); font-weight: 600; text-decoration-color: var(--brass); text-decoration-thickness: 2px; }
 .notice :focus-visible { outline-color: var(--brass); }
+/* Phones (round 5, item 1): smaller type and padding, the whole sentence still shown, never clipped */
+@media (max-width: 599px) {
+  .notice { font-size: 12px; line-height: 1.42; }
+  .notice .wrap { padding-top: .4rem; padding-bottom: .45rem; }
+}
 
 
 /* Header */
@@ -143,6 +151,20 @@ q { quotes: "\201C" "\201D" "\2018" "\2019"; }
   .site-nav { flex: 1 1 60%; order: 6; }
   .their-site { order: 7; flex: none; }
   .nav li:last-child { padding-right: 2.5rem; }
+}
+/* "Their site" is the last nav item on phones; the header button shows from 600 px */
+.nav-their { display: none; }
+@media (max-width: 599px) {
+  .head-row { padding-top: 2px; padding-bottom: 0; row-gap: 0; }
+  .site-head .their-site { display: none; }
+  .nav-their { display: list-item; }
+  .nav-their a { position: relative; opacity: 1; font-weight: 600; text-decoration: underline; text-decoration-color: var(--brass-text); text-underline-offset: 4px; }
+  .home .nav-their a { text-decoration-color: var(--brass); }
+  /* the nav is its own full-width row that scrolls sideways, edge to edge, with a fade at the end */
+  .site-nav { flex: 0 0 calc(100% + 2 * var(--gutter)); width: calc(100% + 2 * var(--gutter)); margin: 0 calc(-1 * var(--gutter)); border-top: 1px solid var(--line); }
+  .home .site-nav { border-top-color: rgba(244, 241, 232, .14); }
+  .nav { gap: 0 1.15rem; padding: 0 var(--gutter); scroll-padding-inline: var(--gutter); }
+  .nav li:last-child { padding-right: 2rem; }
 }
 @media (max-width: 420px) {
   .wordmark { font-size: .9rem; letter-spacing: .02em; }
@@ -200,6 +222,7 @@ main section, .section { padding: var(--s-7) 0; }
 .more { font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
 .more::after { content: "\2192"; margin-left: .4em; }
 .page-head { padding: var(--s-7) 0 var(--s-6); }
+@media (max-width: 599px) { .page-head { padding-top: var(--s-4); } .page-head .eyebrow { margin-bottom: var(--s-3); } }
 .page-head h1 { font-size: clamp(2.3rem, 5vw, 4.235rem); max-width: 22ch; }
 .sec-head { display: grid; gap: var(--s-4); margin-bottom: var(--s-6); }
 .sec-head h2 { margin: 0; max-width: 22ch; }
@@ -207,11 +230,20 @@ main section, .section { padding: var(--s-7) 0; }
 
 /* Hero: deep band, big type, the six-area ring beside it */
 .hero { background: var(--deep); color: var(--on-deep); padding: var(--s-7) 0 var(--s-8); }
+@media (max-width: 599px) { .hero { padding-top: var(--s-4); } .hero .eyebrow { margin-bottom: var(--s-3); font-size: .74rem; } }
 .hero-grid { display: grid; gap: var(--s-7); align-items: center; }
-@media (min-width: 1000px) { .hero-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); } .hero { padding: var(--s-8) 0; } }
+@media (min-width: 1000px) {
+  .hero-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--s-7); align-items: start; }
+  .hero .hero-grid .lede { max-width: 40rem; }
+  .hero .hero-grid h1 { max-width: none; }
+  .hero .hero-grid .actions { margin-top: var(--s-4); }
+  .hero { padding: var(--s-6) 0 var(--s-8); }
+  .hero .ring-fig svg, .hero .ring-fig figcaption, .hero .ring-legend, .hero .ring-legend-label { max-width: 25.5rem; }
+}
 .hero .eyebrow { color: var(--brass); }
-.hero h1 { font-size: var(--fs-6); line-height: 1.02; max-width: 13ch; color: var(--on-deep); margin-bottom: var(--s-6); }
-@media (min-width: 1400px) { .hero h1, .band h2 { text-indent: -.42em; } }
+.hero h1 { font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1.02; max-width: 17ch; color: var(--on-deep); margin-bottom: var(--s-5); }
+.hero .actions { margin-top: var(--s-5); }
+@media (min-width: 1400px) { .hero h1 { text-indent: -.42em; } }
 .hero h1 sup a { color: var(--brass); }
 .hero .lede { color: var(--on-deep); font-size: clamp(1.15rem, 1.6vw, 1.294rem); max-width: 34rem; }
 .hero p { color: var(--on-deep-soft); }
@@ -345,14 +377,16 @@ main section, .section { padding: var(--s-7) 0; }
 .ledger-note { max-width: 46rem; }
 
 /* Why now: a horizontal ruler of sourced dates (built by scripts/generate.mjs from
-   data/research.json), the vertical list below 1000 px */
+   data/research.json), the vertical list below 1000 px. Round 5: one level is 8.8rem
+   (the tallest label measured 8rem at 1000 to 1920 px), and the year labels end at the
+   last dated year (no small orphan year at the end). */
 .ruler { display: none; }
 @media (min-width: 1000px) {
   .ruler { display: block; position: relative; margin: var(--s-6) 0 var(--s-5); }
-  .ruler-list { position: relative; height: calc(var(--levels) * 9.2rem + 1.2rem); }
+  .ruler-list { position: relative; height: calc(var(--levels) * 8.8rem + 1.2rem); }
   .ruler-axis { position: relative; height: 0; border-top: 2px solid var(--ink); }
-  .ruler-item { position: absolute; bottom: calc(var(--lv) * 9.2rem + 1.2rem); width: 18%; font-size: .88rem; line-height: 1.35; }
-  .ruler-item::after { content: ""; position: absolute; left: 0; top: 100%; height: calc(var(--lv) * 9.2rem + 1.2rem); border-left: 1px solid var(--line-strong); }
+  .ruler-item { position: absolute; bottom: calc(var(--lv) * 8.8rem + 1.2rem); width: 18%; font-size: .88rem; line-height: 1.35; }
+  .ruler-item::after { content: ""; position: absolute; left: 0; top: 100%; height: calc(var(--lv) * 8.8rem + 1.2rem); border-left: 1px solid var(--line-strong); }
   .ruler-item.r::after { left: auto; right: 0; }
   .ruler-item.r { text-align: right; }
   .ruler-item time { display: block; font-family: var(--mono); font-weight: 500; color: var(--brass-text); font-size: .88rem; }
@@ -361,9 +395,8 @@ main section, .section { padding: var(--s-7) 0; }
   .ruler-item.l { padding-left: .6rem; }
   .ruler-item.r { padding-right: .6rem; }
   .ruler-dot { position: absolute; top: -7px; width: 12px; height: 12px; margin-left: -6px; border-radius: 50%; background: var(--brass-text); }
-  .ruler-years { position: relative; height: 4.6rem; margin-bottom: 1.6rem; }
+  .ruler-years { position: relative; height: 3.8rem; margin-bottom: 1.4rem; }
   .ruler-year { position: absolute; top: 0; font-family: var(--serif); font-weight: 600; font-size: 2.82rem; line-height: 1; padding-left: .5rem; padding-top: .7rem; border-left: 1px solid var(--line-strong); color: var(--ink); }
-  .ruler-year.end { border-left: 0; border-right: 1px solid var(--line-strong); padding: .7rem .5rem 0 0; transform: translateX(-100%); color: var(--ink-soft); font-size: 1.3rem; }
   .ruler-read { position: absolute; top: -1.2rem; height: 6.4rem; border-left: 2px dashed var(--ink-soft); }
   .ruler-read span { position: absolute; top: 5.4rem; left: .4rem; white-space: nowrap; font-family: var(--mono); font-size: .74rem; color: var(--ink-soft); background: var(--paper-2); padding: 0 .3rem; }
   .ruler + .timeline { display: none; }
@@ -515,3 +548,59 @@ code { font-family: var(--mono); font-size: .9em; overflow-wrap: anywhere; }
 .lr a.ext { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
 .flow-band { padding: var(--s-5) 0 var(--s-6); }
 .question sup a, .question footer { font-style: normal; }
+
+/* Round 5 (review item 5): the lower home page varies its layouts and scale, so each band
+   reads as a different scene with one strong element, not the same heading-and-link band. */
+/* The question: the quote set wide and large on its own, the summary offset to the right */
+.q-sec { padding-bottom: var(--s-7); }
+.q-col { display: grid; gap: var(--s-6); }
+.q-sec .question { margin: 0; border-left: 6px solid var(--brass-text); padding-left: clamp(1rem, 3vw, 2.5rem); }
+.q-sec .question p { max-width: 24ch; font-size: clamp(2rem, 4.6vw, 3.9rem); line-height: 1.1; }
+@media (min-width: 900px) { .q-col > div { width: min(100%, 34rem); margin-left: auto; } }
+/* Three things you can show: the three verbs at poster scale */
+.show-sec .verb .word { font-size: clamp(2.8rem, 5.6vw, 4.6rem); }
+.show-sec .verbs { margin-top: var(--s-7); }
+/* Who it is for: a compact band, the heading in a side column, the two groups as large names */
+.who-sec { padding: var(--s-7) 0; }
+.who-grid { display: grid; gap: var(--s-5); }
+@media (min-width: 1000px) { .who-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: var(--s-7); align-items: start; } .who-grid h2 { margin-top: .4rem; } }
+.who-sec .half .kicker { font-family: var(--serif); font-weight: 600; font-size: clamp(1.9rem, 3.4vw, 2.8rem); letter-spacing: -.01em; text-transform: none; line-height: 1.05; color: var(--ink); margin-bottom: var(--s-4); }
+.who-sec .half blockquote p { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: clamp(1.2rem, 1.8vw, 1.45rem); line-height: 1.35; color: var(--ink-soft); }
+.who-sec .half blockquote p sup { font-style: normal; }
+/* Six areas: an asymmetric split, the claim in a sticky side column, the six in two columns */
+.areas-split { display: grid; gap: var(--s-6); }
+.areas-intro h2 { font-size: var(--fs-5); }
+.areas-intro .label { margin-top: var(--s-5); }
+.areas-sec .areas { margin-top: 0; }
+.areas-sec .areas .n { font-family: var(--serif); font-weight: 600; font-size: clamp(2.4rem, 4vw, 3.4rem); }
+@media (min-width: 1000px) { .areas-split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--s-8); align-items: start; } .areas-intro { position: sticky; top: var(--s-5); } }
+/* Why now: the ruler is the element; no extra rule above it */
+.why-sec .ruler { margin-top: var(--s-5); }
+/* Who is behind it: the founder's name at display size */
+.founder-sec h3 { font-size: var(--fs-4); margin: var(--s-2) 0 var(--s-4); }
+.founder-sec h2 { font-size: var(--fs-0); font-family: var(--mono); font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--brass-text); margin-bottom: var(--s-3); }
+.founder-sec .two-col > div + div { border-top: 1px solid var(--line); padding-top: var(--s-5); }
+@media (min-width: 900px) { .founder-sec .two-col > div + div { border-top: 0; padding-top: 0; border-left: 1px solid var(--line); padding-left: var(--s-7); } }
+
+/* Sources on the page grid: the heading in the left column, the list beside it */
+.src-grid { display: grid; gap: var(--s-3) var(--s-7); }
+.src-grid h2 { margin: 0; }
+.src-grid ol { margin: 0; max-width: 52rem; }
+@media (min-width: 900px) { .src-grid { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); } }
+.sources { padding: var(--s-6) 0; }
+.home .sources { background: var(--paper-2); border-top: 0; }
+
+/* The close: the final band with the call to action, then a compact footer */
+.band-final { padding: var(--s-8) 0; border-top: 2px solid var(--brass); }
+.band-grid { display: grid; gap: var(--s-5); }
+.band-grid h2 { margin: 0; }
+.band-grid .actions { margin-top: var(--s-5); }
+@media (min-width: 1000px) { .band-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); align-items: end; } .band-final h2 { font-size: clamp(2.6rem, 4.6vw, 4rem); max-width: 16ch; } }
+.band-final + * { margin-top: 0; }
+.home .site-foot { border-top: 1px solid rgba(244, 241, 232, .18); }
+.site-foot { padding: var(--s-6) 0 var(--s-4); }
+.site-foot p { margin-bottom: var(--s-2); }
+.foot-base { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--s-5); border-top: 1px solid rgba(244, 241, 232, .18); margin-top: var(--s-4); padding-top: var(--s-2); }
+.foot-base p { margin: 0; }
+.foot-base a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+@media (min-width: 900px) { .foot-base p:last-child { margin-left: auto; } }

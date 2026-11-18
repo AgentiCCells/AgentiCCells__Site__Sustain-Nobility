@@ -1,7 +1,16 @@
 /* Designs picker: chip, "Same facts, six designs" strip and dialog (round 4, review C3).
    Added to every page by scripts/picker.mjs. Neutral by default; a design may set
    --pk-bg --pk-ink --pk-soft --pk-line --pk-accent --pk-focus, and for the strip
-   --pk-strip-bg --pk-strip-ink --pk-strip-soft --pk-strip-line --pk-strip-accent, and --pk-max to match its own tokens. AgentiCCells, code Apache-2.0. */
+   --pk-strip-bg --pk-strip-ink --pk-strip-soft --pk-strip-line --pk-strip-accent to match its own tokens.
+   Strip alignment (round 5): the strip's inner row follows the page's own content box.
+   --pk-max   the content width of the page's wrapper, without its side padding (default 72rem)
+   --pk-pad   the side padding of that wrapper (default 16px; may change per breakpoint)
+   --pk-align left (default) or center: where the strip's items sit inside that box
+   The row is max-width: --pk-max plus padding --pk-pad on each side, centred on the page,
+   so a page whose wrapper is "max-width: X; padding: 0 Y; margin: 0 auto" (content-box) sets
+   --pk-max: X and --pk-pad: Y. With a border-box wrapper, set --pk-max to X minus 2Y.
+   Below 600 px the strip is hidden: the Designs chip in the header opens the same list.
+   AgentiCCells, code Apache-2.0. */
 
 /* Chip: a link to /d/ that picker.js turns into the dialog opener */
 .dz-chip { display: inline-flex; align-items: center; gap: .5em; min-height: 44px; padding: 0 .95rem; border: 1.5px solid currentColor; border-radius: 999px; font: inherit; font-size: .9rem; font-weight: 600; line-height: 1.2; color: inherit; text-decoration: none; white-space: nowrap; }
@@ -16,12 +25,14 @@
 
 /* Strip: right after the notice */
 .dz-strip { display: block; background: var(--pk-strip-bg, rgba(127, 127, 127, .1)); color: var(--pk-strip-ink, var(--pk-ink, inherit)); border-bottom: 1px solid var(--pk-strip-line, var(--pk-line, rgba(127, 127, 127, .4))); font-size: 13px; line-height: 1.3; }
-.dz-strip-in { display: flex; align-items: center; gap: 0 1.1rem; max-width: var(--pk-max, 72rem); margin: 0 auto; padding: 4px 16px; overflow-x: auto; white-space: nowrap; scrollbar-width: thin; }
+.dz-strip-in { box-sizing: content-box; display: flex; align-items: center; justify-content: var(--pk-align, left); gap: 0 1.1rem; max-width: var(--pk-max, 72rem); margin: 0 auto; padding: 4px var(--pk-pad, 16px); overflow-x: auto; white-space: nowrap; scrollbar-width: thin; }
 .dz-strip-label { flex: none; color: var(--pk-strip-soft, var(--pk-soft, inherit)); }
 .dz-strip a { flex: none; display: inline-flex; align-items: center; min-height: 28px; color: inherit; text-decoration: none; border-bottom: 2px solid transparent; }
 .dz-strip a:hover { border-bottom-color: currentColor; }
 .dz-strip a[aria-current="page"] { font-weight: 600; color: var(--pk-strip-accent, var(--pk-accent, inherit)); border-bottom-color: var(--pk-strip-accent, var(--pk-accent, currentColor)); }
-@media (max-width: 600px) { .dz-strip-in { padding: 0 16px; } .dz-strip a { min-height: 44px; } }
+/* Phones: the strip folds away; the Designs chip in every header opens the dialog of all six
+   (and is a plain link to /d/ without JavaScript), so the headline starts higher (round 5, item 1). */
+@media (max-width: 599px) { .dz-strip { display: none; } }
 
 /* Dialog */
 .dz-picker { box-sizing: border-box; width: min(94vw, 64rem); max-width: none; max-height: 90vh; margin: auto; padding: 0; border: 1px solid var(--pk-line, rgba(127, 127, 127, .5)); border-radius: 14px; background: var(--pk-bg, #fff); color: var(--pk-ink, #14201b); overflow: auto; overscroll-behavior: contain; font-size: 16px; line-height: 1.45; }

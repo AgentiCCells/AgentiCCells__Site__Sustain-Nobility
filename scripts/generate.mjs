@@ -174,8 +174,10 @@ const ruler = rows => {
     const px = xs[i], right = best.rt[i], lv = best.lv[i];
     return `<li class="ruler-item ${right ? 'r' : 'l'}" style="${right ? `right:${(100 - px).toFixed(2)}%` : `left:${px}%`};--lv:${lv}"><time datetime="${esc(r.date)}">${esc(human(r.date))}</time><span class="what">${esc(r.what)}</span><span class="tl-src"><a href="/research/#f-${esc(r.id)}">Fact ${esc(r.id)}</a> &#183; source: <a class="ext" rel="noopener" href="${esc(r.url)}">${esc(publisherOf(r.url))}</a>, read ${esc(r.read)}</span></li>`;
   });
+  // Round 5 (review item 5): year labels end at the last dated year; the axis still runs
+  // to 1 January after it, so the last dates keep their true place, but no orphan label.
   const years = [];
-  for (let y = y0; y <= y1; y++) years.push(`<span class="ruler-year${y === y1 ? ' end' : ''}" style="left:${x(`${y}-01-01`)}%">${y}</span>`);
+  for (let y = y0; y < y1; y++) years.push(`<span class="ruler-year" style="left:${x(`${y}-01-01`)}%">${y}</span>`);
   const readAt = /^\d{4}-\d{2}-\d{2}$/.test(r.read) && r.read >= rows[0].date ? x(r.read) : null;
   const label = copy.home?.why_now_ruler || {};
   return `<div class="ruler" role="group" aria-label="${esc(label.title || 'Sourced dates on a line of years')}" style="--levels:${ends.length}">
