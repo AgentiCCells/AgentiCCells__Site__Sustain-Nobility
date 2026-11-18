@@ -23,6 +23,9 @@ for (const f of [...files, 'hub.json', 'README.md']) {
     if (!/<title>[^<]+<\/title>/.test(s)) fail(`${f}: no <title>`);
     if (!/<meta name="description" content="[^"]+"/.test(s)) fail(`${f}: no description`);
     if (!/<html lang="/.test(s)) fail(`${f}: no lang on <html>`);
+    // conductor.sustain-nobility@ (2026-11-18): the proposal takes no input and says what it is on every page.
+    if (/<form[\s>]/i.test(s)) fail(`${f}: has a <form> (this proposal takes no sign-ups, assessments or personal data)`);
+    if (!isTemplate && !/class="notice"[^>]*>[\s\S]*?made by AgentiCCells with their agreement[\s\S]*?sustain-nobility\.com/i.test(s)) fail(`${f}: no proposal notice (made by AgentiCCells with their agreement, linking sustain-nobility.com)`);
     for (const m of s.matchAll(/<script[^>]+src="([^"]+)"/g)) if (/^(https?:)?\/\//.test(m[1])) fail(`${f}: third-party script ${m[1]}`);
     for (const m of s.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g)) if (/^(https?:)?\/\//.test(m[1])) fail(`${f}: third-party stylesheet ${m[1]}`);
     for (const m of s.matchAll(/(?:href|src)="([^"#?]+)/g)) {

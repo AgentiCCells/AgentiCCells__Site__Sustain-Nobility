@@ -1,0 +1,50 @@
+{
+  "note": "What each role may change. Read by the conductor before every commit.",
+  "roles": {
+    "conductor": {
+      "agent": "conductor.sustain-nobility@AgentiCCells.dinis",
+      "writes": [
+        "team/",
+        "REALITY.md",
+        "README.md",
+        "hub.json",
+        "board/"
+      ]
+    },
+    "researcher": {
+      "agent": "researcher.sustain-nobility@AgentiCCells.dinis",
+      "writes": [
+        "data/research.json",
+        "team/rounds/N/research/"
+      ]
+    },
+    "designer": {
+      "agent": "designer.sustain-nobility@AgentiCCells.dinis",
+      "writes": [
+        "team/rounds/N/design/"
+      ]
+    },
+    "developer": {
+      "agent": "developer.sustain-nobility@AgentiCCells.dinis",
+      "writes": [
+        "src/",
+        "scripts/generate.mjs",
+        "scripts/timeline.mjs",
+        "team/rounds/N/build/"
+      ]
+    },
+    "writer": {
+      "agent": "writer.sustain-nobility@AgentiCCells.dinis",
+      "writes": [
+        "data/copy.json",
+        "team/rounds/N/copy/"
+      ]
+    },
+    "reviewer": {
+      "agent": "reviewer.sustain-nobility@AgentiCCells.dinis",
+      "writes": [
+        "team/rounds/N/review/"
+      ]
+    }
+  }
+}
