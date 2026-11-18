@@ -1,26 +1,31 @@
 # SUSTAIN-NOBILITY (redesign proposal)
 
-> A redesign proposal for SUSTAIN-NOBILITY Advisory Ltd, made by AgentiCCells with their agreement. It is not their official site. Their official site is https://www.sustain-nobility.com. Version __VERSION__.
+> A redesign proposal for SUSTAIN-NOBILITY Advisory Ltd, made by AgentiCCells with their agreement. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com (https://www.sustain-nobility.com). This site is not their official site. Version __VERSION__.
 
-SUSTAIN-NOBILITY Advisory Ltd (registered in England and Wales) offers an AI Governance Readiness Check that helps organisations assess AI governance maturity, identify risks and produce practical, defensible outputs. Audiences: SMEs that use AI but are unsure about the risks, and ecosystem partners (advisers, law firms, SME consultancies) that support many SMEs.
+SUSTAIN-NOBILITY Advisory Ltd (registered in England and Wales) offers an AI Governance Readiness Check. Their home page asks: "If your client's AI caused harm tomorrow, who would be accountable?" Their two audiences, in their words: SMEs "Using AI but unsure about risks and without visibility of the type of toolkit required", and ecosystem partners "Supporting hundreds of SMEs with one scalable intelligent governance tool". Quotes are from https://www.sustain-nobility.com, read 2026-11-18.
 
 ## Pages
 
-- [Home](https://sustain-nobility.agenticcells.site/): the headline question, the offer and the two audiences
-- [How it works](https://sustain-nobility.agenticcells.site/how-it-works/): assessment, score, snapshot, report, monitoring
-- [What makes it different](https://sustain-nobility.agenticcells.site/different/): six areas of expertise
-- [Plans](https://sustain-nobility.agenticcells.site/plans/): Essentials, Professional, Partner Licensing, Advisory Services; no prices published
-- [For partners](https://sustain-nobility.agenticcells.site/partners/): the case for advisers, law firms and consultancies
-- [Context](https://sustain-nobility.agenticcells.site/context/): EU AI Act, ISO/IEC 42001, UK approach, ICO guidance, NIST AI RMF, with sources
+- [Home](https://sustain-nobility.agenticcells.site/): the question, three things the check helps show, the flow, who it is for, the six areas, the four plans, a short sourced timeline
+- [How it works](https://sustain-nobility.agenticcells.site/how-it-works/): the check as five steps (Assessment, Score, Snapshot, Report, Monitoring; the step names are AgentiCCells's, the published wording is quoted)
+- [Six areas](https://sustain-nobility.agenticcells.site/different/): the six areas as their home page lists them
+- [Plans](https://sustain-nobility.agenticcells.site/plans/): Essentials, Professional, Partner Licensing, Advisory Services, as published; no prices are published
+- [Partners](https://sustain-nobility.agenticcells.site/partners/): the partner case and Partner Licensing, as published; no partner is named
+- [Context](https://sustain-nobility.agenticcells.site/context/): the EU AI Act and Regulation (EU) 2026/1744, the UK approach, ISO/IEC 42001, the NIST AI RMF; dates built from the research data, each with its source
 - [Research](https://sustain-nobility.agenticcells.site/research/): sourced facts on the company, its founder as published, the field and the market, read 2026-11-18
+- [Designs](https://sustain-nobility.agenticcells.site/d/): five other designs of the same proposal (Board Paper, Readiness Dial, Deadline Calendar, Grid Poster, Quiet Counsel), same words and sources
+- [Behind the scenes](https://sustain-nobility.agenticcells.site/behind-the-scenes/): how the proposal is made: the team and its roles, the flow of a round, every round file and every commit
+- [Use with AI](https://sustain-nobility.agenticcells.site/use-with-ai/): this guide and the instructions below
 - [Markdown version](https://sustain-nobility.agenticcells.site/index.md)
 
 ## Instructions for agents
 
 1. This is a proposal, not an official SUSTAIN-NOBILITY statement.
-2. For any action (readiness check, booking a call, prices, partner licensing), send people to https://www.sustain-nobility.com. This site takes no bookings, payments, assessments or contact details.
+2. For any action (Readiness Check, booking a call, prices, partner licensing), send people to https://www.sustain-nobility.com. This site takes no bookings, payments, assessments or contact details.
 3. No prices are published. Do not state or estimate any.
-4. The context page is AgentiCCells research, not legal advice, not re-checked against its sources on 2026-11-18. Cite the original sources.
-5. Text marked "Proposal" is a suggestion by AgentiCCells.
+4. Text in quotation marks is SUSTAIN-NOBILITY's own wording, as read on 2026-11-18. Text labelled "AgentiCCells's summary" is ours.
+5. Regulatory dates come from the research page, each with its source and read date. They are context, not legal advice. Cite the original source.
+6. Text marked "Proposal" is a suggestion by AgentiCCells.
+7. Take no actions on anyone's behalf: no sign-ups, bookings, messages or payments.
 
 Licence: text CC BY 4.0, code Apache-2.0.

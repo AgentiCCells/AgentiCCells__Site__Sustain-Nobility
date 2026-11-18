@@ -1,9 +1,13 @@
 // Generate pages from data into _site/ (run by scripts/build.mjs after src/ is copied).
 // Node built-ins only. Written by developer.sustain-nobility@AgentiCCells.dinis, 2026-11-18.
 //
-// Writes _site/research/index.html from data/research.json. Nothing generated here is
-// committed under src/. The notice, header and footer are taken from _site/index.html
-// (copied from src/index.html) so every page shares one source for them.
+// Writes _site/research/index.html from data/research.json, and replaces the
+// <!--TIMELINE:home--> and <!--TIMELINE:context--> markers in the copied pages with
+// timelines built only from the "dates" arrays in data/research.json (review G6).
+// Nothing generated here is committed under src/. The notice, header and footer are
+// taken from _site/index.html (copied from src/index.html) so every page shares one
+// source for them. Round 2 (developer.sustain-nobility@, 2026-11-18): timelines, the
+// superseded-date rule, the director redaction, link-preview tags.
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 
 const SITE = 'https://sustain-nobility.agenticcells.site';
@@ -20,12 +24,23 @@ const PRIVATE = /significant control|\bshares?\b|voting rights|\bvot(?:es|ing)\b
 const REDACTED = {
   p1: 'Companies House records one officer, the director, appointed 25 July 2025.',
 };
+// Conductor's brief (2026-11-18): the founder's full legal name, as Companies House
+// prints it, is not published; the record says "the director" (consistent with p1).
+const LEGAL_NAME = /EGHRARI|GHAEM/i;
+const RENAMED = {
+  c33: 'Companies House officers: 1 officer, 0 resignations: the director, active, appointed on 25 July 2025. No occupation is shown.',
+};
+const OPEN_REPLACE = [[/Companies House shows the role Director under the name EGHRARI GHAEM-MAGHAMI, Monica;/, 'Companies House lists the director under a longer legal name;']];
 const TITLES = { person: 'The founder, as published' };
 const NOTES = {
   person: 'Named with their agreement (Dinis Cruz, 2026-11-18). Awards and titles are as their own pages publish them; we have not checked them against the awarding bodies.',
 };
 
-const publishable = f => {
+const publishable = f0 => {
+  const f = RENAMED[f0.id] ? { ...f0, text: RENAMED[f0.id] } : f0;
+  if (LEGAL_NAME.test(f.text) || LEGAL_NAME.test(f.quote || '')) {
+    if (f.id === 'p1' || PRIVATE.test(f.text)) { /* handled by the redaction below */ } else throw new Error(`generate: fact ${f.id} carries the director's legal name; add it to RENAMED`);
+  }
   if (!PRIVATE.test(f.text)) return f;
   const t = REDACTED[f.id];
   if (!t) return null;
@@ -56,25 +71,80 @@ const fact = f => `<div class="fact" id="f-${esc(f.id)}">
 ${source(f.url, f.read || r.read, f.kind)}
 </div>`;
 
-// Timeline: only from facts that carry "dates"; each date must be written in its fact's text.
-const timeline = facts => {
+// Timeline rows: only from facts that carry "dates"; each date must be written in its
+// fact's text and the fact must carry a source URL, or the build fails (review G6).
+// A date that Regulation (EU) 2026/1744 replaced is never shown unlabelled next to the
+// current one: SUPERSEDED names it, the fact that replaced it, and the label.
+const SUPERSEDED = {
+  'f2 2027-08-02': { by: 'f6', note: 'replaced by Regulation (EU) 2026/1744' },
+};
+const allFacts = r.sections.flatMap(s => s.facts);
+const factById = Object.fromEntries(allFacts.map(f => [f.id, f]));
+const copy = JSON.parse(readFileSync('data/copy.json', 'utf8'));
+const publisherOf = url => Object.values(copy.sources || {}).find(s => s.url === url)?.publisher || linkText(url).split('/')[0];
+const timelineRows = facts => {
   const rows = [];
   for (const f of facts) for (const d of f.dates || []) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(d.date)) throw new Error(`generate: bad date ${d.date} on ${f.id}`);
     if (!f.text.includes(human(d.date))) throw new Error(`generate: ${human(d.date)} is not in the text of fact ${f.id}`);
-    rows.push({ ...d, id: f.id });
+    if (!/^https:\/\//.test(f.url || '')) throw new Error(`generate: dated fact ${f.id} has no source URL`);
+    if (!d.what) throw new Error(`generate: a date on ${f.id} has no "what"`);
+    const sup = SUPERSEDED[`${f.id} ${d.date}`];
+    if (sup && !factById[sup.by]) throw new Error(`generate: ${f.id} ${d.date} is marked replaced by a missing fact ${sup.by}`);
+    rows.push({ ...d, id: f.id, url: f.url, read: f.read || r.read, superseded: sup });
   }
-  if (!rows.length) return '';
   rows.sort((a, b) => a.date.localeCompare(b.date) || a.id.localeCompare(b.id, 'en', { numeric: true }));
+  return rows;
+};
+for (const k of Object.keys(SUPERSEDED)) {
+  const [id, date] = k.split(' ');
+  if (!(factById[id]?.dates || []).some(d => d.date === date)) throw new Error(`generate: SUPERSEDED names ${k}, which research.json no longer holds; review the rule`);
+}
+
+// Research page: a table, superseded rows labelled.
+const timeline = facts => {
+  const rows = timelineRows(facts);
+  if (!rows.length) return '';
   return `<h3 id="timeline">EU AI Act timeline</h3>
+<div class="table-scroll" role="region" aria-label="EU AI Act timeline" tabindex="0">
 <table>
-<caption class="small" style="caption-side:bottom;text-align:left;padding-top:.5rem">Built only from the dated facts in this section; each row links to its fact and source. Later rows can change earlier ones: read the facts before relying on a date. Not legal advice.</caption>
+<caption class="small" style="caption-side:bottom;text-align:left;padding-top:.5rem">Built only from the dated facts in this section; each row links to its fact and source. A date replaced by Regulation (EU) 2026/1744 is labelled as replaced. This is not legal advice.</caption>
 <thead><tr><th>Date</th><th>What</th><th>Fact</th></tr></thead>
 <tbody>
-${rows.map(x => `<tr><td>${esc(human(x.date))}</td><td>${esc(x.what)}</td><td><a href="#f-${esc(x.id)}">${esc(x.id)}</a></td></tr>`).join('\n')}
+${rows.map(x => `<tr><td>${esc(human(x.date))}</td><td>${esc(x.what)}${x.superseded ? ` <strong>(${esc(x.superseded.note)}; see <a href="#f-${esc(x.superseded.by)}">${esc(x.superseded.by)}</a>)</strong>` : ''}</td><td><a href="#f-${esc(x.id)}">${esc(x.id)}</a></td></tr>`).join('\n')}
 </tbody>
-</table>`;
+</table>
+</div>`;
 };
+
+// Main-site timelines for <!--TIMELINE:home--> and <!--TIMELINE:context-->.
+// The fact ids come from data/copy.json; the dates only from data/research.json.
+// Home shows a short selection (HOME_ROWS) and drops replaced dates; context shows
+// every row of its facts, with replaced dates labelled.
+const HOME_ROWS = ['f1 2024-08-01', 'f4 2026-07-27', 'f1 2026-08-02', 'f6 2027-12-02', 'f6 2028-08-02'];
+const NOT_ADVICE = copy.not_legal_advice || 'This is not legal advice.';
+const tlList = rows => `<ol class="timeline">
+${rows.map(x => `<li${x.superseded ? ' class="replaced"' : ''}><time datetime="${esc(x.date)}">${esc(human(x.date))}</time>${x.superseded ? `<span class="replaced-note">${esc(x.superseded.note.charAt(0).toUpperCase() + x.superseded.note.slice(1))}: see <a href="/research/#f-${esc(x.superseded.by)}">fact ${esc(x.superseded.by)}</a></span>` : ''}<span class="what">${esc(x.what)}</span><span class="tl-src"><a href="/research/#f-${esc(x.id)}">Fact ${esc(x.id)}</a> &#183; source: <a class="ext" rel="noopener" href="${esc(x.url)}">${esc(publisherOf(x.url))}</a>, read ${esc(x.read)}</span></li>`).join('\n')}
+</ol>
+<p class="nla">${esc(NOT_ADVICE)}</p>`;
+const pickFacts = ids => (ids || []).map(id => factById[id]).filter(Boolean);
+const MARKERS = {
+  home: () => {
+    const rows = timelineRows(pickFacts(copy.home?.why_now_fact_ids)).filter(x => !x.superseded && HOME_ROWS.includes(`${x.id} ${x.date}`));
+    return rows.length ? tlList(rows) : '';
+  },
+  context: () => {
+    const rows = timelineRows(pickFacts(copy.context?.timeline_fact_ids));
+    return rows.length ? tlList(rows) : '';
+  },
+};
+for (const [file, key] of [['_site/index.html', 'home'], ['_site/context/index.html', 'context']]) {
+  let page;
+  try { page = readFileSync(file, 'utf8'); } catch { continue; }
+  const marker = `<!--TIMELINE:${key}-->`;
+  if (!page.includes(marker)) throw new Error(`generate: ${file} has no ${marker}`);
+  writeFileSync(file, page.replace(marker, MARKERS[key]()));
+}
 
 const sections = r.sections.map(s => {
   const facts = s.facts.map(publishable).filter(Boolean);
@@ -87,7 +157,10 @@ ${facts.map(fact).join('\n')}
 });
 
 const failed = (r.failed || []).map(f => `<li>${/^https?:\/\//.test(f.url) ? `<a class="ext" rel="noopener" href="${esc(f.url)}">${esc(linkText(f.url))}</a>` : esc(f.url)}: ${esc(f.why)}</li>`).join('\n');
-const open = (r.open || []).map(q => `<li>${esc(q)}</li>`).join('\n');
+const open = (r.open || []).map(q => OPEN_REPLACE.reduce((t, [re, to]) => t.replace(re, to), q)).map(q => {
+  if (LEGAL_NAME.test(q)) throw new Error('generate: an open question carries the director\'s legal name; add it to OPEN_REPLACE');
+  return `<li>${esc(q)}</li>`;
+}).join('\n');
 
 const title = 'Research on SUSTAIN-NOBILITY and its field (redesign proposal)';
 const desc = `Sourced facts on SUSTAIN-NOBILITY Advisory Ltd, its founder as published, AI governance rules and similar tools, read on ${r.read} from public sources. Part of a redesign proposal made by AgentiCCells with their agreement.`;
@@ -98,6 +171,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${url}">
@@ -107,7 +181,14 @@ const html = `<!doctype html>
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${url}">
 <meta property="og:locale" content="en_GB">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${SITE}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="SUSTAIN-NOBILITY, a proposal: If your client's AI caused harm tomorrow, who would be accountable? A redesign proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(desc)}">
+<meta name="twitter:image" content="${SITE}/og.png">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -117,7 +198,7 @@ ${notice}
 ${header}
 
 <main id="main">
-<div class="wrap narrow">
+<div class="wrap measure">
 <div class="page-head">
 <p class="eyebrow">Research, with sources</p>
 <h1>What the public record says</h1>
@@ -151,7 +232,7 @@ ${open}
 </section>
 
 <div class="actions">
-<a class="btn btn-green ext" href="https://www.sustain-nobility.com">Go to sustain-nobility.com</a>
+<a class="btn btn-gold ext" href="https://www.sustain-nobility.com">Go to sustain-nobility.com &#8599;<span class="vh"> (opens their site)</span></a>
 </div>
 </div>
 </main>
@@ -161,6 +242,7 @@ ${footer}
 </html>
 `;
 
+if (LEGAL_NAME.test(html)) throw new Error('generate: the research page carries the director\'s legal name');
 mkdirSync('_site/research', { recursive: true });
 writeFileSync('_site/research/index.html', html);
 console.log(`generated _site/research/index.html (${sections.map(s => s.id).join(', ')})`);
