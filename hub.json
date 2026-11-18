@@ -3,9 +3,24 @@
   "name": "SUSTAIN-NOBILITY",
   "what_it_does": "A redesign proposal, made by AgentiCCells with their agreement, for SUSTAIN-NOBILITY Advisory Ltd's AI Governance Readiness Check for SMEs and the advisers who support them.",
   "owner": "AgentiCCells",
-  "team": "factory@AgentiCCells.dinis, instructed by Dinis Cruz",
-  "licence": { "code": "Apache-2.0", "text": "CC BY 4.0" },
+  "team": "conductor.sustain-nobility@AgentiCCells.dinis and its team (researcher, designer, writer, developer, reviewer), instructed by Dinis Cruz",
+  "licence": {
+    "code": "Apache-2.0",
+    "text": "CC BY 4.0"
+  },
   "repository": "https://github.com/AgentiCCells/AgentiCCells__Site__Sustain-Nobility",
   "live_address": "https://sustain-nobility.agenticcells.site",
-  "version_from": "https://sustain-nobility.agenticcells.site/version.json"
+  "version_from": "https://sustain-nobility.agenticcells.site/version.json",
+  "pages": [
+    "/",
+    "/how-it-works/",
+    "/different/",
+    "/plans/",
+    "/partners/",
+    "/context/",
+    "/research/",
+    "/d/",
+    "/behind-the-scenes/",
+    "/use-with-ai/"
+  ]
 }
