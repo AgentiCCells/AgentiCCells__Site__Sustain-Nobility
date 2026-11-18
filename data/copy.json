@@ -13,109 +13,367 @@
     "whitespace": "Quotes were captured from the live HTML; line breaks and double spaces inside a quote were collapsed to single spaces. Nothing else was changed.",
     "not_legal_advice": "This is not legal advice."
   },
-
   "notice": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. To start the Readiness Check or book a call, use their site.",
   "notice_short": "Proposal, not the official site. A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com. To start the Readiness Check or book a call, use their site.",
-  "notice_link": { "text": "sustain-nobility.com ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their official site)" },
-
+  "notice_link": {
+    "text": "sustain-nobility.com ↗",
+    "href": "https://www.sustain-nobility.com",
+    "sr": "(opens their official site)"
+  },
   "brand": {
     "wordmark": "SUSTAIN-NOBILITY",
     "tag": "Proposal",
     "full": "SUSTAIN-NOBILITY, a proposal",
     "title_suffix": "SUSTAIN-NOBILITY (redesign proposal)",
     "description": "A redesign proposal for SUSTAIN-NOBILITY Advisory Ltd and its AI Governance Readiness Check, made by AgentiCCells with their agreement. Not the official site.",
-    "their_site_button": { "text": "Their site ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens sustain-nobility.com)" }
+    "their_site_button": {
+      "text": "Their site ↗",
+      "href": "https://www.sustain-nobility.com",
+      "sr": "(opens sustain-nobility.com)"
+    }
   },
-
   "nav": {
     "primary": [
-      { "text": "How it works", "href": "/how-it-works/" },
-      { "text": "Six areas", "href": "/different/" },
-      { "text": "Plans", "href": "/plans/" },
-      { "text": "Partners", "href": "/partners/" },
-      { "text": "Context", "href": "/context/" },
-      { "text": "Research", "href": "/research/" },
-      { "text": "Designs", "href": "/d/" }
+      {
+        "text": "How it works",
+        "href": "/how-it-works/"
+      },
+      {
+        "text": "Six areas",
+        "href": "/different/"
+      },
+      {
+        "text": "Plans",
+        "href": "/plans/"
+      },
+      {
+        "text": "Partners",
+        "href": "/partners/"
+      },
+      {
+        "text": "Context",
+        "href": "/context/"
+      },
+      {
+        "text": "Research",
+        "href": "/research/"
+      },
+      {
+        "text": "Designs",
+        "href": "/d/"
+      }
     ],
     "footer": [
-      { "text": "Behind the scenes", "href": "/behind-the-scenes/" },
-      { "text": "Use with AI", "href": "/use-with-ai/" },
-      { "text": "llms.txt", "href": "/llms.txt" },
-      { "text": "index.md", "href": "/index.md" },
-      { "text": "Designs", "href": "/d/" },
-      { "text": "Sources", "href": "/context/" },
-      { "text": "Version", "href": "/version.json" }
+      {
+        "text": "Behind the scenes",
+        "href": "/behind-the-scenes/"
+      },
+      {
+        "text": "Use with AI",
+        "href": "/use-with-ai/"
+      },
+      {
+        "text": "llms.txt",
+        "href": "/llms.txt"
+      },
+      {
+        "text": "index.md",
+        "href": "/index.md"
+      },
+      {
+        "text": "Designs",
+        "href": "/d/"
+      },
+      {
+        "text": "Sources",
+        "href": "/context/"
+      },
+      {
+        "text": "Version",
+        "href": "/version.json"
+      }
     ],
     "skip": "Skip to content"
   },
-
   "actions": {
-    "start": { "text": "Start the Readiness Check on sustain-nobility.com ↗", "short": "Start on sustain-nobility.com ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their site)" },
-    "call": { "text": "Book a strategy call on sustain-nobility.com ↗", "short": "Book a call on their site ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their site)", "basis": "Their home page offers 'BOOK STRATEGY CALL' (fact c11); this proposal links to their home page, not to the booking tool." },
-    "partner": { "text": "Ask about Partner Licensing on sustain-nobility.com ↗", "short": "Ask about partner licensing on their site ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their site)" },
-    "discuss": { "text": "Discuss a plan on sustain-nobility.com ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their site)" },
+    "start": {
+      "text": "Start the Readiness Check on sustain-nobility.com ↗",
+      "short": "Start on sustain-nobility.com ↗",
+      "href": "https://www.sustain-nobility.com",
+      "sr": "(opens their site)"
+    },
+    "call": {
+      "text": "Book a strategy call on sustain-nobility.com ↗",
+      "short": "Book a call on their site ↗",
+      "href": "https://www.sustain-nobility.com",
+      "sr": "(opens their site)",
+      "basis": "Their home page offers 'BOOK STRATEGY CALL' (fact c11); this proposal links to their home page, not to the booking tool."
+    },
+    "partner": {
+      "text": "Ask about Partner Licensing on sustain-nobility.com ↗",
+      "short": "Ask about partner licensing on their site ↗",
+      "href": "https://www.sustain-nobility.com",
+      "sr": "(opens their site)"
+    },
+    "discuss": {
+      "text": "Discuss a plan on sustain-nobility.com ↗",
+      "href": "https://www.sustain-nobility.com",
+      "sr": "(opens their site)"
+    },
     "note": "Every button opens SUSTAIN-NOBILITY's own site, sustain-nobility.com. This proposal takes no assessments, bookings, payments or contact details."
   },
-
   "home": {
     "title": "AI governance readiness: SUSTAIN-NOBILITY (redesign proposal)",
     "eyebrow": "AI Governance Readiness Check",
     "eyebrow_fact_id": "c1",
-    "headline": { "kind": "quote", "text": "If your client's AI caused harm tomorrow, who would be accountable?", "fact_id": "c1" },
+    "headline": {
+      "kind": "quote",
+      "text": "If your client's AI caused harm tomorrow, who would be accountable?",
+      "fact_id": "c1"
+    },
     "lede": [
-      { "kind": "quote", "text": "When Clients, Investors or Regulators ask about AI governance of SMEs, readiness to prove its level of maturity matters.", "fact_id": "c2" },
-      { "kind": "ours", "label": "AgentiCCells's summary", "text": "Their Readiness Check helps an organisation assess its AI governance maturity, identify risks and get practical, defensible outputs, which their site says come \"in days instead of months\".", "fact_ids": ["c3"], "quoted_part": "in days instead of months" }
+      {
+        "kind": "quote",
+        "text": "When Clients, Investors or Regulators ask about AI governance of SMEs, readiness to prove its level of maturity matters.",
+        "fact_id": "c2"
+      },
+      {
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "text": "Their Readiness Check helps an organisation assess its AI governance maturity, identify risks and get practical, defensible outputs, which their site says come \"in days instead of months\".",
+        "fact_ids": [
+          "c3"
+        ],
+        "quoted_part": "in days instead of months"
+      }
     ],
-    "buttons": ["start", "call"],
+    "buttons": [
+      "start",
+      "call"
+    ],
     "buttons_note": "Both open sustain-nobility.com. This proposal takes no assessments, bookings or contact details.",
     "show_title": "One check, three things you can show",
-    "show_intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "The three verbs are theirs: their home page says the check helps organisations assess, identify and generate.", "fact_ids": ["c3"] },
+    "show_intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "The three verbs are theirs: their home page says the check helps organisations assess, identify and generate.",
+      "fact_ids": [
+        "c3"
+      ]
+    },
     "show": [
-      { "tag": "Assess", "title": "Governance maturity", "text": "A short assessment of how AI is used and governed in the organisation today.", "kind": "ours", "label": "AgentiCCells's summary", "fact_ids": ["c3", "c9"] },
-      { "tag": "Identify", "title": "Risks", "text": "Where the gaps are: regulatory, legal, ethical and operational.", "kind": "ours", "label": "AgentiCCells's summary", "fact_ids": ["c3", "c6"] },
-      { "tag": "Generate", "title": "Defensible outputs", "text": "A Governance Score and an Initial Executive Snapshot Summary, with an Initial Executive Board Report in the Professional plan.", "kind": "ours", "label": "AgentiCCells's summary", "fact_ids": ["c3", "c9"] }
+      {
+        "tag": "Assess",
+        "title": "Governance maturity",
+        "text": "A short assessment of how AI is used and governed in the organisation today.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "fact_ids": [
+          "c3",
+          "c9"
+        ]
+      },
+      {
+        "tag": "Identify",
+        "title": "Risks",
+        "text": "Where the gaps are: regulatory, legal, ethical and operational.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "fact_ids": [
+          "c3",
+          "c6"
+        ]
+      },
+      {
+        "tag": "Generate",
+        "title": "Defensible outputs",
+        "text": "A Governance Score and an Initial Executive Snapshot Summary, with an Initial Executive Board Report in the Professional plan.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "fact_ids": [
+          "c3",
+          "c9"
+        ]
+      }
     ],
-    "question": { "kind": "quote", "text": "The question is no longer: \"Are you using AI?\" The question is: \"Can you prove it is governed responsibly?\"", "fact_id": "c7" },
+    "show_label": "AgentiCCells's summary",
+    "show_label_note": "One label for the whole Assess, Identify, Generate band; each item keeps its own fact_ids.",
+    "ring": {
+      "svg_title": "Six areas, one Readiness Check",
+      "svg_desc": "A ring of six equal segments around a centre labelled One Readiness Check. The segments are numbered 01 to 06: AI governance; Regulatory and legal risk; AI assurance and audit readiness; Human rights and ethical safeguards; Public policy and emerging regulation; SME operational realities. No segment is highlighted.",
+      "centre": "One Readiness Check",
+      "sub": "Six areas",
+      "legend_label": "The six areas, as their home page lists them",
+      "caption": "AgentiCCells's drawing of the six areas their site lists. Not a mark, logo or certification of SUSTAIN-NOBILITY."
+    },
+    "question": {
+      "kind": "quote",
+      "text": "The question is no longer: \"Are you using AI?\" The question is: \"Can you prove it is governed responsibly?\"",
+      "fact_id": "c7"
+    },
     "flow_title": "How the check runs",
-    "flow_link": { "text": "The full flow", "href": "/how-it-works/" },
+    "flow_link": {
+      "text": "The full flow",
+      "href": "/how-it-works/"
+    },
     "audiences_title": "Who it is for",
     "audiences": [
-      { "name": "For SMEs", "kind": "quote", "text": "Using AI but unsure about risks and without visibility of the type of toolkit required", "fact_id": "c4", "link": { "text": "Compare the plans", "href": "/plans/" } },
-      { "name": "For Ecosystem partners", "kind": "quote", "text": "Supporting hundreds of SMEs with one scalable intelligent governance tool", "fact_id": "c4", "link": { "text": "The partner case", "href": "/partners/" } }
+      {
+        "name": "For SMEs",
+        "kind": "quote",
+        "text": "Using AI but unsure about risks and without visibility of the type of toolkit required",
+        "fact_id": "c4",
+        "link": {
+          "text": "Compare the plans",
+          "href": "/plans/"
+        }
+      },
+      {
+        "name": "For Ecosystem partners",
+        "kind": "quote",
+        "text": "Supporting hundreds of SMEs with one scalable intelligent governance tool",
+        "fact_id": "c4",
+        "link": {
+          "text": "The partner case",
+          "href": "/partners/"
+        }
+      }
     ],
     "areas_title": "Six areas, one check",
-    "areas_intro": { "kind": "quote", "text": "Most AI governance solutions focus on only one of these dimensions: Legal compliance, technical controls, or policy.", "fact_id": "c5", "lead_in": "Their site says:" },
-    "areas_link": { "text": "The six areas", "href": "/different/" },
+    "areas_intro": {
+      "kind": "quote",
+      "text": "Most AI governance solutions focus on only one of these dimensions: Legal compliance, technical controls, or policy.",
+      "fact_id": "c5",
+      "lead_in": "Their site says:"
+    },
+    "areas_link": {
+      "text": "The six areas",
+      "href": "/different/"
+    },
     "plans_title": "Four plans, as published",
-    "plans_link": { "text": "Compare the plans", "href": "/plans/" },
+    "plans_link": {
+      "text": "Compare the plans",
+      "href": "/plans/"
+    },
     "why_now_title": "Why now",
-    "why_now_intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "The rules and guidance around AI keep moving. The dates below are taken from the official texts and pages listed under Sources, each with the date we read it, and are shown for context only. This is not legal advice." },
-    "why_now_fact_ids": ["f1", "f4", "f6", "f7", "f24"],
+    "why_now_intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "The rules and guidance around AI keep moving. The dates below are taken from the official texts and pages listed under Sources, each with the date we read it, and are shown for context only. This is not legal advice."
+    },
+    "why_now_fact_ids": [
+      "f1",
+      "f4",
+      "f6",
+      "f7",
+      "f24"
+    ],
+    "why_now_ruler": {
+      "title": "Sourced dates on a line of years",
+      "read_marker_label": "Read",
+      "scroller_label": "Dates from the sources, scrollable"
+    },
     "cta": {
-      "title": { "kind": "quote", "text": "Can you prove it is governed responsibly?", "fact_id": "c7" },
+      "title": {
+        "kind": "quote",
+        "text": "Can you prove it is governed responsibly?",
+        "fact_id": "c7"
+      },
       "text": "The Readiness Check runs on SUSTAIN-NOBILITY's own site. This proposal assesses nothing and collects nothing.",
-      "buttons": ["start", "partner"],
+      "buttons": [
+        "start",
+        "partner"
+      ],
       "small": "Both buttons open sustain-nobility.com."
     },
-    "designs_row": { "text": "See five other designs of this proposal", "href": "/d/" }
+    "designs_row": {
+      "text": "See five other designs of this proposal",
+      "href": "/d/"
+    }
   },
-
   "flow": {
     "title": "How the Readiness Check works",
     "h1": "From a 10-minute assessment to a board report",
-    "h1_fact_ids": ["c9"],
-    "intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Five steps, drawn from what their home page lists in the plans and the hero. The step names are ours; the published wording is quoted under each step.", "fact_ids": ["c9", "c10"] },
+    "h1_fact_ids": [
+      "c9"
+    ],
+    "intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Five steps, drawn from what their home page lists in the plans and the hero. The step names are ours; the published wording is quoted under each step.",
+      "fact_ids": [
+        "c9",
+        "c10"
+      ]
+    },
     "steps": [
-      { "n": 1, "name": "Assessment", "published": "10-minute Assessment", "text": "A short diagnostic of how AI is used and governed in the organisation.", "kind": "ours", "label": "AgentiCCells's summary", "source_fact_ids": ["c9"] },
-      { "n": 2, "name": "Score", "published": "Governance Score", "text": "A score of governance maturity, so the organisation can see where it stands.", "kind": "ours", "label": "AgentiCCells's summary", "source_fact_ids": ["c9", "c24"] },
-      { "n": 3, "name": "Snapshot", "published": "Initial Executive Snapshot Summary", "text": "A first summary of the results, written for executives.", "kind": "ours", "label": "AgentiCCells's summary", "source_fact_ids": ["c9"] },
-      { "n": 4, "name": "Report", "published": "30-min review call; Initial Executive Board Report", "text": "In the Professional plan, a review call and a first report for the board.", "kind": "ours", "label": "AgentiCCells's summary", "source_fact_ids": ["c9"] },
-      { "n": 5, "name": "Monitoring", "published": "Additionally, receive a diagnostic in real time when the company changes its strategy, it can be alerted.", "text": "Their site describes a diagnostic in real time when the company changes its strategy. The name 'Monitoring' is ours.", "kind": "ours", "label": "AgentiCCells's summary", "source_fact_ids": ["c10"] }
+      {
+        "n": 1,
+        "name": "Assessment",
+        "published": "10-minute Assessment",
+        "text": "A short diagnostic of how AI is used and governed in the organisation.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "source_fact_ids": [
+          "c9"
+        ]
+      },
+      {
+        "n": 2,
+        "name": "Score",
+        "published": "Governance Score",
+        "text": "A score of governance maturity, so the organisation can see where it stands.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "source_fact_ids": [
+          "c9",
+          "c24"
+        ]
+      },
+      {
+        "n": 3,
+        "name": "Snapshot",
+        "published": "Initial Executive Snapshot Summary",
+        "text": "A first summary of the results, written for executives.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "source_fact_ids": [
+          "c9"
+        ]
+      },
+      {
+        "n": 4,
+        "name": "Report",
+        "published": "30-min review call; Initial Executive Board Report",
+        "text": "In the Professional plan, a review call and a first report for the board.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "source_fact_ids": [
+          "c9"
+        ]
+      },
+      {
+        "n": 5,
+        "name": "Monitoring",
+        "published": "Additionally, receive a diagnostic in real time when the company changes its strategy, it can be alerted.",
+        "text": "Their site describes a diagnostic in real time when the company changes its strategy. The name 'Monitoring' is ours.",
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "source_fact_ids": [
+          "c10"
+        ]
+      }
     ],
     "return_label": "When strategy changes, run again",
     "brackets": [
-      { "text": "Essentials: steps 1 to 3", "fact_id": "c9" },
-      { "text": "Professional: adds step 4", "fact_id": "c9" }
+      {
+        "text": "Essentials: steps 1 to 3",
+        "fact_id": "c9"
+      },
+      {
+        "text": "Professional: adds step 4",
+        "fact_id": "c9"
+      }
     ],
     "caption": "The Readiness Check as five steps. Essentials covers the assessment, score and snapshot; Professional adds a review call and a board report. Their site describes a diagnostic in real time when strategy changes; it does not say which plan includes it.",
     "svg_title": "The Readiness Check as a flow",
@@ -123,12 +381,22 @@
     "twin_heading": "The steps in words",
     "footnote": "Step wording follows what sustain-nobility.com published. The assessment questions and the scoring method are not published there, so this page does not describe them."
   },
-
   "areas_page": {
     "title": "Six areas: SUSTAIN-NOBILITY (redesign proposal)",
     "h1": "Six areas, one Readiness Check",
-    "intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Their home page lists six areas of combined expertise. The names below are theirs, as published. The line under each is our plain-language summary of what the field usually covers, not their words.", "fact_ids": ["c6"] },
-    "lead_quote": { "kind": "quote", "text": "Most AI governance solutions focus on only one of these dimensions: Legal compliance, technical controls, or policy.", "fact_id": "c5" },
+    "intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Their home page lists six areas of combined expertise. The names below are theirs, as published. The line under each is our plain-language summary of what the field usually covers, not their words.",
+      "fact_ids": [
+        "c6"
+      ]
+    },
+    "lead_quote": {
+      "kind": "quote",
+      "text": "Most AI governance solutions focus on only one of these dimensions: Legal compliance, technical controls, or policy.",
+      "fact_id": "c5"
+    },
     "svg_title": "Six areas around one Readiness Check",
     "svg_desc": "A centre disc labelled 'One Readiness Check' with six equal segments: AI governance; Regulatory and legal risk; AI assurance and audit readiness; Human rights and ethical safeguards; Public policy and emerging regulation; SME operational realities.",
     "centre": "One Readiness Check",
@@ -136,30 +404,74 @@
     "summary_label": "AgentiCCells's plain-language summary"
   },
   "areas": [
-    { "name": "AI governance", "text": "Who decides how AI is used, who is accountable, and how decisions are recorded.", "fact_id": "c6" },
-    { "name": "Regulatory and legal risk", "text": "Which laws and rules apply to the way an organisation builds, buys or uses AI.", "fact_id": "c6" },
-    { "name": "AI assurance and audit readiness", "text": "Being able to show evidence that controls exist and work, when someone asks.", "fact_id": "c6" },
-    { "name": "Human rights and ethical safeguards", "text": "Protecting the people affected by AI decisions: fairness, privacy, dignity and redress.", "fact_id": "c6" },
-    { "name": "Public policy and emerging regulation", "text": "Knowing what is changing, so today's choices still hold next year.", "fact_id": "c6" },
-    { "name": "SME operational realities", "text": "Advice sized for small teams with limited time and budget, not for large compliance departments.", "fact_id": "c6" }
+    {
+      "name": "AI governance",
+      "text": "Who decides how AI is used, who is accountable, and how decisions are recorded.",
+      "fact_id": "c6"
+    },
+    {
+      "name": "Regulatory and legal risk",
+      "text": "Which laws and rules apply to the way an organisation builds, buys or uses AI.",
+      "fact_id": "c6"
+    },
+    {
+      "name": "AI assurance and audit readiness",
+      "text": "Being able to show evidence that controls exist and work, when someone asks.",
+      "fact_id": "c6"
+    },
+    {
+      "name": "Human rights and ethical safeguards",
+      "text": "Protecting the people affected by AI decisions: fairness, privacy, dignity and redress.",
+      "fact_id": "c6"
+    },
+    {
+      "name": "Public policy and emerging regulation",
+      "text": "Knowing what is changing, so today's choices still hold next year.",
+      "fact_id": "c6"
+    },
+    {
+      "name": "SME operational realities",
+      "text": "Advice sized for small teams with limited time and budget, not for large compliance departments.",
+      "fact_id": "c6"
+    }
   ],
-
   "plans_page": {
     "title": "Plans: SUSTAIN-NOBILITY (redesign proposal)",
     "h1": "Four plans, as published",
-    "intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Plan names, labels and contents are copied from their home page. Nothing is added. No plan is recommended here, because they have not recommended one.", "fact_ids": ["c9"] },
-    "row_labels": { "label": "Label", "for": "Who it is for", "includes": "What you get", "start": "How to start", "price": "Price" },
+    "intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Plan names, labels and contents are copied from their home page. Nothing is added. No plan is recommended here, because they have not recommended one.",
+      "fact_ids": [
+        "c9"
+      ]
+    },
+    "row_labels": {
+      "label": "Label",
+      "for": "Who it is for",
+      "includes": "What you get",
+      "start": "How to start",
+      "price": "Price"
+    },
     "no_price": "No price published on their site.",
+    "no_label": "No label published on their site.",
     "to_be_discussed": "To be discussed",
     "footnote": "Plan names and contents as published on sustain-nobility.com (source c9, with its read date). Their site publishes no prices, so none are shown here.",
-    "buttons": ["start", "discuss"]
+    "buttons": [
+      "start",
+      "discuss"
+    ]
   },
   "plans": [
     {
       "name": "Essentials",
       "label": "Diagnostic",
       "for": "AI governance health check for SMEs - initial executive snapshot summary",
-      "includes": ["10-minute Assessment", "Governance Score", "Initial Executive Snapshot Summary"],
+      "includes": [
+        "10-minute Assessment",
+        "Governance Score",
+        "Initial Executive Snapshot Summary"
+      ],
       "price": "No price published on their site.",
       "start": "Start on sustain-nobility.com ↗",
       "fact_id": "c9",
@@ -169,8 +481,16 @@
       "name": "Professional",
       "label": "Initial report",
       "for": "For Policy firms and SME consultancy supporting organisation's AI governance",
-      "includes": ["Everything above", "30-min review call", "Initial Executive Board Report"],
-      "includes_note": { "kind": "ours", "label": "AgentiCCells's note", "text": "On their page, \"Everything above\" follows the Essentials plan." },
+      "includes": [
+        "Everything above",
+        "30-min review call",
+        "Initial Executive Board Report"
+      ],
+      "includes_note": {
+        "kind": "ours",
+        "label": "AgentiCCells's note",
+        "text": "On their page, \"Everything above\" follows the Essentials plan."
+      },
       "price": "No price published on their site.",
       "start": "Start on sustain-nobility.com ↗",
       "fact_id": "c9",
@@ -199,18 +519,41 @@
       "published_heading": "Advisory Services"
     }
   ],
-
   "partners": {
     "title": "Partners: SUSTAIN-NOBILITY (redesign proposal)",
     "h1": "One check, many SMEs",
-    "lede": { "kind": "quote", "text": "Supporting hundreds of SMEs with one scalable intelligent governance tool", "fact_id": "c4" },
-    "method": { "kind": "quote", "text": "Our methodology is designed not only for direct organisational use, but also to support advisors, law firms, and ecosystem partners seeking scalable, repeatable AI governance assessments across multiple clients.", "fact_id": "c8" },
-    "types_intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Their site names these partners in its own words: advisors, law firms and ecosystem partners (c8), and, for the Professional plan, policy firms and SME consultancy (c9)." },
+    "lede": {
+      "kind": "quote",
+      "text": "Supporting hundreds of SMEs with one scalable intelligent governance tool",
+      "fact_id": "c4"
+    },
+    "method": {
+      "kind": "quote",
+      "text": "Our methodology is designed not only for direct organisational use, but also to support advisors, law firms, and ecosystem partners seeking scalable, repeatable AI governance assessments across multiple clients.",
+      "fact_id": "c8"
+    },
+    "types_intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Their site names these partners in its own words: advisors, law firms and ecosystem partners (c8), and, for the Professional plan, policy firms and SME consultancy (c9)."
+    },
     "types": [
-      { "name": "Advisors", "fact_id": "c8" },
-      { "name": "Law firms", "fact_id": "c8" },
-      { "name": "Ecosystem partners", "fact_id": "c8" },
-      { "name": "Policy firms and SME consultancy", "fact_id": "c9" }
+      {
+        "name": "Advisors",
+        "fact_id": "c8"
+      },
+      {
+        "name": "Law firms",
+        "fact_id": "c8"
+      },
+      {
+        "name": "Ecosystem partners",
+        "fact_id": "c8"
+      },
+      {
+        "name": "Policy firms and SME consultancy",
+        "fact_id": "c9"
+      }
     ],
     "plan_ref": "Partner Licensing",
     "figure_title": "One partner, one check, many SMEs",
@@ -218,76 +561,261 @@
     "figure_caption": "Illustration. No partner is named and no count is shown.",
     "button": "partner"
   },
-
   "context": {
     "title": "Context: SUSTAIN-NOBILITY (redesign proposal)",
     "h1": "The rules and standards around the question",
-    "intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Why the question matters, from official sources. Every date and status on this page is read from data/research.json at build time and shown with its source, publisher and read date. Where a source has not been read, nothing is shown in its place." },
-    "eu": { "kind": "ours", "label": "AgentiCCells's summary", "text": "The EU AI Act applies in stages, and an amending regulation, the Digital Omnibus on AI, has moved some of them. It gives SMEs simpler documentation and priority access to regulatory sandboxes, and caps their fines at the lower of two amounts.", "fact_ids": ["f1", "f2", "f4", "f5", "f6", "f7", "f11", "f12", "f13", "f15"] },
-    "uk": { "kind": "ours", "label": "AgentiCCells's summary", "text": "The UK has no single AI law. Existing regulators apply five cross-sector principles; the government asked regulators to publish plans for supporting safe AI innovation, and chose to write governance guidance for SMEs instead of publishing its AI Management Essentials tool. The ICO's guidance says most uses of AI will need a data protection impact assessment.", "fact_ids": ["f20", "f21", "f24", "f25", "f26", "f27", "f28"] },
-    "standards": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Two voluntary frameworks are widely used to organise AI governance evidence: ISO/IEC 42001, a certifiable AI management system standard, and the NIST AI Risk Management Framework, built around Govern, Map, Measure and Manage.", "fact_ids": ["f19", "f30", "f31"] },
-    "evidence": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Taken together, the sources suggest what an SME may be asked to show: a record of the AI systems it uses and their risk class, AI literacy measures, impact assessments where personal data is involved, transparency notices and, for high-risk uses, human oversight.", "fact_ids": ["f32"] },
-    "their_alignment": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Their Our Tool page says the check is aligned with the main UK and EU regulators relevant to AI, without naming them.", "fact_ids": ["c17"] },
+    "intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Why the question matters, from official sources. Every date and status on this page is read from data/research.json at build time and shown with its source, publisher and read date. Where a source has not been read, nothing is shown in its place."
+    },
+    "eu": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "The EU AI Act applies in stages, and an amending regulation, the Digital Omnibus on AI, has moved some of them. It gives SMEs simpler documentation and priority access to regulatory sandboxes, and caps their fines at the lower of two amounts.",
+      "fact_ids": [
+        "f1",
+        "f2",
+        "f4",
+        "f5",
+        "f6",
+        "f7",
+        "f11",
+        "f12",
+        "f13",
+        "f15"
+      ]
+    },
+    "uk": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "The UK has no single AI law. Existing regulators apply five cross-sector principles; the government asked regulators to publish plans for supporting safe AI innovation, and chose to write governance guidance for SMEs instead of publishing its AI Management Essentials tool. The ICO's guidance says most uses of AI will need a data protection impact assessment.",
+      "fact_ids": [
+        "f20",
+        "f21",
+        "f24",
+        "f25",
+        "f26",
+        "f27",
+        "f28"
+      ]
+    },
+    "standards": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Two voluntary frameworks are widely used to organise AI governance evidence: ISO/IEC 42001, a certifiable AI management system standard, and the NIST AI Risk Management Framework, built around Govern, Map, Measure and Manage.",
+      "fact_ids": [
+        "f19",
+        "f30",
+        "f31"
+      ]
+    },
+    "evidence": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Taken together, the sources suggest what an SME may be asked to show: a record of the AI systems it uses and their risk class, AI literacy measures, impact assessments where personal data is involved, transparency notices and, for high-risk uses, human oversight.",
+      "fact_ids": [
+        "f32"
+      ]
+    },
+    "their_alignment": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Their Our Tool page says the check is aligned with the main UK and EU regulators relevant to AI, without naming them.",
+      "fact_ids": [
+        "c17"
+      ]
+    },
     "disclaimer": {
       "ours": "Dates and summaries here are context, not advice. This is not legal advice.",
-      "theirs": { "kind": "quote", "text": "Any diagnostics, assessments, scores, dashboards or reports generated through this website or associated digital tools are indicative only", "fact_id": "c24", "lead_in": "Their own Disclaimer says:" },
-      "theirs_summary": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Their Disclaimer also says they provide non-regulated advisory services and that nothing on their site is legal advice, audit, assurance, certification or a guarantee of compliance.", "fact_ids": ["c23"] }
+      "theirs": {
+        "kind": "quote",
+        "text": "Any diagnostics, assessments, scores, dashboards or reports generated through this website or associated digital tools are indicative only",
+        "fact_id": "c24",
+        "lead_in": "Their own Disclaimer says:"
+      },
+      "theirs_summary": {
+        "kind": "ours",
+        "label": "AgentiCCells's summary",
+        "text": "Their Disclaimer also says they provide non-regulated advisory services and that nothing on their site is legal advice, audit, assurance, certification or a guarantee of compliance.",
+        "fact_ids": [
+          "c23"
+        ]
+      }
     },
     "timeline_title": "Dates from the sources",
     "timeline_note": "Each date is shown with the source's own status wording, its link and the date we read it. This is not legal advice.",
-    "timeline_fact_ids": ["f1", "f2", "f4", "f5", "f6", "f7", "f14"]
+    "timeline_fact_ids": [
+      "f1",
+      "f2",
+      "f4",
+      "f5",
+      "f6",
+      "f7",
+      "f14"
+    ]
   },
-
   "research_page": {
     "title": "Research: SUSTAIN-NOBILITY (redesign proposal)",
     "h1": "What we read, with sources",
-    "intro": { "kind": "ours", "label": "AgentiCCells's summary", "text": "Every fact the proposal uses, grouped as the company, the founder, the field and the market. Each card gives its source link, the date it was read, and whether it is quoted, paraphrased or public record." },
-    "kind_labels": { "quoted": "Quoted", "paraphrased": "Paraphrased by us", "public record": "Public record" },
+    "intro": {
+      "kind": "ours",
+      "label": "AgentiCCells's summary",
+      "text": "Every fact the proposal uses, grouped as the company, the founder, the field and the market. Each card gives its source link, the date it was read, and whether it is quoted, paraphrased or public record."
+    },
+    "kind_labels": {
+      "quoted": "Quoted",
+      "paraphrased": "Paraphrased by us",
+      "public record": "Public record"
+    },
     "market_note": "Other tools are described in their own words. This is not a ranking."
   },
-
   "designs_page": {
-    "title": "Five designs: SUSTAIN-NOBILITY (redesign proposal)",
-    "h1": "Five designs of the same proposal",
-    "lede": "Same facts, five layouts. Pick one to see the whole page.",
-    "main_card": { "name": "Main design", "line": "The full proposal site, in green and gold.", "href": "/" },
+    "title": "Six designs: SUSTAIN-NOBILITY (redesign proposal)",
+    "h1": "Six designs of the same proposal",
+    "lede": "Same facts, six designs: the main design and five others. Pick one to see the whole page.",
+    "main_card": {
+      "slug": "main",
+      "name": "Main design",
+      "short_name": "Main",
+      "idea": "a six-area ring, the default",
+      "line": "The full proposal site, in deep green and brass, drawn around a ring of the six areas.",
+      "signature": "A ring of six equal segments, one per area, around one Readiness Check.",
+      "href": "/"
+    },
     "switcher_label": "Other designs",
-    "table_heads": ["Design", "Concept", "Signature element"]
+    "table_heads": [
+      "Design",
+      "Concept",
+      "Signature element"
+    ],
+    "table_caption": "How the six designs differ",
+    "idea_label": "Idea",
+    "thumb_note": "Each picture is a screenshot of the design's first screen."
+  },
+  "picker": {
+    "chip": "Designs",
+    "title": "Six designs, the same facts",
+    "strip_label": "Same facts, six designs:",
+    "strip_aria": "Designs of this proposal",
+    "showing": "Showing",
+    "close": "Close",
+    "close_aria": "Close designs",
+    "foot_link": {
+      "text": "All six designs on one page, with their concepts",
+      "href": "/d/"
+    },
+    "main": {
+      "slug": "main",
+      "name": "Main",
+      "idea": "a six-area ring, the default",
+      "href": "/"
+    },
+    "order": [
+      "main",
+      "board-paper",
+      "dial",
+      "calendar",
+      "grid",
+      "counsel"
+    ]
   },
   "designs": [
-    { "slug": "board-paper", "name": "Board Paper", "line": "The proposal set out as a paper for a board meeting, with numbered paragraphs and source notes in the margin.", "signature": "A ruled summary box: question, options, evidence, next step." },
-    { "slug": "dial", "name": "Readiness Dial", "line": "A dashboard layout that shows the shape of the check's output, with every gauge left empty.", "signature": "An empty six-segment dial, one segment per area." },
-    { "slug": "calendar", "name": "Deadline Calendar", "line": "An editorial page led by the sourced dates of the rules around AI, then what the check does.", "signature": "A date spine drawn only from sourced dates." },
-    { "slug": "grid", "name": "Grid Poster", "line": "A bold poster on a strict grid, with the question set very large and every section numbered.", "signature": "A question mark built from six squares and one dot." },
-    { "slug": "counsel", "name": "Quiet Counsel", "line": "A calm, letter-like page with one idea per screen and their words set as pull quotes.", "signature": "One continuous line that loops through the five steps." }
+    {
+      "slug": "board-paper",
+      "name": "Board Paper",
+      "idea": "a board meeting paper",
+      "line": "The proposal set out as a paper for a board meeting, with numbered paragraphs and source notes in the margin.",
+      "signature": "A ruled summary box: question, options, evidence, next step."
+    },
+    {
+      "slug": "dial",
+      "name": "Readiness Dial",
+      "idea": "an empty dashboard",
+      "line": "A dashboard layout that shows the shape of the check's output, with every gauge left empty.",
+      "signature": "An empty six-segment dial, one segment per area."
+    },
+    {
+      "slug": "calendar",
+      "name": "Deadline Calendar",
+      "idea": "led by the sourced dates",
+      "line": "An editorial page led by the sourced dates of the rules around AI, then what the check does.",
+      "signature": "A date spine drawn only from sourced dates."
+    },
+    {
+      "slug": "grid",
+      "name": "Grid Poster",
+      "idea": "a strict grid poster",
+      "line": "A bold poster on a strict grid, with the question set very large and every section numbered.",
+      "signature": "A question mark built from six squares and one dot."
+    },
+    {
+      "slug": "counsel",
+      "name": "Quiet Counsel",
+      "idea": "a calm letter",
+      "line": "A calm, letter-like page with one idea per screen and their words set as pull quotes.",
+      "signature": "One continuous line that loops through the five steps."
+    }
   ],
   "design_text": {
     "board_paper": {
       "header": "Paper: AI governance readiness. Prepared as a proposal by AgentiCCells.",
-      "summary_rows": ["Question", "Options", "Evidence", "Next step"],
+      "summary_rows": [
+        "Question",
+        "Options",
+        "Evidence",
+        "Next step"
+      ],
       "areas_table_title": "Areas covered by the check",
       "areas_tick_head": "Covered by one check",
       "options_title": "Options for the board (our proposal, not their advice)",
-      "options_letters": ["A", "B", "C", "D"],
+      "options_letters": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
       "cost_head": "Cost",
       "cost_not_published": "No price published",
       "cost_to_be_discussed": "To be discussed",
       "annex_title": "Annex: dates",
       "next_step_title": "Recommended next step (our proposal, not their advice)",
-      "next_step_text": "Read the plans on their site and start there."
+      "next_step_text": "Read the plans on their site and start there.",
+      "paper_title": "Paper: AI governance readiness",
+      "meta": [
+        {
+          "label": "Prepared by",
+          "value": "AgentiCCells"
+        },
+        {
+          "label": "Status",
+          "value": "Proposal"
+        }
+      ],
+      "margin_notes_label": "Source notes"
     },
     "dial": {
       "status_title": "Status",
       "status_text": "This page assesses nothing. The Readiness Check runs on sustain-nobility.com.",
       "includes_label": "Includes",
       "essentials_chip": "Essentials +",
-      "events_title": "Dates from the sources"
+      "events_title": "Dates from the sources",
+      "channels": [
+        "Areas",
+        "Flow",
+        "Plans"
+      ],
+      "readout_empty": "No reading shown"
     },
     "calendar": {
       "spine_title": "Dates from the sources",
       "read_marker_label": "Read",
       "flow_title": "How the check runs",
-      "flow_quote": { "kind": "quote", "text": "in days instead of months", "fact_id": "c3" },
+      "flow_quote": {
+        "kind": "quote",
+        "text": "in days instead of months",
+        "fact_id": "c3"
+      },
       "plans_title": "Four ways in",
       "scroller_label": "Dates from the sources, scrollable",
       "list_title": "The same dates as a list"
@@ -298,22 +826,25 @@
     },
     "counsel": {
       "cta_line": "When you are ready, the Readiness Check is on their site.",
-      "cta_link": "Begin on sustain-nobility.com ↗"
+      "cta_link": "Begin on sustain-nobility.com ↗",
+      "opening": "AI governance readiness, a proposal",
+      "sign_off": "Made by AgentiCCells with their agreement"
+    },
+    "shared": {
+      "source_note_label": "Source",
+      "source_note_sr": "Source note: see Sources"
     }
   },
-
   "dial_caption": {
     "centre": "Their check produces a Governance Score. This page shows none.",
     "caption": "Illustration of the output's shape. No score is shown or implied.",
     "fact_id": "c9"
   },
-
   "calendar_cta": {
     "title": "Start on sustain-nobility.com ↗",
     "text": "The dates on this page are shown for context. Whether and when any of them applies to you depends on your situation. This is not legal advice.",
     "button": "start"
   },
-
   "about_proposal": {
     "title": "About this proposal",
     "text": [
@@ -321,69 +852,325 @@
       "Their words are quoted as published, with the link and the date we read them. Lines marked as AgentiCCells's summary are ours. Nothing here is a new claim about clients, results or prices.",
       "Five alternative designs show the same words in different layouts."
     ],
-    "button": { "text": "Go to sustain-nobility.com ↗", "href": "https://www.sustain-nobility.com", "sr": "(opens their site)" }
+    "button": {
+      "text": "Go to sustain-nobility.com ↗",
+      "href": "https://www.sustain-nobility.com",
+      "sr": "(opens their site)"
+    }
   },
-
   "proposals": {
     "box_label": "Proposal",
     "intro": "Suggestions from AgentiCCells for SUSTAIN-NOBILITY to consider. These are our proposals, not their claims.",
     "items": [
-      { "text": "Proposal: Lead with the question the site already owns, \"Can you prove it is governed responsibly?\", and make evidence you can show the thread through every page.", "fact_ids": ["c7", "c14", "f28", "f32"] },
-      { "text": "Proposal: Use one product name everywhere. Their site uses both Readiness Check and Health Check.", "fact_ids": ["c20"] },
-      { "text": "Proposal: Give SMEs and advisers two clear paths from the home page, with Partner Licensing as the adviser offer.", "fact_ids": ["c4", "c8"] },
-      { "text": "Proposal: Name the frameworks the check maps to, once the company confirms the mapping, in place of 'the main UK and EU regulators'.", "fact_ids": ["c17", "c36"] },
-      { "text": "Proposal: Add a short, dated panel on what changed this year in EU and UK rules, with the date it was last checked.", "fact_ids": ["f6", "f9", "f24"] },
-      { "text": "Proposal: Say plainly what each plan delivers and whether prices will be published.", "fact_ids": ["c9"] },
-      { "text": "Proposal: Carry the Disclaimer's plain words into the main copy: the check is indicative, not legal advice or certification.", "fact_ids": ["c23", "c24"] },
-      { "text": "Proposal: Correct small wording slips on the current site, such as 'assess responsibly governance maturity' and 'concommitantly', and complete the sentence about the real-time diagnostic.", "fact_ids": ["c3", "c5", "c10"] },
-      { "text": "Proposal: Publish an accessibility statement and move the Terms of Use to their own address.", "fact_ids": ["c26"] }
+      {
+        "text": "Proposal: Lead with the question the site already owns, \"Can you prove it is governed responsibly?\", and make evidence you can show the thread through every page.",
+        "fact_ids": [
+          "c7",
+          "c14",
+          "f28",
+          "f32"
+        ]
+      },
+      {
+        "text": "Proposal: Use one product name everywhere. Their site uses both Readiness Check and Health Check.",
+        "fact_ids": [
+          "c20"
+        ]
+      },
+      {
+        "text": "Proposal: Give SMEs and advisers two clear paths from the home page, with Partner Licensing as the adviser offer.",
+        "fact_ids": [
+          "c4",
+          "c8"
+        ]
+      },
+      {
+        "text": "Proposal: Name the frameworks the check maps to, once the company confirms the mapping, in place of 'the main UK and EU regulators'.",
+        "fact_ids": [
+          "c17",
+          "c36"
+        ]
+      },
+      {
+        "text": "Proposal: Add a short, dated panel on what changed this year in EU and UK rules, with the date it was last checked.",
+        "fact_ids": [
+          "f6",
+          "f9",
+          "f24"
+        ]
+      },
+      {
+        "text": "Proposal: Say plainly what each plan delivers and whether prices will be published.",
+        "fact_ids": [
+          "c9"
+        ]
+      },
+      {
+        "text": "Proposal: Carry the Disclaimer's plain words into the main copy: the check is indicative, not legal advice or certification.",
+        "fact_ids": [
+          "c23",
+          "c24"
+        ]
+      },
+      {
+        "text": "Proposal: Correct small wording slips on the current site, such as 'assess responsibly governance maturity' and 'concommitantly', and complete the sentence about the real-time diagnostic.",
+        "fact_ids": [
+          "c3",
+          "c5",
+          "c10"
+        ]
+      },
+      {
+        "text": "Proposal: Publish an accessibility statement and move the Terms of Use to their own address.",
+        "fact_ids": [
+          "c26"
+        ]
+      }
     ]
   },
-
   "founder": {
     "section_title": "Who founded it",
     "name": "Monica Maghami",
     "title": "Founder",
-    "title_basis": { "kind": "quote", "text": "Founded by Monica Maghami", "fact_id": "p2" },
+    "title_basis": {
+      "kind": "quote",
+      "text": "Founded by Monica Maghami",
+      "fact_id": "p2"
+    },
     "lines": [
-      { "kind": "quote", "text": "Lawyer qualified in Portugal and Brazil with experience advising global organisations on technology, governance, regulatory compliance, sustainability, and responsible AI.", "fact_id": "p5" },
-      { "kind": "quote", "text": "Workshop presenter at the United Nations AI for Good 2026 for 14 selected global start-ups.", "fact_id": "p3" }
+      {
+        "kind": "quote",
+        "text": "Lawyer qualified in Portugal and Brazil with experience advising global organisations on technology, governance, regulatory compliance, sustainability, and responsible AI.",
+        "fact_id": "p5"
+      },
+      {
+        "kind": "quote",
+        "text": "Workshop presenter at the United Nations AI for Good 2026 for 14 selected global start-ups.",
+        "fact_id": "p3"
+      }
     ],
     "agreement": "Named with their agreement.",
     "pronoun_note": "Refer to the founder by name or as they/them.",
     "not_in_footer": true
   },
-
   "footer": {
     "company": "SUSTAIN-NOBILITY Advisory Ltd",
     "jurisdiction": "Registered in England and Wales.",
     "office": "Registered Office: 128 City Road, London, England, EC1V 2NX",
-    "office_fact_ids": ["c28", "c30"],
+    "office_fact_ids": [
+      "c28",
+      "c30"
+    ],
     "source_line": "Company name, registration and office as given in their site footer (source c28, with its read date).",
     "proposal_line": "A proposal by AgentiCCells, made with SUSTAIN-NOBILITY's agreement; their official site is sustain-nobility.com.",
     "licences": "Code Apache-2.0, text CC BY 4.0.",
     "version_label": "Version"
   },
-
   "not_legal_advice": "This is not legal advice.",
-
   "sources": {
-    "home": { "url": "https://www.sustain-nobility.com", "read": "2026-11-18", "fact_id": "c1", "title": "SUSTAIN-NOBILITY home page", "publisher": "SUSTAIN-NOBILITY Advisory Ltd", "fact_ids": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "c11", "c28"] },
-    "about": { "url": "https://www.sustain-nobility.com/home", "read": "2026-11-18", "fact_id": "p2", "title": "SUSTAIN-NOBILITY About Us", "publisher": "SUSTAIN-NOBILITY Advisory Ltd", "fact_ids": ["c12", "c13", "c14", "p2", "p3", "p5"] },
-    "our_tool": { "url": "https://www.sustain-nobility.com/our-services", "read": "2026-11-18", "fact_id": "c17", "title": "SUSTAIN-NOBILITY Our Tool", "publisher": "SUSTAIN-NOBILITY Advisory Ltd", "fact_ids": ["c15", "c16", "c17", "c19", "c20"] },
-    "disclaimer": { "url": "https://www.sustain-nobility.com/disclaimer", "read": "2026-11-18", "fact_id": "c24", "title": "SUSTAIN-NOBILITY Disclaimer", "publisher": "SUSTAIN-NOBILITY Advisory Ltd", "fact_ids": ["c23", "c24"] },
-    "companies_house": { "url": "https://find-and-update.company-information.service.gov.uk/company/16608011", "read": "2026-11-18", "fact_id": "c30", "title": "Companies House: SUSTAIN-NOBILITY ADVISORY LTD", "publisher": "Companies House", "fact_ids": ["c29", "c30"] },
-    "eu_ai_act": { "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689", "read": "2026-11-18", "fact_id": "f1", "title": "EU AI Act", "publisher": "EUR-Lex", "fact_ids": ["f1", "f2", "f11", "f13", "f15"] },
-    "eu_omnibus": { "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601744", "read": "2026-11-18", "fact_id": "f5", "title": "Digital Omnibus on AI", "publisher": "EUR-Lex", "fact_ids": ["f5", "f6", "f7", "f9", "f14"] },
-    "eu_commission": { "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "read": "2026-11-18", "fact_id": "f3", "title": "AI Act: regulatory framework for AI", "publisher": "European Commission", "fact_ids": ["f3", "f4", "f12", "f32"] },
-    "iso_42001": { "url": "https://www.iso.org/standard/42001", "read": "2026-11-18", "fact_id": "f19", "title": "ISO/IEC 42001", "publisher": "ISO (search listing only)", "fact_ids": ["f19"] },
-    "uk_white_paper": { "url": "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach", "read": "2026-11-18", "fact_id": "f20", "title": "A pro-innovation approach to AI regulation", "publisher": "DSIT", "fact_ids": ["f20"] },
-    "uk_response": { "url": "https://www.gov.uk/government/consultations/ai-regulation-a-pro-innovation-approach-policy-proposals/outcome/a-pro-innovation-approach-to-ai-regulation-government-response", "read": "2026-11-18", "fact_id": "f21", "title": "Government response", "publisher": "DSIT", "fact_ids": ["f21"] },
-    "uk_aime": { "url": "https://www.gov.uk/government/consultations/ai-management-essentials-tool/outcome/guidance-for-using-the-ai-management-essentials-tool-government-response", "read": "2026-11-18", "fact_id": "f24", "title": "AI Management Essentials: government response", "publisher": "DSIT", "fact_ids": ["f24"] },
-    "uk_regulators_letter": { "url": "https://www.gov.uk/government/publications/how-will-regulators-enable-safe-ai-powered-innovation-joint-letter-from-dsit-secretary-of-state-and-dbt-secretary-of-state", "read": "2026-11-18", "fact_id": "f25", "title": "Joint letter to regulators", "publisher": "DSIT and DBT", "fact_ids": ["f25"] },
-    "uk_ico_code_si": { "url": "https://www.legislation.gov.uk/uksi/2026/425/pdfs/uksiem_20260425_en_001.pdf", "read": "2026-11-18", "fact_id": "f26", "title": "Explanatory memorandum: ICO code of practice regulations", "publisher": "legislation.gov.uk", "fact_ids": ["f26"] },
-    "ico_guidance": { "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/", "read": "2026-11-18", "fact_id": "f27", "title": "Guidance on AI and data protection", "publisher": "ICO", "fact_ids": ["f27"] },
-    "ico_accountability": { "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/what-are-the-accountability-and-governance-implications-of-ai/", "read": "2026-11-18", "fact_id": "f28", "title": "Accountability and governance implications of AI", "publisher": "ICO", "fact_ids": ["f28"] },
-    "nist_ai_rmf": { "url": "https://www.nist.gov/itl/ai-risk-management-framework", "read": "2026-11-18", "fact_id": "f30", "title": "AI Risk Management Framework", "publisher": "NIST", "fact_ids": ["f30", "f31"] }
+    "home": {
+      "url": "https://www.sustain-nobility.com",
+      "read": "2026-11-18",
+      "fact_id": "c1",
+      "title": "SUSTAIN-NOBILITY home page",
+      "publisher": "SUSTAIN-NOBILITY Advisory Ltd",
+      "fact_ids": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6",
+        "c7",
+        "c8",
+        "c9",
+        "c10",
+        "c11",
+        "c28"
+      ]
+    },
+    "about": {
+      "url": "https://www.sustain-nobility.com/home",
+      "read": "2026-11-18",
+      "fact_id": "p2",
+      "title": "SUSTAIN-NOBILITY About Us",
+      "publisher": "SUSTAIN-NOBILITY Advisory Ltd",
+      "fact_ids": [
+        "c12",
+        "c13",
+        "c14",
+        "p2",
+        "p3",
+        "p5"
+      ]
+    },
+    "our_tool": {
+      "url": "https://www.sustain-nobility.com/our-services",
+      "read": "2026-11-18",
+      "fact_id": "c17",
+      "title": "SUSTAIN-NOBILITY Our Tool",
+      "publisher": "SUSTAIN-NOBILITY Advisory Ltd",
+      "fact_ids": [
+        "c15",
+        "c16",
+        "c17",
+        "c19",
+        "c20"
+      ]
+    },
+    "disclaimer": {
+      "url": "https://www.sustain-nobility.com/disclaimer",
+      "read": "2026-11-18",
+      "fact_id": "c24",
+      "title": "SUSTAIN-NOBILITY Disclaimer",
+      "publisher": "SUSTAIN-NOBILITY Advisory Ltd",
+      "fact_ids": [
+        "c23",
+        "c24"
+      ]
+    },
+    "companies_house": {
+      "url": "https://find-and-update.company-information.service.gov.uk/company/16608011",
+      "read": "2026-11-18",
+      "fact_id": "c30",
+      "title": "Companies House: SUSTAIN-NOBILITY ADVISORY LTD",
+      "publisher": "Companies House",
+      "fact_ids": [
+        "c29",
+        "c30"
+      ]
+    },
+    "eu_ai_act": {
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689",
+      "read": "2026-11-18",
+      "fact_id": "f1",
+      "title": "EU AI Act",
+      "publisher": "EUR-Lex",
+      "fact_ids": [
+        "f1",
+        "f2",
+        "f11",
+        "f13",
+        "f15"
+      ]
+    },
+    "eu_omnibus": {
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=OJ:L_202601744",
+      "read": "2026-11-18",
+      "fact_id": "f5",
+      "title": "Digital Omnibus on AI",
+      "publisher": "EUR-Lex",
+      "fact_ids": [
+        "f5",
+        "f6",
+        "f7",
+        "f9",
+        "f14"
+      ]
+    },
+    "eu_commission": {
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "read": "2026-11-18",
+      "fact_id": "f3",
+      "title": "AI Act: regulatory framework for AI",
+      "publisher": "European Commission",
+      "fact_ids": [
+        "f3",
+        "f4",
+        "f12",
+        "f32"
+      ]
+    },
+    "iso_42001": {
+      "url": "https://www.iso.org/standard/42001",
+      "read": "2026-11-18",
+      "fact_id": "f19",
+      "title": "ISO/IEC 42001",
+      "publisher": "ISO (search listing only)",
+      "fact_ids": [
+        "f19"
+      ]
+    },
+    "uk_white_paper": {
+      "url": "https://www.gov.uk/government/publications/ai-regulation-a-pro-innovation-approach",
+      "read": "2026-11-18",
+      "fact_id": "f20",
+      "title": "A pro-innovation approach to AI regulation",
+      "publisher": "DSIT",
+      "fact_ids": [
+        "f20"
+      ]
+    },
+    "uk_response": {
+      "url": "https://www.gov.uk/government/consultations/ai-regulation-a-pro-innovation-approach-policy-proposals/outcome/a-pro-innovation-approach-to-ai-regulation-government-response",
+      "read": "2026-11-18",
+      "fact_id": "f21",
+      "title": "Government response",
+      "publisher": "DSIT",
+      "fact_ids": [
+        "f21"
+      ]
+    },
+    "uk_aime": {
+      "url": "https://www.gov.uk/government/consultations/ai-management-essentials-tool/outcome/guidance-for-using-the-ai-management-essentials-tool-government-response",
+      "read": "2026-11-18",
+      "fact_id": "f24",
+      "title": "AI Management Essentials: government response",
+      "publisher": "DSIT",
+      "fact_ids": [
+        "f24"
+      ]
+    },
+    "uk_regulators_letter": {
+      "url": "https://www.gov.uk/government/publications/how-will-regulators-enable-safe-ai-powered-innovation-joint-letter-from-dsit-secretary-of-state-and-dbt-secretary-of-state",
+      "read": "2026-11-18",
+      "fact_id": "f25",
+      "title": "Joint letter to regulators",
+      "publisher": "DSIT and DBT",
+      "fact_ids": [
+        "f25"
+      ]
+    },
+    "uk_ico_code_si": {
+      "url": "https://www.legislation.gov.uk/uksi/2026/425/pdfs/uksiem_20260425_en_001.pdf",
+      "read": "2026-11-18",
+      "fact_id": "f26",
+      "title": "Explanatory memorandum: ICO code of practice regulations",
+      "publisher": "legislation.gov.uk",
+      "fact_ids": [
+        "f26"
+      ]
+    },
+    "ico_guidance": {
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/",
+      "read": "2026-11-18",
+      "fact_id": "f27",
+      "title": "Guidance on AI and data protection",
+      "publisher": "ICO",
+      "fact_ids": [
+        "f27"
+      ]
+    },
+    "ico_accountability": {
+      "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/what-are-the-accountability-and-governance-implications-of-ai/",
+      "read": "2026-11-18",
+      "fact_id": "f28",
+      "title": "Accountability and governance implications of AI",
+      "publisher": "ICO",
+      "fact_ids": [
+        "f28"
+      ]
+    },
+    "nist_ai_rmf": {
+      "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+      "read": "2026-11-18",
+      "fact_id": "f30",
+      "title": "AI Risk Management Framework",
+      "publisher": "NIST",
+      "fact_ids": [
+        "f30",
+        "f31"
+      ]
+    }
   }
 }
