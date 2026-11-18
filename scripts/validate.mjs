@@ -11,6 +11,12 @@ const hype = /\b(revolutionary|cutting[- ]edge|seamless(?:ly)?|world[- ]class|ga
 const isTemplate = existsSync('.factory-template');
 if (!existsSync('_site')) { console.error('FAILED: _site/ is not built: run node scripts/build.mjs'); process.exit(1); }
 const files = walk('_site');
+const researchUrls = new Set();
+if (existsSync('data/research.json')) {
+  const r = JSON.parse(readFileSync('data/research.json', 'utf8'));
+  for (const sec of r.sections || []) for (const x of sec.facts || []) if (x.url) researchUrls.add(x.url);
+  for (const x of r.failed || []) if (x.url) researchUrls.add(x.url);
+}
 for (const f of [...files, 'hub.json', 'README.md']) {
   if (!existsSync(f) || !/\.(html|js|css|json|md)$/.test(f)) continue;
   const s = readFileSync(f, 'utf8');
@@ -26,6 +32,16 @@ for (const f of [...files, 'hub.json', 'README.md']) {
     // conductor.sustain-nobility@ (2026-11-18): the proposal takes no input and says what it is on every page.
     if (/<form[\s>]/i.test(s)) fail(`${f}: has a <form> (this proposal takes no sign-ups, assessments or personal data)`);
     if (!isTemplate && !/class="notice"[^>]*>[\s\S]*?made by AgentiCCells with their agreement[\s\S]*?sustain-nobility\.com/i.test(s)) fail(`${f}: no proposal notice (made by AgentiCCells with their agreement, linking sustain-nobility.com)`);
+    // conductor.sustain-nobility@ (2026-11-18, live review F4): an external link goes only to their site,
+    // a source recorded in data/research.json, this site, or this team's own GitHub repositories.
+    if (!isTemplate) for (const m of s.matchAll(/<a\s[^>]*href="(https?:\/\/[^"]+)"/g)) {
+      const u = m[1].replace(/&amp;/g, '&');
+      if (/^https:\/\/(www\.)?sustain-nobility\.com(\/|$)/.test(u)) continue;
+      if (/^https:\/\/sustain-nobility\.agenticcells\.site(\/|$)/.test(u)) continue;
+      if (/^https:\/\/github\.com\/AgentiCCells\//.test(u)) continue;
+      if (researchUrls.has(u)) continue;
+      fail(`${f}: external link to ${u} is not their site, a research source or this team's repository`);
+    }
     for (const m of s.matchAll(/<script[^>]+src="([^"]+)"/g)) if (/^(https?:)?\/\//.test(m[1])) fail(`${f}: third-party script ${m[1]}`);
     for (const m of s.matchAll(/<link[^>]+rel="stylesheet"[^>]+href="([^"]+)"/g)) if (/^(https?:)?\/\//.test(m[1])) fail(`${f}: third-party stylesheet ${m[1]}`);
     for (const m of s.matchAll(/(?:href|src)="([^"#?]+)/g)) {
@@ -37,6 +53,7 @@ for (const f of [...files, 'hub.json', 'README.md']) {
 }
 if (!existsSync('_site/version.json')) fail('no version.json');
 if (!existsSync('_site/index.html')) fail('no index.html');
+if (!isTemplate && !existsSync('_site/404.html')) fail('no 404.html (live review F1: the host default has no notice)');
 try {
   const h = JSON.parse(readFileSync('hub.json', 'utf8'));
   for (const k of ['name', 'what_it_does', 'owner', 'repository', 'live_address', 'version_from']) if (typeof h[k] !== 'string' || !h[k].trim()) fail(`hub.json: ${k} must be a non-empty string`);
