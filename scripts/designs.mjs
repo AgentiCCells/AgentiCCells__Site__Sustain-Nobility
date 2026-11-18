@@ -7,6 +7,8 @@
 // Rebuilt in round 4 by developer.sustain-nobility@AgentiCCells.dinis (designs build),
 // 2026-11-18, to team/rounds/4/design/PROPOSAL.md section 3 under team/rounds/4/review/DESIGN.md
 // (changes 15 to 20, conditions C1 to C5). Notes: team/rounds/4/build/DESIGNS.md.
+// Second pass in round 5 by the same agent, 2026-11-18, to team/rounds/5.md items 2, 3, 6 to 9
+// (critique: team/rounds/4/review/LIVE.md). Notes: team/rounds/5/build/DESIGNS.md.
 //
 // Rules this file keeps:
 // - Every word comes from copy.json or research.json; every regulatory date comes from a
@@ -156,7 +158,18 @@ h1 .sn,h2 .sn,.pull .sn{font-size:.34em;margin-left:.15em}
 h1,h2,h3{overflow-wrap:break-word}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 @media (forced-colors:active){svg text{fill:CanvasText!important;stroke:none!important}svg :is(line,path,polyline){stroke:CanvasText!important;fill:none!important}svg :is(rect,circle,polygon,ellipse){stroke:CanvasText!important;fill:Canvas!important}svg .solid{fill:CanvasText!important}.btn,.their{border:2px solid ButtonText}}`;
-const BASE_CSS = () => BASE_CSS_ + VFLOW_CSS;
+// Round 5 (conductor, from the main-site developer): on phones the notice is tighter and the header
+// is one row (wordmark over the Proposal tag, then the Designs chip and Their site), so each
+// headline starts near 240 px at 390 px. Selectors are specific enough to win over each design's own.
+const PHONE_CSS = `@media (max-width:599px){
+body .notice{font-size:12px;line-height:1.42;padding-top:.4rem;padding-bottom:.45rem}
+header.top .top-in{flex-wrap:nowrap;gap:.5rem;padding-top:3px;padding-bottom:3px}
+header.top .brand{flex-direction:column;align-items:flex-start;justify-content:center;gap:1px;font-size:.9rem;letter-spacing:.03em;line-height:1.15;min-width:0}
+header.top .tag{font-size:.6rem;padding:0 .3rem}
+header.top .top-r{flex-wrap:nowrap;gap:.4rem;margin-left:auto}
+header.top .dz-chip{padding:0 .65rem;font-size:.85rem}
+header.top .their{padding:0 .6rem;font-size:.82rem;white-space:nowrap}}`;
+const BASE_CSS = () => BASE_CSS_ + VFLOW_CSS + PHONE_CSS;
 
 function head({ title, desc, path, css, fonts }) {
   return `<!doctype html>
@@ -304,6 +317,10 @@ function writePage(path, html) {
 function pageMeta(d) {
   return { title: `${d.name}: ${C.brand.title_suffix}`, desc: `${d.line} ${C.brand.description}`, path: `/d/${d.slug}/`, fonts: DESIGN_FONTS[d.slug] };
 }
+// Round 5 (brief item 6): the picker strip reads --pk-max (content width of the header's
+// inner box, without padding), --pk-pad (the header's side padding) and --pk-align
+// (left or center), so it lines up with each design's own header margin.
+const lay = (max, align = 'left') => `--pk-max:${max};--pk-pad:16px;--pk-align:${align}`;
 const pk = (bg, ink, soft, line, accent) => `--pk-bg:${bg};--pk-ink:${ink};--pk-soft:${soft};--pk-line:${line};--pk-accent:${accent}`;
 
 // ---------- 1. Board Paper ----------
@@ -313,7 +330,7 @@ const pk = (bg, ink, soft, line, accent) => `--pk-bg:${bg};--pk-ink:${ink};--pk-
 function boardPaper() {
   const d = D['board-paper']; const T = C.design_text.board_paper; begin();
   const SERIF = '"Source Serif 4",Charter,"Bitstream Charter","Iowan Old Style",Cambria,Georgia,serif';
-  const css = `:root{--bg:#d9d4c7;--paper:#fdfcf8;--ink:#1b1b1b;--soft:#57514a;--rule:#8f877a;--hair:#d6d0c3;--accent:#7a2430;--link:#7a2430;--focus:#7a2430;--deskink:#1b1b1b;${pk('#fdfcf8', '#1b1b1b', '#57514a', '#d6d0c3', '#7a2430')}}
+  const css = `:root{--bg:#d9d4c7;--paper:#fdfcf8;--ink:#1b1b1b;--soft:#57514a;--rule:#8f877a;--hair:#d6d0c3;--accent:#7a2430;--link:#7a2430;--focus:#7a2430;--deskink:#1b1b1b;${pk('#fdfcf8', '#1b1b1b', '#57514a', '#d6d0c3', '#7a2430')};${lay('68rem')}}
 @media (prefers-color-scheme:dark){:root{--bg:#0b0a09;--paper:#181715;--ink:#ebe6dc;--soft:#b3ac9f;--rule:#7d766b;--hair:#3a3631;--accent:#eaa3ab;--link:#eaa3ab;--focus:#eaa3ab;--deskink:#ebe6dc;${pk('#181715', '#ebe6dc', '#b3ac9f', '#3a3631', '#eaa3ab')}}}
 body{font:18px/1.6 ${SERIF}}
 .mono,.no,.note,.small,.kicker,.meta th,.tag{font-family:${MONO}}
@@ -346,8 +363,15 @@ h3{font-size:1.1rem}
 .row{position:relative;margin:0 0 1.15rem}.row p{margin:0}
 .row .no{color:var(--soft);font-size:.8rem;margin-right:.5rem}
 @media (min-width:800px){.row .no{position:absolute;left:-4.5rem;top:.3rem;width:3.5rem;text-align:right;margin:0}}
-.note{display:block;font-size:.76rem;line-height:1.5;color:var(--soft);border-left:2px solid var(--hair);padding-left:.6rem;margin:.4rem 0 0}.note a{color:var(--link)}.note b{color:var(--accent);font-weight:500}
-@media (min-width:1100px){.row{display:grid;grid-template-columns:minmax(0,1fr) 13.5rem;gap:2.5rem;align-items:start}.note{margin:.25rem 0 0}}
+.note{display:block;font-size:.8rem;line-height:1.5;color:var(--soft);border-left:2px solid var(--hair);padding-left:.6rem;margin:.4rem 0 0}.note a{color:var(--link)}.note b{color:var(--accent);font-weight:500}
+@media (min-width:1100px){.row{display:grid;grid-template-columns:minmax(0,1fr) 13.5rem;gap:2.5rem;align-items:start}.note{margin:.3rem 0 0;font-size:.78rem}}
+/* Round 5 (brief item 9): scale varies: one display paragraph, one boxed decision, a compact two-column annex. */
+.row.big p{font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.22;font-weight:700;letter-spacing:-.01em}.row.big .no{font-size:.8rem;font-weight:500;letter-spacing:0}
+.decision{font-size:1.25rem}.decision p:first-child{font-size:clamp(1.5rem,2.6vw,2rem);line-height:1.2;font-weight:700;margin:0 0 .75rem}
+.anncols{columns:2 22rem;column-gap:2.5rem;margin:.75rem 0}
+.ann{break-inside:avoid;border-collapse:collapse;width:100%;font-size:.88rem;margin:0 0 1.25rem}.ann caption{text-align:left;font:700 1.6rem/1 ${SERIF};padding:.2rem 0 .4rem;border-bottom:2px solid var(--ink)}
+.ann th,.ann td{border-bottom:1px solid var(--hair);padding:.45rem .5rem .45rem 0;text-align:left;vertical-align:top}.ann th{font:500 .8rem ${MONO};white-space:nowrap;width:5.5rem;color:var(--accent)}.ann .src{display:block;font-size:.76rem;color:var(--soft)}
+.endp{margin:3rem 0 0;padding-top:.6rem;border-top:4px double var(--ink);font:500 .78rem ${MONO};letter-spacing:.14em;text-transform:uppercase;color:var(--soft);text-align:center}
 .small{font-size:.8rem;color:var(--soft)}
 figure{margin:1rem 0}figcaption{font-size:.85rem;color:var(--soft)}
 .lane{width:100%}.l-box{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}.l-rule{stroke:var(--rule);stroke-width:1.5}.l-n{font:500 15px ${MONO};fill:var(--accent)}.l-t{font:600 18px ${SERIF};fill:var(--ink)}.l-br{fill:none;stroke:var(--soft);stroke-width:1.5}.l-bt{font:14px ${MONO};fill:var(--soft)}.l-arc{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 4}
@@ -362,9 +386,9 @@ table.t{border-collapse:collapse;width:100%;font-size:.95rem;margin:.5rem 0}
 .btn{border:1.5px solid var(--accent);color:var(--accent);margin:.25rem .4rem .25rem 0}.btnp{background:var(--accent);color:var(--paper)}
 .ptypes{padding-left:1.1rem}
 .sources{font-size:.85rem;padding-left:1.4rem}
-.foot{max-width:68rem;margin:0 auto 2rem;padding:0 16px;font-size:.9rem;color:var(--deskink)}.foot a{color:inherit}.foot .small{font-size:.8rem;color:inherit}`;
+.foot{max-width:calc(68rem + 24px);margin:0 auto 2rem;padding:0 12px;font-size:.9rem;color:var(--deskink)}.foot-in{border-top:1px solid var(--rule);padding:1rem 18px 0}@media (min-width:800px){.foot-in{padding:1rem 4rem 0 6.5rem}}.foot a{color:inherit}.foot .small{font-size:.8rem;color:inherit}`;
   const noteFor = id => { used.add(id); const s = srcInfo(id); const n = srcNo(s.url); return `<b>${n}</b> <a href="${esc(s.url)}">${esc(s.title)}</a>, read ${esc(s.read)}`; };
-  const R_ = (no, body, noteId = '') => `<div class="row"><p><span class="no">${no}</span>${body}${noteId ? cite(noteId) : ''}</p>${noteId ? `<span class="note">${noteFor(noteId)}</span>` : ''}</div>`;
+  const R_ = (no, body, noteId = '', cls = '') => `<div class="row${cls ? ` ${cls}` : ''}"><p><span class="no">${no}</span>${body}${noteId ? cite(noteId) : ''}</p>${noteId ? `<span class="note">${noteFor(noteId)}</span>` : ''}</div>`;
   const valText = ['Four plans, set out as options A to D in section 5.', 'Their published words, and the dated sources in the annex.', T.next_step_text];
   const meta = T.meta.map(m => `<tr><th scope="row">${esc(m.label)}</th><td>${esc(m.value)}${m.label === 'Prepared by' && !/proposal/i.test(m.value) ? ' (proposal)' : ''}</td></tr>`).join('') + `<tr><th scope="row">Sources read</th><td><time datetime="${esc(R.read)}">${esc(fmt(R.read))}</time></td></tr>`;
   const summary = `<p class="sumcap" id="sumcap">Summary box</p><table class="summary" aria-labelledby="sumcap"><tbody>
@@ -384,7 +408,7 @@ ${steps.map((s, i) => `<rect class="l-box" x="${bx(i)}" y="60" width="160" heigh
   const opts = plans.map((p, i) => `<tr><th scope="row">${esc(T.options_letters[i])}. ${esc(p.name)}</th><td>${p.label ? esc(p.label) : none(C.plans_page.no_label)}</td><td>${p.for ? `<q>${esc(p.for)}</q>` : ''}${p.includes.length ? `<ul class="pinc">${p.includes.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}${p.includes_note ? `<span class="small">${ours(p.includes_note)}</span>` : ''}${p.start_quote ? `<p><q>${esc(p.start_quote)}</q></p>` : ''}${!p.for && !p.includes.length && !p.start_quote ? none(NOT_PUBLISHED) : ''}</td><td>${esc(p.price)}</td></tr>`).join('');
   const annex = rows.length ? `<section aria-labelledby="annex"><h2 id="annex"><span class="no">A</span>${esc(T.annex_title)}</h2>
 <p class="small">${esc(C.context.timeline_note)}</p>
-<div class="tablewrap"><table class="t"><thead><tr><th scope="col">Date</th><th scope="col">What the source says</th><th scope="col">Source</th></tr></thead><tbody>${rows.map(r => `<tr><td class="mono">${time(r.date)}</td><td>${rowWhat(r)}</td><td class="small">${rowSource(r)}</td></tr>`).join('')}</tbody></table></div>
+<div class="anncols">${[...new Set(rows.map(r => r.date.slice(0, 4)))].map(y => `<table class="ann"><caption>${y}</caption><thead class="vh"><tr><th scope="col">Date</th><th scope="col">What the source says, and the source</th></tr></thead><tbody>${rows.filter(r => r.date.startsWith(y)).map(r => `<tr><th scope="row"><time datetime="${esc(r.date)}">${esc(fmtShort(r.date))}</time></th><td>${rowWhat(r)}<span class="src">${rowSource(r)}</span></td></tr>`).join('')}</tbody></table>`).join('')}</div>
 <p><strong>${esc(NLA)}</strong></p></section>` : '';
   const body = `${header()}
 <main id="main" class="desk"><article class="paper">
@@ -394,7 +418,7 @@ ${summary}
 <section aria-labelledby="p1"><h2 id="p1"><span class="no">1</span>The question</h2>
 ${R_('1.1', q(C.home.lede[0]), C.home.lede[0].fact_id)}
 ${R_('1.2', ours(C.home.lede[1]), 'c3')}
-${R_('1.3', q(C.home.question), C.home.question.fact_id)}
+${R_('1.3', q(C.home.question), C.home.question.fact_id, 'big')}
 </section>
 <section aria-labelledby="p2"><h2 id="p2"><span class="no">2</span>${esc(C.home.show_title)}</h2>
 ${R_('2.0', ours(C.home.show_intro), 'c3')}
@@ -431,6 +455,7 @@ ${founder.lines.map((l, i) => R_(`7.${i + 2}`, q(l), l.fact_id)).join('')}
 </section>
 ${annex}
 <section aria-labelledby="srcs"><h2 id="srcs"><span class="no">B</span>Sources</h2>${sourcesList()}</section>
+<p class="endp">End of paper</p>
 </article></main>`;
   writePage(`d/${d.slug}`, head({ ...pageMeta(d), css }) + body + footer());
 }
@@ -442,7 +467,7 @@ ${annex}
 function dial() {
   const d = D.dial; const T = C.design_text.dial; begin();
   const SANS = '"IBM Plex Sans Condensed","Arial Narrow","Roboto Condensed",system-ui,-apple-system,"Segoe UI",sans-serif';
-  const css = `:root{color-scheme:dark;--bg:#0b1116;--panel:#111a21;--ink:#e8eef2;--soft:#a3b3bf;--line:#2a3945;--stroke:#7d93a3;--teal:#5fd4c8;--amber:#f0b45a;--ondark:#04211e;--link:#5fd4c8;--focus:#f0b45a;${pk('#111a21', '#e8eef2', '#a3b3bf', '#2a3945', '#5fd4c8')}}
+  const css = `:root{color-scheme:dark;--bg:#0b1116;--panel:#111a21;--ink:#e8eef2;--soft:#a3b3bf;--line:#2a3945;--stroke:#7d93a3;--seg:#1f2c36;--teal:#5fd4c8;--amber:#f0b45a;--ondark:#04211e;--link:#5fd4c8;--focus:#f0b45a;${pk('#111a21', '#e8eef2', '#a3b3bf', '#2a3945', '#5fd4c8')};${lay('84rem')}}
 body{font:17px/1.55 ${SANS};background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:22px 22px}
 time,.sn,.num{font-variant-numeric:tabular-nums}
 .chan,.tag,.plab,.stag,.chip,.mono{font-family:${MONO};font-weight:500;letter-spacing:.12em;text-transform:uppercase}
@@ -451,7 +476,8 @@ time,.sn,.num{font-variant-numeric:tabular-nums}
 .brand{font-weight:700;letter-spacing:.04em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;min-height:44px;font-size:1.05rem}
 .tag{font-size:.7rem;color:var(--amber);border:1px solid var(--amber);border-radius:4px;padding:.1rem .4rem}
 .their{display:inline-flex;align-items:center;min-height:44px;padding:0 .9rem;border:1px solid var(--teal);border-radius:6px;color:var(--teal);text-decoration:none;font-weight:500}
-.dash{max-width:84rem;margin:0 auto;padding:8px 16px 16px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
+.dash{max-width:calc(84rem + 32px);margin:0 auto;padding:8px 16px 16px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
+@media (min-width:960px){.panel{padding:2rem 2.25rem 2.25rem}}
 .panel{position:relative;grid-column:span 12;background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:1.25rem 1.3rem;min-width:0}
 .panel::before,.panel::after{content:"";position:absolute;top:10px;width:6px;height:6px;border-radius:50%;background:var(--line)}.panel::before{left:10px}.panel::after{right:10px}
 .chan{display:block;font-size:.75rem;color:var(--teal);margin:0 0 .6rem}
@@ -467,31 +493,32 @@ h2{font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.1;margin:0 0 .75rem;font-wei
 .btn2{display:inline-flex;align-items:center;min-height:44px;padding:.5rem 1rem;border:1px solid var(--teal);border-radius:6px;color:var(--teal);text-decoration:none;font-weight:700;margin:.25rem .4rem .25rem 0}
 .acts{margin:1.25rem 0 .5rem}
 .dialfig{margin:0}.dialfig svg{display:block;width:100%;max-width:30rem;margin:0 auto}
-.d-seg{fill:none;stroke:var(--stroke);stroke-width:2;stroke-dasharray:7 6}.d-n{font:500 19px ${MONO};fill:var(--soft)}.d-c{font:500 24px ${SANS};fill:var(--ink)}
+.d-seg{fill:var(--seg);stroke:var(--stroke);stroke-width:1.5}.d-rim{fill:none;stroke:var(--stroke);stroke-width:1}.d-n{font:500 24px ${MONO};fill:var(--ink)}.d-c{font:500 24px ${SANS};fill:var(--ink)}
 .dialfig figcaption{font-size:.84rem;color:var(--soft);text-align:center;margin-top:.5rem}
 .legend{list-style:none;margin:1rem 0 .5rem;padding:0;display:grid;gap:12px;grid-template-columns:1fr}
 @media (min-width:640px){.legend{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1000px){.legend{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.legend li{border:1px solid var(--line);border-radius:6px;padding:.8rem .9rem;display:grid;grid-template-columns:2.6rem minmax(0,1fr);gap:.1rem .6rem}
-.legend .num{font:500 1.35rem ${MONO};color:var(--teal);grid-row:span 2}.legend strong{font-size:1.05rem}.legend span{font-size:.9rem;color:var(--soft)}
+.legend li{border:1px solid var(--line);border-radius:6px;padding:1rem 1.1rem 1.1rem;display:grid;grid-template-columns:5rem minmax(0,1fr);gap:.15rem .9rem;align-items:start}
+.legend .num{font:500 3.4rem/1 ${MONO};color:var(--teal);grid-row:span 2;letter-spacing:-.04em}.legend strong{font-size:1.2rem;line-height:1.2}.legend span{font-size:.9rem;color:var(--soft)}
 .grouplbl{font:500 .75rem ${MONO};letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:.5rem 0 .75rem}
 .shows{display:grid;gap:12px;grid-template-columns:1fr}@media (min-width:800px){.shows{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.show{border:1px solid var(--line);border-radius:6px;padding:.9rem 1rem}.show p{margin:.3rem 0}.stag{color:var(--amber);font-size:.75rem;margin:0}
-.rail{width:100%;max-width:960px;display:block;margin:.25rem 0 1rem}.r-line{stroke:var(--stroke);stroke-width:2}.r-pill{fill:var(--panel);stroke:var(--teal);stroke-width:2}.r-n{font:500 18px ${MONO};fill:var(--teal)}.r-t{font:700 19px ${SANS};fill:var(--ink)}.r-loop{fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:6 5}.r-lt{font:14px ${MONO};fill:var(--soft)}
+.show{border:1px solid var(--line);border-radius:6px;padding:1.1rem 1.2rem}.show p{margin:.3rem 0}.stag{color:var(--amber);margin:0}.show .stag{font:700 clamp(2.2rem,4vw,3.4rem)/1 ${SANS};letter-spacing:-.01em;text-transform:none}
+.rail{width:100%;display:block;margin:.75rem 0 1.5rem}.r-line{stroke:var(--stroke);stroke-width:2}.r-pill{fill:var(--panel);stroke:var(--teal);stroke-width:2}.r-n{font:500 18px ${MONO};fill:var(--teal)}.r-t{font:700 19px ${SANS};fill:var(--ink)}.r-loop{fill:none;stroke:var(--amber);stroke-width:2;stroke-dasharray:6 5}.r-lt{font:14px ${MONO};fill:var(--soft)}
 .stepgrid{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:1fr}
 @media (min-width:900px){.stepgrid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 .stepgrid li{border:1px solid var(--line);border-radius:6px;padding:.8rem;font-size:.94rem}.stepgrid .sn2{font:500 .75rem ${MONO};color:var(--teal);letter-spacing:.12em}.stepgrid p{margin:.3rem 0}
-.plan h3{font-size:1.45rem;margin:0 0 .5rem}
+.plan h3{font-size:clamp(1.7rem,2.4vw,2.1rem);line-height:1.05;margin:0 0 .6rem}
 .chip{display:inline-block;font-size:.7rem;border:1px solid var(--amber);color:var(--amber);border-radius:999px;padding:.1rem .55rem}
 .prows{margin:0}.prows div{border-top:1px solid var(--line);padding:.55rem 0}.prows dt{font:500 .7rem ${MONO};letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}.prows dd{margin:.2rem 0 0}.prows .none{color:var(--soft)}.prows .squote{margin:0 0 .4rem}
 .pinc{padding-left:1.1rem;margin:.25rem 0}.pinc li::marker{color:var(--teal)}
 .plan .btn{width:100%;justify-content:center;text-align:center}
-.pfig svg{max-width:28rem;display:block}.f-line{stroke:var(--stroke);stroke-width:2}.f-node{fill:var(--panel);stroke:var(--teal);stroke-width:2}.f-txt{font:700 18px ${SANS};fill:var(--ink)}.f-hub{fill:var(--panel);stroke:var(--amber);stroke-width:2.5}.f-hubtxt{font:700 20px ${SANS};fill:var(--ink)}.f-small{font-weight:500;font-size:17px}
+.pfig svg{max-width:34rem;width:100%;display:block}.f-line{stroke:var(--stroke);stroke-width:2}.f-node{fill:var(--panel);stroke:var(--teal);stroke-width:2}.f-txt{font:700 18px ${SANS};fill:var(--ink)}.f-hub{fill:var(--panel);stroke:var(--amber);stroke-width:2.5}.f-hubtxt{font:700 20px ${SANS};fill:var(--ink)}.f-small{font-weight:500;font-size:17px}
 figcaption{font-size:.85rem;color:var(--soft)}
-.events{list-style:none;padding:0;margin:.5rem 0;display:grid;gap:10px;grid-template-columns:1fr}
-@media (min-width:700px){.events{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1100px){.events{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.events li{border:1px solid var(--line);border-radius:6px;padding:.7rem .8rem;font-size:.92rem}.events time{display:inline-block;font:500 .82rem ${MONO};border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;margin-bottom:.3rem}
+.years{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(min(100%,14rem),1fr));margin:.75rem 0}
+.yb{border-top:2px solid var(--teal);padding-top:.4rem}.ybig{font:500 clamp(2.6rem,4.5vw,3.8rem)/1 ${MONO};color:var(--teal);margin:0 0 .5rem;letter-spacing:-.04em}
+.events{list-style:none;padding:0;margin:0}
+.events li{border-top:1px solid var(--line);padding:.6rem 0;font-size:.95rem}.events time{display:inline-block;font:500 .82rem ${MONO};border:1px solid var(--line);border-radius:999px;padding:.1rem .6rem;margin-bottom:.3rem}
 .events .src{display:block;font-size:.82rem;color:var(--soft);margin-top:.3rem}
-.cta{border-top:3px solid var(--teal)}
+.cta{border-top:3px solid var(--teal)}.cta h2{font-size:clamp(1.9rem,3.2vw,2.8rem);line-height:1.08}.fname{font:700 clamp(1.9rem,3.2vw,2.6rem)/1.05 ${SANS};margin:.25rem 0 .75rem}
 .ptypes{padding-left:1.1rem}
 .sources{font-size:.85rem;padding-left:1.3rem}
 .foot{max-width:84rem;margin:0 auto 2rem;padding:0 16px;font-size:.9rem}.foot .small{font-size:.82rem}`;
@@ -509,14 +536,14 @@ ${steps.map((s, i) => `<rect class="r-pill" x="${px(i) - 84}" y="38" width="168"
   const rimNo = i => { const [x, y] = pt(ro + 28, i * 60 + 30); return `<text class="d-n" x="${x}" y="${(+y + 7).toFixed(1)}" text-anchor="middle">${two(i + 1)}</text>`; };
   used.add(C.dial_caption.fact_id);
   const cLines = wrap(T.status_text, 22);
-  const dialSvg = `<figure class="dialfig"><svg viewBox="0 0 600 600" role="img" aria-labelledby="dl-t dl-d"><title id="dl-t">${esc(C.areas_page.svg_title)}</title><desc id="dl-d">Six empty outlined segments numbered 01 to 06, one per area, clockwise from the top: ${esc(areas.map((a, i) => `${two(i + 1)} ${a.name}`).join('; '))}. Centre text: ${esc(T.status_text)}</desc>
-${[0, 1, 2, 3, 4, 5].map(seg).join('')}${[0, 1, 2, 3, 4, 5].map(rimNo).join('')}
+  const dialSvg = `<figure class="dialfig"><svg viewBox="0 0 600 600" role="img" aria-labelledby="dl-t dl-d"><title id="dl-t">${esc(C.areas_page.svg_title)}</title><desc id="dl-d">Six equal segments, all the same neutral tint and none marked, numbered 01 to 06, one per area, clockwise from the top: ${esc(areas.map((a, i) => `${two(i + 1)} ${a.name}`).join('; '))}. Centre text: ${esc(T.status_text)}</desc>
+<circle class="d-rim" cx="${cx}" cy="${cy}" r="${ri - 12}"/>${[0, 1, 2, 3, 4, 5].map(seg).join('')}${[0, 1, 2, 3, 4, 5].map(rimNo).join('')}
 <text class="d-c" y="${cy - (cLines.length - 1) * 16 + 8}" text-anchor="middle">${tspans(cLines, cx, 32)}</text>
 </svg><figcaption>${esc(C.dial_caption.caption)}</figcaption></figure>`;
   const chan = i => `<span class="chan">${two(i + 1)} ${esc(T.channels[i])}</span>`;
   const plansPanels = plans.map(p => { const id = `pl-${p.name.replace(/\W+/g, '-')}`; return `<section class="panel s3 plan" aria-labelledby="${esc(id)}"><span class="chan">Plan</span><h3 id="${esc(id)}">${esc(p.name)}</h3>${p.name === 'Professional' ? `<p><span class="chip">${esc(T.essentials_chip)}</span></p>` : ''}${planRows(p).replace(`<dt>${esc(RL.includes)}</dt>`, `<dt>${esc(T.includes_label)}</dt>`)}</section>`; }).join('\n');
   const events = rows.length ? `<section class="panel" aria-labelledby="ev"><span class="chan">Timeline</span><h2 id="ev">${esc(T.events_title)}</h2><p class="small">${esc(C.context.timeline_note)}</p>
-<ol class="events">${rows.map(r => `<li>${time(r.date)}<br>${rowWhat(r)}<span class="src">${rowSource(r)}</span></li>`).join('')}</ol>
+<div class="years">${[...new Set(rows.map(r => r.date.slice(0, 4)))].map(y => `<div class="yb"><p class="ybig" aria-hidden="true">${y}</p><ol class="events">${rows.filter(r => r.date.startsWith(y)).map(r => `<li>${time(r.date)}<br>${rowWhat(r)}<span class="src">${rowSource(r)}</span></li>`).join('')}</ol></div>`).join('')}</div>
 <p><strong>${esc(NLA)}</strong></p></section>` : '';
   const body = `${header()}
 <main id="main" class="dash">
@@ -533,7 +560,7 @@ ${plansPanels}
 <section class="panel s6" aria-labelledby="pa"><span class="chan">Partners</span><h2 id="pa">${esc(P.h1)}</h2>${partnerText()}</section>
 <div class="panel s6">${partnerFigure('pf')}</div>
 ${events}
-<section class="panel s6" aria-labelledby="fo">${founderBlock('h2', '', 'fo')}</section>
+<section class="panel s6" aria-labelledby="fo">${founderBlock('h2', '', 'fo').replace(`<p><strong>${esc(founder.name)}</strong>, `, `<p class="fname">${esc(founder.name)}</p><p>`)}</section>
 <section class="panel s6 cta" aria-labelledby="ct"><h2 id="ct">${q(C.home.cta.title)}${cite(C.home.cta.title.fact_id)}</h2><p>${esc(C.home.cta.text)}</p><p>${action('start')} ${action('partner', 'btn2')}</p></section>
 <section class="panel" aria-labelledby="sr"><h2 id="sr">Sources</h2>${sourcesList()}</section>
 </main>`;
@@ -547,8 +574,8 @@ ${events}
 function calendar() {
   const d = D.calendar; const T = C.design_text.calendar; begin();
   const SERIF = 'Newsreader,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif';
-  const css = `:root{--bg:#f5f1e8;--card:#fffdf8;--ink:#1b1c1e;--soft:#55524b;--rule:#cfc8b8;--year:#b3a993;--stroke:#7a7466;--blue:#1d3f73;--green:#2f6b3a;--link:#1d3f73;--focus:#1d3f73;${pk('#fffdf8', '#1b1c1e', '#55524b', '#cfc8b8', '#1d3f73')}}
-@media (prefers-color-scheme:dark){:root{--bg:#121417;--card:#1a1d21;--ink:#ece8df;--soft:#b4afa5;--rule:#3a3d42;--year:#555b64;--stroke:#8a8f97;--blue:#9bbcf0;--green:#8fd19a;--link:#9bbcf0;--focus:#9bbcf0;${pk('#1a1d21', '#ece8df', '#b4afa5', '#3a3d42', '#9bbcf0')}}}
+  const css = `:root{--bg:#f5f1e8;--card:#fffdf8;--ink:#1b1c1e;--soft:#55524b;--rule:#cfc8b8;--year:#8a7f68;--stroke:#7a7466;--blue:#1d3f73;--green:#2f6b3a;--link:#1d3f73;--focus:#1d3f73;${pk('#fffdf8', '#1b1c1e', '#55524b', '#cfc8b8', '#1d3f73')};${lay('84rem')}}
+@media (prefers-color-scheme:dark){:root{--bg:#121417;--card:#1a1d21;--ink:#ece8df;--soft:#b4afa5;--rule:#3a3d42;--year:#6b717a;--stroke:#8a8f97;--blue:#9bbcf0;--green:#8fd19a;--link:#9bbcf0;--focus:#9bbcf0;${pk('#1a1d21', '#ece8df', '#b4afa5', '#3a3d42', '#9bbcf0')}}}
 body{font:18px/1.6 ${SERIF}}
 .mono,time,.kicker,.tag{font-family:${MONO};font-variant-numeric:tabular-nums}
 .notice{border-bottom:3px double var(--rule);padding:.55rem 16px}.notice-in{max-width:84rem}
@@ -556,17 +583,18 @@ body{font:18px/1.6 ${SERIF}}
 .brand{font-weight:600;font-size:1.1rem;letter-spacing:.08em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;min-height:44px}.tag{font-size:.68rem;font-weight:500;color:var(--green);border:1px solid var(--green);padding:.05rem .35rem;letter-spacing:.1em;text-transform:uppercase}
 .their{display:inline-flex;align-items:center;min-height:44px;padding:0 .9rem;border:2px solid var(--blue);border-radius:4px;color:var(--blue);font-weight:600;text-decoration:none}
 .wrapc{max-width:84rem;margin:0 auto;padding:0 16px}
-.ruler{margin:0;padding:1.25rem 0 .5rem;border-bottom:1px solid var(--rule)}
+.ruler{margin:0;padding:.9rem 0 .4rem;border-bottom:1px solid var(--rule)}
 .rhead{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;align-items:baseline;margin:0 0 .25rem}
 .rhead h2{font:500 .8rem ${MONO};letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0}
 .scroller{overflow-x:auto}
 .ru{display:block;width:100%;min-width:1100px}
 @media (max-width:1100px){.ru{width:1100px}}
-.ru-base{stroke:var(--ink);stroke-width:2}.ru-yr{stroke:var(--ink);stroke-width:2}.ru-year{font:600 92px ${SERIF};fill:none;stroke:var(--year);stroke-width:1.5}
+.ru-base{stroke:var(--ink);stroke-width:2}.ru-yr{stroke:var(--ink);stroke-width:2}.ru-year{font:600 60px ${SERIF};fill:var(--year);stroke:none;letter-spacing:-.01em}.ru-br{fill:none;stroke:var(--blue);stroke-width:1.5}
 .ru-tick{stroke:var(--blue);stroke-width:1.5}.ru-dot{fill:var(--card);stroke:var(--blue);stroke-width:2.5}.ru-lab{font:500 15px ${MONO};fill:var(--ink)}.ru-n{fill:var(--blue)}
 .ru-read{stroke:var(--green);stroke-width:2;stroke-dasharray:4 4}.ru-rl{font:500 14px ${MONO};fill:var(--green)}
 .ruler figcaption{font-size:.85rem;color:var(--soft);margin:.25rem 0 0}
-.mast{padding:1.75rem 0 2rem;border-bottom:1px solid var(--rule);display:grid;gap:1rem}
+@media (max-width:599px){.wrapc{display:flex;flex-direction:column}.wrapc>.mast{order:-1}}
+.mast{padding:1.1rem 0 1.75rem;border-bottom:1px solid var(--rule);display:grid;gap:1rem}
 @media (min-width:1000px){.mast{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:1rem 3.5rem;align-items:end}}
 .kicker{font-size:.8rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 0 .5rem}
 h1{font-size:clamp(2.3rem,5vw,4.4rem);line-height:1.02;margin:0;font-weight:600;letter-spacing:-.015em}
@@ -607,25 +635,36 @@ figcaption{font-size:.85rem;color:var(--soft)}
 .foot{max-width:84rem;margin:0 auto 2rem;padding:0 16px}.foot-in{padding-top:1rem;border-top:2px solid var(--ink);font-size:.9rem}.foot .small{font-size:.82rem}`;
   // the ruler: years from the earliest to the latest current date, positions from the ISO dates
   const numOf = r => rows.indexOf(r) + 1;
-  const W = 1300, pad = 24, yB = 176, H = 290;
+  const W = 1300, pad = 24, yB = 126, H = 200;
   const ms = iso => Date.UTC(...iso.split('-').map((n, i) => i === 1 ? n - 1 : +n));
   const y0 = +current[0].date.slice(0, 4), y1 = +current[current.length - 1].date.slice(0, 4);
   const t0 = Date.UTC(y0, 0, 1), t1 = Date.UTC(y1 + 1, 0, 1);
   const X = t => pad + (t - t0) / (t1 - t0) * (W - 2 * pad);
-  const rowsY = [38, 72, 106, 140]; const lastEnd = rowsY.map(() => -Infinity);
-  const ticks = current.map(r => {
-    const x = X(ms(r.date)); const label = `${numOf(r)} ${fmtShort(r.date)}`; const w = label.length * 9 + 8;
+  // Round 5 (brief item 8): dates closer than 32 units share one bracket and one label, so no labels collide.
+  const groups = [];
+  for (const r of current) { const x = X(ms(r.date)); const g = groups[groups.length - 1]; if (g && x - g.xs[g.xs.length - 1] < 32) { g.rs.push(r); g.xs.push(x); } else groups.push({ rs: [r], xs: [x] }); }
+  const rowsY = [40, 68, 96]; const lastEnd = rowsY.map(() => -Infinity);
+  const f1 = n => n.toFixed(1);
+  const ticks = groups.map(({ rs, xs }) => {
+    const nums = rs.map(numOf).join(', ');
+    // A shared label carries the numbers only; each date is in the list below with its source.
+    const dates = rs.length > 1 ? '' : fmtShort(rs[0].date);
+    const x = xs[0], xe = xs[xs.length - 1];
+    const w = (nums.length + (dates ? dates.length + 1 : 0)) * 9 + 8;
     let k = lastEnd.findIndex(e => e + 6 <= x); if (k < 0) k = lastEnd.indexOf(Math.min(...lastEnd));
     lastEnd[k] = x + 6 + w;
-    return `<line class="ru-tick" x1="${x.toFixed(1)}" y1="${rowsY[k] + 6}" x2="${x.toFixed(1)}" y2="${yB}"/><circle class="ru-dot" cx="${x.toFixed(1)}" cy="${yB}" r="6"/><text class="ru-lab" x="${(x + 6).toFixed(1)}" y="${rowsY[k]}"><tspan class="ru-n">${numOf(r)}</tspan> ${esc(fmtShort(r.date))}</text>`;
+    const top = rowsY[k] + 7;
+    const stems = xs.map(xi => `<line class="ru-tick" x1="${f1(xi)}" y1="${rs.length > 1 ? top + 6 : top}" x2="${f1(xi)}" y2="${yB}"/><circle class="ru-dot" cx="${f1(xi)}" cy="${yB}" r="6"/>`).join('');
+    const bracket = rs.length > 1 ? `<path class="ru-br" d="M${f1(x)} ${top + 12} V${top} H${f1(xe)} V${top + 12}"/>` : '';
+    return `${stems}${bracket}<text class="ru-lab" x="${f1(x + 6)}" y="${rowsY[k]}"><tspan class="ru-n">${nums}</tspan>${dates ? ` ${esc(dates)}` : ''}</text>`;
   }).join('');
   const years = []; for (let y = y0; y <= y1; y++) years.push(y);
   const xr = X(ms(R.read));
   const rulerSvg = `<svg class="ru" viewBox="0 0 ${W} ${H}" role="img" aria-labelledby="ru-t ru-d"><title id="ru-t">${esc(T.spine_title)}</title><desc id="ru-d">${esc(`Years ${y0} to ${y1}. ` + current.map(r => `${numOf(r)}: ${fmt(r.date)}, ${r.what}`).join('. ') + `. ${T.read_marker_label} ${fmt(R.read)}.`)}</desc>
-${years.map(y => `<text class="ru-year" x="${(X(Date.UTC(y, 0, 1)) + 10).toFixed(1)}" y="${yB + 104}">${y}</text><line class="ru-yr" x1="${X(Date.UTC(y, 0, 1)).toFixed(1)}" y1="${yB - 10}" x2="${X(Date.UTC(y, 0, 1)).toFixed(1)}" y2="${yB + 18}"/>`).join('')}
+${years.map(y => `<text class="ru-year" x="${(X(Date.UTC(y, 0, 1)) + 10).toFixed(1)}" y="${yB + 64}">${y}</text><line class="ru-yr" x1="${X(Date.UTC(y, 0, 1)).toFixed(1)}" y1="${yB - 10}" x2="${X(Date.UTC(y, 0, 1)).toFixed(1)}" y2="${yB + 18}"/>`).join('')}
 <line class="ru-yr" x1="${W - pad}" y1="${yB - 10}" x2="${W - pad}" y2="${yB + 18}"/>
 <line class="ru-base" x1="${pad}" y1="${yB}" x2="${W - pad}" y2="${yB}"/>
-<line class="ru-read" x1="${xr.toFixed(1)}" y1="12" x2="${xr.toFixed(1)}" y2="${yB}"/><text class="ru-rl" x="${(xr + 8).toFixed(1)}" y="${yB + 36}">${esc(T.read_marker_label)} ${esc(fmtShort(R.read))} ${esc(R.read.slice(0, 4))}</text>
+<line class="ru-read" x1="${xr.toFixed(1)}" y1="6" x2="${xr.toFixed(1)}" y2="${yB}"/><text class="ru-rl" x="${(xr + 8).toFixed(1)}" y="16">${esc(T.read_marker_label)} ${esc(fmtShort(R.read))} ${esc(R.read.slice(0, 4))}</text>
 ${ticks}
 </svg>`;
   // short flow timeline, with a named vertical twin (F11)
@@ -640,7 +679,7 @@ ${steps.map((s, i) => `<circle class="h-dot" cx="${fx(i)}" cy="50" r="16"/><text
 <main id="main" class="wrapc">
 ${rows.length ? `<figure class="ruler" aria-labelledby="ru-h"><div class="rhead"><h2 id="ru-h">${esc(T.spine_title)}</h2><p class="small">${esc(NLA)}</p></div>
 <div class="scroller" role="region" aria-label="${esc(T.scroller_label)}" tabindex="0">${rulerSvg}</div>
-<figcaption>Numbers match the list of dates below, where each date has its source. The replaced date is in the list, not on the line.</figcaption></figure>` : ''}
+<figcaption>Numbers match the list of dates below, where each date has its source. Close dates share one bracket. The replaced date is in the list, not on the line.</figcaption></figure>` : ''}
 <div class="mast"><div><p class="kicker">${eyebrow()}</p><h1>${h1Quote()}</h1></div><div>${ledeQuote()}${ledeOurs()}</div></div>
 <div class="ed">
 ${rows.length ? `<aside class="datecol" aria-labelledby="dl-h"><h2 id="dl-h">${esc(T.list_title)}</h2><p class="small">${esc(C.context.timeline_note)}</p>
@@ -680,8 +719,8 @@ ${hflow}
 function grid() {
   const d = D.grid; const T = C.design_text.grid; begin();
   const SANS = 'Archivo,"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif';
-  const css = `:root{--bg:#ffffff;--ink:#111111;--soft:#4d4d4d;--line:#e6e6e6;--red:#c42d1a;--band:#c42d1a;--onband:#ffffff;--link:#111111;--focus:#c42d1a;${pk('#ffffff', '#111111', '#4d4d4d', '#e6e6e6', '#c42d1a')}}
-@media (prefers-color-scheme:dark){:root{--bg:#111111;--ink:#f2f2f2;--soft:#bdbdbd;--line:#262626;--red:#ff6b55;--band:#b3261e;--onband:#ffffff;--link:#f2f2f2;--focus:#ff6b55;${pk('#111111', '#f2f2f2', '#bdbdbd', '#333333', '#ff6b55')}}}
+  const css = `:root{--bg:#ffffff;--ink:#111111;--soft:#4d4d4d;--line:#e6e6e6;--red:#c42d1a;--band:#c42d1a;--onband:#ffffff;--link:#111111;--focus:#c42d1a;--bsoft:#bdbdbd;--bred:#ff6b55;${pk('#ffffff', '#111111', '#4d4d4d', '#e6e6e6', '#c42d1a')};${lay('calc(90rem - 32px)')}}
+@media (prefers-color-scheme:dark){:root{--bg:#111111;--ink:#f2f2f2;--soft:#bdbdbd;--line:#262626;--red:#ff6b55;--band:#b3261e;--onband:#ffffff;--link:#f2f2f2;--focus:#ff6b55;--bsoft:#4d4d4d;--bred:#b3261e;${pk('#111111', '#f2f2f2', '#bdbdbd', '#333333', '#ff6b55')}}}
 body{font:500 18px/1.5 ${SANS}}
 .notice{background:var(--ink);color:var(--bg);padding:.55rem 16px}.notice-in{max-width:90rem}.notice a{color:var(--bg)}.notice a:focus-visible{outline-color:var(--bg)}
 .wrap{max-width:90rem;margin:0 auto;padding:0 16px}
@@ -696,7 +735,7 @@ body{font:500 18px/1.5 ${SANS}}
 @media (min-width:1000px){.g{grid-template-columns:repeat(12,minmax(0,1fr));gap:24px}}
 .c3,.c4,.c6,.c8,.c9,.c12{grid-column:1/-1;min-width:0}
 @media (min-width:1000px){.c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}.c8{grid-column:span 8}.c9{grid-column:span 9}.c12{grid-column:span 12}}
-.hero{padding:2rem 0 2.5rem}
+.hero{padding:2rem 0 2.5rem}@media (max-width:599px){.hero{padding-top:1.1rem}}
 .eyebrow{font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin:0 0 1rem;font-size:.95rem}
 h1{font-size:clamp(2.6rem,11.4vw,6.4rem);line-height:.94;letter-spacing:-.035em;font-weight:800;margin:0;padding-left:.4em;text-indent:-.4em}
 @media (min-width:1000px){h1{font-size:clamp(4rem,7vw,7rem)}}
@@ -706,6 +745,19 @@ h1 .sn{font-size:.22em;letter-spacing:0;vertical-align:top;position:relative;top
 @media (min-width:1000px){.qm{order:2;align-self:stretch;justify-content:flex-start}.qm svg{width:auto;height:100%;max-height:34rem;max-width:100%}}
 .qm-sq{fill:var(--ink)}.qm-dot{fill:var(--red)}
 .hl{order:1}
+@media (max-width:999px){.hero{position:relative}.qm{position:absolute;right:0;top:2rem}.qm svg{width:2.9rem}.eyebrow{padding-right:4rem;margin-bottom:1.6rem}}
+/* Round 5 (brief item 9): sections vary in scale: compact, standard, one full-bleed black band, one large numeral spread, one wide table. */
+.chead{display:flex;align-items:flex-end;gap:.5rem 1.25rem;flex-wrap:wrap}.compact.g,.wide.g{row-gap:12px}.chead h2{margin:0 0 .35rem}
+.compact{padding:1rem 0 2.25rem}.compact .num{font-size:clamp(3rem,6vw,5rem);margin:0;-webkit-text-stroke-width:1.5px}.compact h2{font-size:clamp(1.6rem,3vw,2.5rem)}
+.wide .chead{align-items:flex-end}.wide .chead h2{font-size:clamp(2rem,5vw,4.6rem)}
+.bleed{background:var(--ink);color:var(--bg);box-shadow:0 0 0 100vmax var(--ink);clip-path:inset(0 -100vmax);border-top:0;padding:3rem 0 4rem}
+.bleed .num{-webkit-text-stroke-color:var(--bg)}.bleed a,.bleed .sn a{color:var(--bg)}.bleed .small{color:var(--bsoft)}.bleed :focus-visible{outline-color:var(--bg)}
+.bleed .giant{border-bottom-color:var(--bred)}.bleed .giant li{border-top-color:var(--bg)}.bleed .giant .n{font-size:clamp(5rem,12vw,10.5rem)}.bleed .ret{color:var(--bred)}
+.spread .num{color:var(--red);-webkit-text-stroke:0;font-size:clamp(7rem,20vw,19rem);line-height:.78;letter-spacing:-.07em}
+.spread .blocks div{border-width:5px;aspect-ratio:auto;min-height:12rem}.spread .redq{max-width:30ch;margin:0 0 1.5rem}.spread .blocks h3{font-size:clamp(1.05rem,1.9vw,1.55rem)}
+.ytab tbody{border-top:6px solid var(--ink)}.ytab th.y{font-size:clamp(2.4rem,5vw,4.4rem);line-height:.9;letter-spacing:-.04em;font-weight:800;width:12rem;padding-top:.5rem;border-top:0}
+.ytab tbody tr:first-child td{border-top:0}.ytab td{border-top:1px solid var(--ink)}.ytab td.d{width:9rem}
+@media (max-width:700px){.ytab tbody{display:block;border-top:6px solid var(--ink);padding-top:.25rem}.ytab th.y{display:block;width:auto;padding:.25rem 0 .5rem}.ytab tr{border-top:1px solid var(--ink)}.ytab tbody tr:first-child{border-top:0}}
 .under{padding:1.5rem 0 3rem;border-top:6px solid var(--ink)}
 .lede{max-width:40rem;margin:.3rem 0 .8rem}.under .c6:first-child .lede{font-size:1.3rem;line-height:1.35;font-weight:800;letter-spacing:-.01em}
 .panel{border-top:6px solid var(--ink);padding:1.25rem 0 3.5rem}
@@ -753,20 +805,24 @@ figcaption{font-size:.85rem;color:var(--soft)}
   const sq = [[60, 0], [140, 0], [220, 60], [220, 140], [140, 200], [140, 280]];
   const qmSvg = `<svg viewBox="0 0 300 460" role="img" aria-labelledby="qm-t qm-d"><title id="qm-t">${esc(d.signature)}</title><desc id="qm-d">A question mark made of six squares, one for each area: ${esc(areas.map(a => a.name).join('; '))}. The dot beneath is one Readiness Check.</desc>
 ${sq.map(([x, y]) => `<rect class="qm-sq solid" x="${x}" y="${y}" width="72" height="72"/>`).join('')}<circle class="qm-dot solid" cx="176" cy="410" r="42"/></svg>`;
-  const P_ = (n, id, title, inner) => `<section class="panel g" aria-labelledby="${id}"><div class="c3"><p class="num" aria-hidden="true">${two(n)}</p></div><div class="c9"><h2 id="${id}">${title}</h2>${inner}</div></section>`;
+  const P_ = (n, id, title, inner, v = 'std') => (v === 'compact' || v === 'wide')
+    ? `<section class="panel g ${v}" aria-labelledby="${id}"><div class="c12 chead"><p class="num" aria-hidden="true">${two(n)}</p><h2 id="${id}">${title}</h2></div><div class="c12">${inner}</div></section>`
+    : `<section class="panel g ${v}" aria-labelledby="${id}"><div class="${v === 'spread' ? 'c4' : 'c3'}"><p class="num" aria-hidden="true">${two(n)}</p></div><div class="${v === 'spread' ? 'c8' : 'c9'}"><h2 id="${id}">${title}</h2>${inner}</div></section>`;
+  const years = [...new Set(rows.map(r => r.date.slice(0, 4)))];
+  const ytab = `<table class="ytab"><thead><tr><th scope="col">Year</th><th scope="col">Date</th><th scope="col">What the source says</th></tr></thead>${years.map(y => { const yr = rows.filter(r => r.date.startsWith(y)); return `<tbody>${yr.map((r, i) => `<tr>${i ? '' : `<th scope="rowgroup" rowspan="${yr.length}" class="y">${y}</th>`}<td class="d"><time datetime="${esc(r.date)}">${esc(fmt(r.date).replace(/ \d{4}$/, ''))}</time></td><td>${rowWhat(r)}<span class="src">${rowSource(r)}</span></td></tr>`).join('')}</tbody>`; }).join('')}</table>`;
   const body = `${header()}
 <div class="pg">
 <main id="main" class="wrap">
 <section class="hero g" aria-labelledby="h1"><div class="c4 qm">${qmSvg}</div><div class="c8 hl"><p class="eyebrow">${eyebrow()}</p><h1 id="h1"><q>${h1}</q>${cite(hFact)}</h1></div></section>
 <div class="under g"><div class="c6">${ledeQuote()}</div><div class="c6">${ledeOurs()}<p>${action('start')}</p><p class="small">${esc(C.actions.note)}</p></div></div>
-${P_(2, 'show', esc(C.home.show_title), `<p class="small">${ours(C.home.show_intro)}</p>${showLabel()}<div class="g">${C.home.show.map(s => { s.fact_ids.forEach(id => used.add(id)); return `<div class="c4 show"><p class="stag">${esc(s.tag)}</p><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`; }).join('')}</div>`)}
-${P_(3, 'flow', esc(C.flow.title), `<p class="small">${ours(C.flow.intro)}</p><ol class="giant">${steps.map(s => { s.source_fact_ids.forEach(id => used.add(id)); return `<li><span class="n" aria-hidden="true">${s.n}</span><h3><span class="vh">Step ${s.n}: </span>${esc(s.name)}</h3><p>Published: <q>${esc(s.published)}</q></p><p class="small"><span class="lbl">${esc(s.label)}:</span> ${esc(s.text)}</p></li>`; }).join('')}</ol><p class="ret">${esc(C.flow.return_label)}</p><p class="small">${flowCaption()} ${esc(C.flow.footnote)}</p>`)}
-${P_(4, 'areas', esc(C.home.areas_title), `<div class="g"><div class="c8"><div class="blocks">${areas.map((a, i) => { used.add(a.fact_id); return `<div><span class="bn" aria-hidden="true">${two(i + 1)}</span><h3>${esc(a.name)}</h3><p>${esc(a.text)}</p></div>`; }).join('')}</div><p class="small">${esc(C.areas_page.summary_label)} under each name. ${esc(C.areas_page.caption)}${cite('c6')}</p></div><div class="c4"><p class="redq">${qc(C.home.areas_intro)}</p></div></div>`)}
+${P_(2, 'show', esc(C.home.show_title), `<p class="small">${ours(C.home.show_intro)}</p>${showLabel()}<div class="g">${C.home.show.map(s => { s.fact_ids.forEach(id => used.add(id)); return `<div class="c4 show"><p class="stag">${esc(s.tag)}</p><h3>${esc(s.title)}</h3><p>${esc(s.text)}</p></div>`; }).join('')}</div>`, 'compact')}
+${P_(3, 'flow', esc(C.flow.title), `<p class="small">${ours(C.flow.intro)}</p><ol class="giant">${steps.map(s => { s.source_fact_ids.forEach(id => used.add(id)); return `<li><span class="n" aria-hidden="true">${s.n}</span><h3><span class="vh">Step ${s.n}: </span>${esc(s.name)}</h3><p>Published: <q>${esc(s.published)}</q></p><p class="small"><span class="lbl">${esc(s.label)}:</span> ${esc(s.text)}</p></li>`; }).join('')}</ol><p class="ret">${esc(C.flow.return_label)}</p><p class="small">${flowCaption()} ${esc(C.flow.footnote)}</p>`, 'bleed')}
+${P_(4, 'areas', esc(C.home.areas_title), `<p class="redq">${qc(C.home.areas_intro)}</p><div class="blocks">${areas.map((a, i) => { used.add(a.fact_id); return `<div><span class="bn" aria-hidden="true">${two(i + 1)}</span><h3>${esc(a.name)}</h3><p>${esc(a.text)}</p></div>`; }).join('')}</div><p class="small">${esc(C.areas_page.summary_label)} under each name. ${esc(C.areas_page.caption)}${cite('c6')}</p>`, 'spread')}
 ${P_(5, 'plans', esc(C.plans_page.h1), `<p class="small">${ours(C.plans_page.intro)}</p><div class="pcols">${plans.map(p => `<article><h3>${esc(p.name)}</h3>${planRows(p)}</article>`).join('')}</div>${plansNote()}`)}
-${P_(6, 'part', esc(P.h1), `<div class="g"><div class="c6">${partnerText()}</div><div class="c6">${partnerFigure('pf')}</div></div>`)}
-${rows.length ? P_(7, 'dates', esc(C.context.timeline_title), `<p class="small">${esc(C.context.timeline_note)}</p><table><thead><tr><th scope="col">Date</th><th scope="col">What the source says</th></tr></thead><tbody>${rows.map(r => `<tr><td class="d">${time(r.date)}</td><td>${rowWhat(r)}<span class="src">${rowSource(r)}</span></td></tr>`).join('')}</tbody></table><p><strong>${esc(NLA)}</strong></p>`) : ''}
-${P_(8, 'fo', esc(founder.section_title), founderBlock('h3', 'vh'))}
-${P_(9, 'srcs', 'Sources', sourcesList())}
+${P_(6, 'part', esc(P.h1), `<div class="g"><div class="c6">${partnerText()}</div><div class="c6">${partnerFigure('pf')}</div></div>`, 'compact')}
+${rows.length ? P_(7, 'dates', esc(C.context.timeline_title), `<p class="small">${esc(C.context.timeline_note)}</p>${ytab}<p><strong>${esc(NLA)}</strong></p>`, 'wide') : ''}
+${P_(8, 'fo', esc(founder.section_title), founderBlock('h3', 'vh'), 'compact')}
+${P_(9, 'srcs', 'Sources', sourcesList(), 'compact')}
 </main>
 </div>
 <section class="band" aria-labelledby="cta"><div class="wrap"><h2 id="cta" class="vh">${esc(C.home.cta.title.text)}</h2><p><q>${esc(C.home.cta.title.text)}</q>${cite(C.home.cta.title.fact_id)}</p><p><a class="big" href="${THEIRS}">${esc(T.cta_band)}${sr(C.actions.start.sr)}</a></p><p>${esc(C.home.cta.text)}</p><p>${action('partner', 'btnb')}</p></div></section>`;
@@ -782,7 +838,7 @@ function counsel() {
   const d = D.counsel; const T = C.design_text.counsel; begin();
   const SERIF = '"EB Garamond",Garamond,"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif';
   const SANS = '"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
-  const css = `:root{--bg:#f3efe6;--ink:#2a2a26;--soft:#5a5850;--rule:#d6cfc0;--sage:#46634f;--clay:#8c4d2b;--link:#46634f;--focus:#8c4d2b;--th:-3rem;${pk('#f3efe6', '#2a2a26', '#5a5850', '#d6cfc0', '#46634f')}}
+  const css = `:root{--bg:#f3efe6;--ink:#2a2a26;--soft:#5a5850;--rule:#d6cfc0;--sage:#46634f;--clay:#8c4d2b;--link:#46634f;--focus:#8c4d2b;--th:-3rem;${pk('#f3efe6', '#2a2a26', '#5a5850', '#d6cfc0', '#46634f')};${lay('42rem', 'center')}}
 @media (prefers-color-scheme:dark){:root{--bg:#191b18;--ink:#e8e4d9;--soft:#b9b4a8;--rule:#3a3d37;--sage:#a7c4b1;--clay:#e0a483;--link:#a7c4b1;--focus:#e0a483;${pk('#191b18', '#e8e4d9', '#b9b4a8', '#3a3d37', '#a7c4b1')}}}
 body{font:22px/1.6 ${SERIF}}
 .notice,.small,.top,.foot,.sources,figcaption{font-family:${SANS}}
@@ -794,8 +850,9 @@ body{font:22px/1.6 ${SERIF}}
 .thread{position:absolute;top:0;bottom:0;left:calc(50% - 20rem);border-left:1.5px solid var(--sage);pointer-events:none}
 .col{max-width:calc(34rem + 32px);margin:0 auto;padding:0 16px}
 @media (max-width:760px){:root{--th:-28px}.thread{left:24px}.col{max-width:none;padding-left:52px}}
-.scene{min-height:80vh;display:flex;flex-direction:column;justify-content:center;padding:4rem 16px}
-@media (max-width:760px){.scene{min-height:0;padding-top:3rem;padding-bottom:3rem;padding-left:52px}}
+.scene{display:flex;flex-direction:column;justify-content:center;padding:2.6rem 16px}
+.scene+.scene{border-top:1px solid var(--rule)}@media (max-width:599px){.scene:first-of-type{padding-top:1.25rem}}
+@media (max-width:760px){.scene{padding-top:2.5rem;padding-bottom:2.5rem;padding-left:52px}}
 .long{min-height:0}
 .sc{font-variant:small-caps;letter-spacing:.08em;color:var(--clay);margin:0 0 .25rem}
 .opening{font-size:1.05rem;letter-spacing:.14em}
@@ -806,64 +863,70 @@ h2{font-size:clamp(1.9rem,4vw,3rem);line-height:1.15;font-weight:400;margin:0 0 
 .pull{font-style:italic;font-size:clamp(1.55rem,3.4vw,2.25rem);line-height:1.3;margin:0;padding-top:1.25rem;border-top:2px solid var(--sage);max-width:30ch}
 .pull .sn{font-style:normal}
 .tsteps{list-style:none;margin:2rem 0;padding:0}
-.tsteps li{position:relative;margin:0 0 2.25rem;min-height:3.25rem}
+.tsteps li{position:relative;margin:0 0 1.6rem;min-height:3rem}
 .ring{position:absolute;left:calc(var(--th) - 27px);top:-.35rem;width:54px;height:54px}
+@media (min-width:761px){.ring{left:calc(var(--th) - 32px);width:64px;height:64px;top:-.6rem}}@media (max-width:760px){.ring{left:calc(var(--th) - 22px);width:44px;height:44px;top:-.1rem}}
 .ring circle{fill:var(--bg);stroke:var(--sage);stroke-width:1.5}.ring text{font:400 26px ${SERIF};fill:var(--sage)}
 .tsteps strong{font-weight:600;font-size:1.2em}.tsteps p{margin:.2rem 0}
-.hex svg{width:100%;max-width:22rem;display:block;margin:1.5rem auto}.hx{fill:none;stroke:var(--sage);stroke-width:1.5}.hv{fill:var(--sage)}.ht{font:20px ${SERIF};fill:var(--ink)}
+.hex{margin:1.25rem 0}.hexlist{display:none;margin:0 0 .75rem;padding-left:1.4rem;font-size:.9em}.hexlist li::marker{color:var(--clay)}@media (max-width:600px){.hexlist{display:block}.hex .ht{display:none}}.hex svg{width:100%;display:block}.hx{fill:none;stroke:var(--sage);stroke-width:1.5}.hv{fill:var(--sage)}.ht{font:21px ${SERIF};fill:var(--ink)}.hn{font:600 22px ${SERIF};fill:var(--clay)}.hc{font:italic 24px ${SERIF};fill:var(--ink)}
 figcaption{font-size:.8rem;color:var(--soft);text-align:center}
-.alist p{margin:0 0 1rem}
-.letters article{border-top:1px solid var(--ink);padding:1rem 0 1.5rem}
+
+.letters{display:grid;gap:0 1.75rem}@media (min-width:700px){.letters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.letters article{border-top:1px solid var(--ink);padding:.75rem 0 1rem;font-size:.86em;line-height:1.5}.letters ul{margin:.1rem 0}.letters p{margin:.25rem 0}
 .letters h3{font-size:1.5rem;font-weight:400}.plabel{color:var(--clay);margin:0;font-variant:small-caps;letter-spacing:.06em}.phead{font-variant:small-caps;letter-spacing:.06em;margin:.5rem 0 0}.pinc{padding-left:1.2rem;margin:.2rem 0}.pfor,.pprice{margin:.3rem 0}
 .btn{color:var(--sage);text-decoration:underline;padding-left:0;font-weight:400}
-.pfig svg{max-width:26rem;display:block;margin:0 auto}.f-line{stroke:var(--sage);stroke-width:1.5}.f-node{fill:var(--bg);stroke:var(--sage);stroke-width:1.5}.f-txt{font:20px ${SERIF};fill:var(--ink)}.f-hub{fill:var(--bg);stroke:var(--clay);stroke-width:1.5}.f-hubtxt{font:22px ${SERIF};fill:var(--ink)}.f-small{font-size:19px}
-.dates{list-style:none;padding:0}.dates li{padding:.6rem 0;border-bottom:1px solid var(--rule);font-size:.95em}.dates time{font-variant:small-caps;letter-spacing:.04em;color:var(--clay);display:block;font-variant-numeric:oldstyle-nums}.dates .src{display:block;font-size:.8rem;color:var(--soft);font-family:${SANS}}
-.close{text-align:left}.close a{font-size:1.35rem;display:inline-flex;align-items:center;min-height:44px}
-.signoff{margin:2.5rem 0 0;padding-top:1rem;border-top:1px solid var(--rule)}
+.pfig{margin:1rem 0 0}.pfig svg{width:100%;display:block}.f-line{stroke:var(--sage);stroke-width:1.5}.f-node{fill:var(--bg);stroke:var(--sage);stroke-width:1.5}.f-txt{font:20px ${SERIF};fill:var(--ink)}.f-hub{fill:var(--bg);stroke:var(--clay);stroke-width:1.5}.f-hubtxt{font:22px ${SERIF};fill:var(--ink)}.f-small{font-size:19px}
+.dates{border-collapse:collapse;width:100%;font-size:.78em;line-height:1.45;margin:.5rem 0 1rem}.dates th,.dates td{text-align:left;vertical-align:top;border-top:1px solid var(--rule);padding:.45rem .75rem .45rem 0}.dates th{font-weight:400;white-space:nowrap;color:var(--clay);font-variant-numeric:oldstyle-nums}.dates tr:last-child>*{border-bottom:1px solid var(--rule)}
+.close{text-align:left}.close p{margin:.4rem 0}.close a{font-size:1.35rem;display:inline-flex;align-items:center;min-height:44px}
+.signoff{margin:1.5rem 0 0!important;padding-top:.8rem;border-top:1px solid var(--rule)}
 .grouplbl{font-variant:small-caps;letter-spacing:.08em;color:var(--clay);margin:.5rem 0}
 .show{margin:0 0 1.2rem}.show p{margin:0}.stag{margin:0}
 .ptypes{padding-left:1.2rem}
 .sources{font-size:.8rem;padding-left:1.3rem}
 .foot{max-width:calc(34rem + 32px);margin:2rem auto 2rem;padding:1rem 16px 0;border-top:1px solid var(--rule);font-size:.85rem}.foot .small{font-size:.78rem}
 @media (max-width:760px){.foot{padding-left:52px}}`;
-  const hexR = 120, hc = [200, 170];
-  const hv = [0, 1, 2, 3, 4, 5].map(i => { const a = (i * 60 - 90) * Math.PI / 180; return [hc[0] + hexR * Math.cos(a), hc[1] + hexR * Math.sin(a)]; });
-  const hexSvg = `<figure class="hex"><svg viewBox="0 0 400 340" role="img" aria-labelledby="hx-t hx-d"><title id="hx-t">${esc(C.areas_page.svg_title)}</title><desc id="hx-d">A hexagon outline; each of its six corners stands for one area: ${esc(areas.map(a => a.name).join('; '))}.</desc>
-<polygon class="hx" points="${hv.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ')}"/>${hv.map(([x, y], i) => `<circle class="hv solid" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5"/><text class="ht" x="${(hc[0] + (hexR + 22) * Math.cos((i * 60 - 90) * Math.PI / 180)).toFixed(1)}" y="${(hc[1] + (hexR + 22) * Math.sin((i * 60 - 90) * Math.PI / 180) + 5).toFixed(1)}" text-anchor="${i === 0 || i === 3 ? 'middle' : i < 3 ? 'start' : 'end'}">${i + 1}</text>`).join('')}
-<text class="ht" x="200" y="176" text-anchor="middle">${esc(C.areas_page.centre)}</text></svg><figcaption>${esc(C.areas_page.caption)}</figcaption></figure>`;
+  // Round 5 (brief item 3): the areas figure fills the measure, with each area's name at its corner.
+  const hexR = 122, hc = [300, 190];
+  const hang = i => (i * 60 - 90) * Math.PI / 180;
+  const hv = [0, 1, 2, 3, 4, 5].map(i => [hc[0] + hexR * Math.cos(hang(i)), hc[1] + hexR * Math.sin(hang(i))]);
+  const hexLabel = (a, i) => {
+    const [x, y] = hv[i]; const side = i === 0 || i === 3 ? 'middle' : i < 3 ? 'start' : 'end';
+    const lx = side === 'middle' ? x : side === 'start' ? x + 18 : x - 18;
+    const lines = wrap(a.name, side === 'middle' ? 44 : 15);
+    const ly = i === 0 ? y - 16 - (lines.length - 1) * 24 : i === 3 ? y + 34 : y - (lines.length - 1) * 12 + 6;
+    return `<text class="ht" x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${side}"><tspan class="hn">${i + 1}</tspan> ${esc(lines[0])}${lines.slice(1).map(l => `<tspan x="${lx.toFixed(1)}" dy="24">${esc(l)}</tspan>`).join('')}</text>`;
+  };
+  const hexSvg = `<figure class="hex"><svg viewBox="0 0 600 384" role="img" aria-labelledby="hx-t hx-d"><title id="hx-t">${esc(C.areas_page.svg_title)}</title><desc id="hx-d">A hexagon outline; each of its six corners stands for one area, numbered clockwise from the top: ${esc(areas.map((a, i) => `${i + 1} ${a.name}`).join('; '))}. No area is highlighted.</desc>
+<polygon class="hx" points="${hv.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ')}"/>${hv.map(([x, y]) => `<circle class="hv solid" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5"/>`).join('')}${areas.map((a, i) => { used.add(a.fact_id); return hexLabel(a, i); }).join('')}
+<text class="hc" x="${hc[0]}" y="${hc[1] + 8}" text-anchor="middle">${esc(C.areas_page.centre)}</text></svg><ol class="hexlist">${areas.map(a => `<li>${esc(a.name)}</li>`).join('')}</ol><figcaption>${esc(C.areas_page.caption)}${cite('c6')}</figcaption></figure>`;
   const pull = item => `<blockquote class="pull"><p>${q(item)}${cite(item.fact_id)}</p></blockquote>`;
   const ring = n => `<svg class="ring" viewBox="0 0 54 54" aria-hidden="true" focusable="false"><circle cx="27" cy="27" r="25"/><text x="27" y="35" text-anchor="middle">${n}</text></svg>`;
-  const tsteps = `<ol class="tsteps" role="list">${steps.map(s => { s.source_fact_ids.forEach(id => used.add(id)); return `<li>${ring(s.n)}<p><strong><span class="vh">Step ${s.n}: </span>${esc(s.name)}</strong></p><p>Published: <q>${esc(s.published)}</q>${/[.?!]$/.test(s.published) ? '' : '.'}</p><p class="small"><span class="lbl">${esc(s.label)}:</span> ${esc(s.text)}</p></li>`; }).join('')}</ol>`;
+  const tsteps = `<ol class="tsteps" role="list">${steps.map(s => { s.source_fact_ids.forEach(id => used.add(id)); return `<li>${ring(s.n)}<p><strong><span class="vh">Step ${s.n}: </span>${esc(s.name)}.</strong> Published: <q>${esc(s.published)}</q>${/[.?!]$/.test(s.published) ? '' : '.'}</p></li>`; }).join('')}</ol>`;
   const body = `${header()}
 <main id="main" class="letter">
 <div class="thread" aria-hidden="true"></div>
 <section class="scene col" aria-labelledby="h1">
 <p class="sc opening">${esc(T.opening)}</p>
-<p class="sc small">${eyebrow()}</p>
 <h1 id="h1">${h1Quote()}</h1>
-${ledeParas()}
+${ledeQuote()}
 </section>
 <section class="scene col" aria-labelledby="why"><h2 id="why" class="vh">${esc(C.home.why_now_title)}</h2>
 ${pull(C.home.question)}
 </section>
 <section class="scene col" aria-labelledby="fl"><h2 id="fl">${esc(C.flow.title)}</h2>
-<p>${ours(C.flow.intro)}</p>
 ${tsteps}
-<p class="small">${flowCaption()} ${esc(C.flow.return_label)}.</p>
-<p class="small">${esc(C.flow.footnote)}</p></section>
-<section class="scene col" aria-labelledby="sh"><h2 id="sh">${esc(C.home.show_title)}</h2><p class="small">${ours(C.home.show_intro)}</p>${showLabel()}${C.home.show.map(s => { s.fact_ids.forEach(id => used.add(id)); return `<div class="show"><p><span class="sc">${esc(s.tag)}: ${esc(s.title)}.</span> ${esc(s.text)}</p></div>`; }).join('')}</section>
+<p class="small">${flowCaption()} ${esc(C.flow.return_label)}.</p></section>
+<section class="scene col" aria-labelledby="sh"><h2 id="sh">${esc(C.home.show_title)}</h2>${showLabel()}${C.home.show.map(s => { s.fact_ids.forEach(id => used.add(id)); return `<div class="show"><p><span class="sc">${esc(s.tag)}: ${esc(s.title)}.</span> ${esc(s.text)}</p></div>`; }).join('')}</section>
 <section class="scene col" aria-labelledby="ar"><h2 id="ar">${esc(C.areas_page.h1)}</h2>
 ${pull(C.home.areas_intro)}
 ${hexSvg}
-<p class="small">${esc(C.areas_page.summary_label)} after each name.</p>
-<div class="alist">${areas.map((a, i) => { used.add(a.fact_id); return `<p><span class="sc">${i + 1}. ${esc(a.name)}.</span> ${esc(a.text)}</p>`; }).join('')}</div>
-<p class="small">${esc(C.areas_page.caption)}${cite('c6')}</p></section>
-<section class="scene col long" aria-labelledby="pl"><h2 id="pl">${esc(C.plans_page.h1)}</h2><p class="small">${ours(C.plans_page.intro)}</p>
+</section>
+<section class="scene col" aria-labelledby="pl"><h2 id="pl">${esc(C.plans_page.h1)}</h2>
 <div class="letters">${plans.map(p => `<article><h3>${esc(p.name)}</h3>${planBody(p)}</article>`).join('')}</div>${plansNote()}</section>
-<section class="scene col" aria-labelledby="pa"><h2 id="pa">${esc(P.h1)}</h2>${partnerText()}${partnerFigure('pf')}</section>
+<section class="scene col" aria-labelledby="pa"><h2 id="pa">${esc(P.h1)}</h2><p>${qc(P.lede)} ${esc(P.types.map(t => { used.add(t.fact_id); return t.name; }).join(', '))}.${cite('c8')}</p><p>${action(P.button)}</p>${partnerFigure('pf')}</section>
 <section class="scene col" aria-labelledby="fo">${founderBlock('h2', '', 'fo')}</section>
-${rows.length ? `<section class="scene col long" aria-labelledby="dt"><h2 id="dt">${esc(C.context.timeline_title)}</h2><p class="small">${esc(C.context.timeline_note)}</p>
-<ol class="dates">${rows.map(r => `<li>${time(r.date)}${rowWhat(r)}<span class="src">${rowSource(r)}</span></li>`).join('')}</ol><p><strong>${esc(NLA)}</strong></p></section>` : ''}
+${rows.length ? `<section class="scene col" aria-labelledby="dt"><h2 id="dt">${esc(C.context.timeline_title)}</h2><p class="small">${esc(C.context.timeline_note)}</p>
+<table class="dates"><thead class="vh"><tr><th scope="col">Date</th><th scope="col">What the source says</th></tr></thead><tbody>${rows.map(r => `<tr><th scope="row">${time(r.date)}</th><td>${rowWhat(r)}${cite(r.id)}</td></tr>`).join('')}</tbody></table><p><strong>${esc(NLA)}</strong></p></section>` : ''}
 <section class="scene col close" aria-labelledby="cl"><h2 id="cl" class="vh">${esc(C.home.cta.title.text)}</h2><p>${esc(T.cta_line)}</p><p><a href="${THEIRS}">${esc(T.cta_link)}${sr(C.actions.start.sr)}</a></p><p class="small">${esc(C.actions.note)}</p>
 <p class="signoff">${esc(T.sign_off)}</p></section>
 <section class="col long" aria-labelledby="sr"><h2 id="sr">Sources</h2>${sourcesList()}</section>
@@ -879,7 +942,7 @@ function chooser() {
   const DP = C.designs_page;
   const SERIF = 'Fraunces,"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif';
   const SANS = '"Public Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif';
-  const css = `:root{--bg:#f4f1e8;--surface:#ffffff;--ink:#0f1f19;--soft:#4a5a52;--line:#d8d2c4;--green:#1f5c46;--brass:#7a5814;--deep:#0e3b2e;--ondeep:#f4f1e8;--notice:#0b1612;--link:#1f5c46;--focus:#1f5c46;${pk('#ffffff', '#0f1f19', '#4a5a52', '#d8d2c4', '#1f5c46')}}
+  const css = `:root{--bg:#f4f1e8;--surface:#ffffff;--ink:#0f1f19;--soft:#4a5a52;--line:#d8d2c4;--green:#1f5c46;--brass:#7a5814;--deep:#0e3b2e;--ondeep:#f4f1e8;--notice:#0b1612;--link:#1f5c46;--focus:#1f5c46;${pk('#ffffff', '#0f1f19', '#4a5a52', '#d8d2c4', '#1f5c46')};${lay('76rem')}}
 @media (prefers-color-scheme:dark){:root{--bg:#0b1612;--surface:#12211b;--ink:#ede8dc;--soft:#b5b0a2;--line:#2c3c35;--green:#7fcfae;--brass:#e0b860;--deep:#10241d;--ondeep:#f4f1e8;--notice:#050a08;--link:#7fcfae;--focus:#e0b860;${pk('#12211b', '#ede8dc', '#b5b0a2', '#2c3c35', '#7fcfae')}}}
 body{font:17px/1.6 ${SANS}}
 .mono,.eyebrow,.il,.tag{font-family:${MONO}}
@@ -887,7 +950,7 @@ body{font:17px/1.6 ${SANS}}
 .top{background:var(--bg);border-bottom:1px solid var(--line);padding:0 16px}.top-in{max-width:76rem;margin:0 auto;padding:.5rem 0;display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between}
 .brand{font:600 1.1rem ${SERIF};letter-spacing:.06em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;min-height:44px}.tag{font-size:.68rem;font-weight:500;color:var(--brass);border:1px solid var(--brass);border-radius:4px;padding:.05rem .4rem;letter-spacing:.1em;text-transform:uppercase}
 .their{display:inline-flex;align-items:center;min-height:44px;padding:0 .9rem;border:1px solid var(--green);border-radius:6px;color:var(--green);text-decoration:none;font-weight:600}
-main{max-width:76rem;margin:0 auto;padding:3rem 16px 3.5rem}
+main{max-width:76rem;margin:0 auto;padding:3rem 16px 3.5rem}@media (max-width:599px){main{padding-top:1.25rem}}
 .eyebrow{font-size:.8rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin:0 0 .75rem}
 h1{font:600 clamp(2.4rem,6vw,4.6rem)/1.02 ${SERIF};letter-spacing:-.02em;margin:0 0 1rem;max-width:16ch}
 .intro{display:grid;gap:.5rem;border-bottom:1px solid var(--line);padding-bottom:2rem}@media (min-width:1000px){.intro{grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:3rem;align-items:end}.intro h1{margin:0}}
